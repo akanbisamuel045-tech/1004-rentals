@@ -1,27 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import {
-  MapPin, Heart, Share2, ArrowLeft, Check, Sparkles,
-  Shield, Zap, Droplet, CheckCircle2
+  MapPin, Heart, Share2, ArrowLeft,
+  Shield, Zap, Droplet, CheckCircle2, Calendar
 } from 'lucide-react';
 import { api } from '../services/api';
 import { formatPriceNGN } from '../components/PropertyCard';
+import { useAuth } from '../context/AuthContext';
 import EnquiryModal from '../components/EnquiryModal';
-import ViewingModal from '../components/ViewingModal';
 
 export default function PropertyDetailPage() {
   const { id } = useParams();
+  const { user, isFavorite, toggleFavorite, openBookingModal } = useAuth();
+
   const [property, setProperty] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [saved, setSaved] = useState(false);
   const [copied, setCopied] = useState(false);
 
   // Modals
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
-  const [isViewingOpen, setIsViewingOpen] = useState(false);
   const [showFeeModal, setShowFeeModal] = useState(false);
   const [showSpecsModal, setShowSpecsModal] = useState(false);
-  const [galleryOpen, setGalleryOpen] = useState(false);
 
   useEffect(() => {
     async function loadProperty() {
@@ -42,6 +41,12 @@ export default function PropertyDetailPage() {
     navigator.clipboard.writeText(window.location.href);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleFavoriteClick = async () => {
+    if (property) {
+      await toggleFavorite(property.id);
+    }
   };
 
   if (loading) {
@@ -73,6 +78,7 @@ export default function PropertyDetailPage() {
       ];
 
   const totalPhotoCount = imgs.length >= 4 ? imgs.length + 12 : 16;
+  const saved = isFavorite(property.id);
 
   return (
     <div className="detail-page-wrapper">
@@ -106,10 +112,10 @@ export default function PropertyDetailPage() {
           <div className="gallery-cell">
             <img src={imgs[3] || imgs[0]} alt="Exterior view" />
             <button
-              onClick={() => setIsViewingOpen(true)}
+              onClick={() => openBookingModal(property)}
               className="show-all-photos-btn"
             >
-              <span>Schedule Inspection</span>
+              <span>Book Inspection Now</span>
               <span>{totalPhotoCount} photos</span>
             </button>
           </div>
@@ -119,7 +125,7 @@ export default function PropertyDetailPage() {
         <div className="detail-actions-bar">
           <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
             <button
-              onClick={() => setSaved(!saved)}
+              onClick={handleFavoriteClick}
               className="action-link-btn"
               style={{ color: saved ? '#ef4444' : '#111111' }}
             >
@@ -156,8 +162,8 @@ export default function PropertyDetailPage() {
               Calculate rental breakdown
             </button>
 
-            {/* Estate Agency Pill Card */}
-            <div>
+            {/* Estate Agency Pill Card & Booking CTA */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div className="agency-card-pill">
                 <div style={{ width: '36px', height: '36px', background: '#000000', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ffffff' }}>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -180,10 +186,20 @@ export default function PropertyDetailPage() {
                   Contact Agent
                 </button>
               </div>
+
+              <div>
+                <button
+                  onClick={() => openBookingModal(property)}
+                  className="btn-add-listing"
+                  style={{ width: '100%', padding: '14px', justifyContent: 'center', fontSize: '0.95rem' }}
+                >
+                  <Calendar size={18} /> Book This Apartment Now
+                </button>
+              </div>
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Key Stats, Specs Link, Icons, Description */}
+          {/* RIGHT COLUMN: Key Specs, Specs Link, Icons, Description */}
           <div>
             {/* Big Typography Specs */}
             <div className="detail-stats-row">
@@ -232,7 +248,7 @@ export default function PropertyDetailPage() {
                 <span>Uniformed Security</span>
               </div>
               <div className="amenity-inline-item">
-                <Sparkles size={18} color="#000000" />
+                <CheckCircle2 size={18} color="#000000" />
                 <span>{property.furnishedStatus || 'Furnished'}</span>
               </div>
             </div>
@@ -273,8 +289,8 @@ export default function PropertyDetailPage() {
                 <span style={{ fontWeight: '700' }}>{formatPriceNGN(property.agencyFee || property.price * 0.1)}</span>
               </div>
             </div>
-            <button className="btn-black-block" onClick={() => { setShowFeeModal(false); setIsViewingOpen(true); }}>
-              Schedule Inspection
+            <button className="btn-black-block" onClick={() => { setShowFeeModal(false); openBookingModal(property); }}>
+              Book Inspection Now
             </button>
           </div>
         </div>
@@ -323,16 +339,10 @@ export default function PropertyDetailPage() {
         </div>
       )}
 
-      {/* Standard Action Modals */}
+      {/* Enquiry Modal */}
       <EnquiryModal
         isOpen={isEnquiryOpen}
         onClose={() => setIsEnquiryOpen(false)}
-        property={property}
-      />
-
-      <ViewingModal
-        isOpen={isViewingOpen}
-        onClose={() => setIsViewingOpen(false)}
         property={property}
       />
     </div>

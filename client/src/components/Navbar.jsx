@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Lock, Plus, Menu, ChevronDown } from 'lucide-react';
+import { Home, Lock, User, LogOut, ChevronDown, Calendar, Heart, ShieldCheck } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 export default function Navbar() {
   const location = useLocation();
+  const { user, logout, openAuthModal, openBookingModal } = useAuth();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const isActive = (path) => location.pathname === path;
 
@@ -31,24 +34,166 @@ export default function Navbar() {
           <Link to="/properties" className={`nav-pill-item ${isActive('/properties') ? 'active' : ''}`}>
             Listing
           </Link>
-          <Link to="/properties" className={`nav-pill-item ${isActive('/properties') ? 'active' : ''}`} style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-            Property <ChevronDown size={14} />
+          <Link to="/contact" className={`nav-pill-item ${isActive('/contact') ? 'active' : ''}`}>
+            Contact
           </Link>
         </nav>
 
         {/* Right Nav Action Elements */}
         <div className="nav-actions">
-          <Link to="/admin" className="nav-login-link">
-            <Lock size={15} />
-            <span>Login/Sign up</span>
-          </Link>
+          {user ? (
+            /* Logged In User Dropdown */
+            <div style={{ position: 'relative' }}>
+              <button
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+                style={{
+                  background: '#f3f4f6',
+                  border: '1px solid #e5e7eb',
+                  padding: '8px 14px',
+                  borderRadius: '9999px',
+                  fontSize: '0.88rem',
+                  fontWeight: '600',
+                  color: '#111111',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px'
+                }}
+              >
+                <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: '#000000', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.75rem', fontWeight: '700' }}>
+                  {user.name.charAt(0).toUpperCase()}
+                </div>
+                <span>{user.name.split(' ')[0]}</span>
+                <ChevronDown size={14} />
+              </button>
 
-          <Link to="/admin" className="btn-add-listing">
-            Add listing
-          </Link>
+              {dropdownOpen && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '110%',
+                    right: 0,
+                    background: '#ffffff',
+                    border: '1px solid #e5e7eb',
+                    borderRadius: '16px',
+                    boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
+                    width: '210px',
+                    padding: '8px',
+                    zIndex: 200
+                  }}
+                  onClick={() => setDropdownOpen(false)}
+                >
+                  <Link
+                    to="/dashboard"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '10px',
+                      padding: '10px 12px',
+                      borderRadius: '10px',
+                      fontSize: '0.88rem',
+                      fontWeight: '600',
+                      color: '#111111',
+                      transition: 'background 0.15s'
+                    }}
+                    className="dropdown-item"
+                  >
+                    <Calendar size={16} /> My Bookings
+                  </Link>
 
-          <button style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px' }} title="Menu">
-            <Menu size={20} />
+                  <Link
+                    to="/dashboard"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '10px',
+                      padding: '10px 12px',
+                      borderRadius: '10px',
+                      fontSize: '0.88rem',
+                      fontWeight: '600',
+                      color: '#111111'
+                    }}
+                  >
+                    <Heart size={16} /> Saved Homes
+                  </Link>
+
+                  <Link
+                    to="/dashboard"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '10px',
+                      padding: '10px 12px',
+                      borderRadius: '10px',
+                      fontSize: '0.88rem',
+                      fontWeight: '600',
+                      color: '#111111'
+                    }}
+                  >
+                    <User size={16} /> Account Profile
+                  </Link>
+
+                  {user.role === 'ADMIN' && (
+                    <Link
+                      to="/admin"
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '10px',
+                        padding: '10px 12px',
+                        borderRadius: '10px',
+                        fontSize: '0.88rem',
+                        fontWeight: '600',
+                        color: '#0f766e'
+                      }}
+                    >
+                      <ShieldCheck size={16} /> Admin Portal
+                    </Link>
+                  )}
+
+                  <div style={{ height: '1px', background: '#f3f4f6', margin: '4px 0' }} />
+
+                  <button
+                    onClick={logout}
+                    style={{
+                      width: '100%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '10px',
+                      padding: '10px 12px',
+                      borderRadius: '10px',
+                      fontSize: '0.88rem',
+                      fontWeight: '600',
+                      color: '#ef4444',
+                      background: 'none',
+                      border: 'none',
+                      cursor: 'pointer',
+                      textAlign: 'left'
+                    }}
+                  >
+                    <LogOut size={16} /> Log Out
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            /* Logged Out Login Button */
+            <button
+              onClick={() => openAuthModal('login')}
+              className="nav-login-link"
+              style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+            >
+              <Lock size={15} />
+              <span>Login/Sign up</span>
+            </button>
+          )}
+
+          {/* Top-Right "Book Now" Button */}
+          <button
+            onClick={() => openBookingModal(null)}
+            className="btn-add-listing"
+          >
+            <Calendar size={15} /> Book Now
           </button>
         </div>
       </div>

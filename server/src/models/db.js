@@ -2,19 +2,34 @@ import { properties as initialProperties, locations as initialLocations, ameniti
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import bcrypt from "bcryptjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const DATA_FILE = path.join(__dirname, "../data/store.json");
+// Save outside of src to avoid triggering node --watch restarts
+const DATA_FILE = path.join(__dirname, "../../data/store.json");
 
 class DatabaseStore {
   constructor() {
     this.data = {
+      users: [
+        {
+          id: "user-admin",
+          name: "Akanbi Samuel",
+          email: "akanbisamuel045@gmail.com",
+          phone: "+234 802 345 6789",
+          passwordHash: bcrypt.hashSync("admin123", 10),
+          role: "ADMIN",
+          createdAt: new Date().toISOString()
+        }
+      ],
       properties: [...initialProperties],
       locations: [...initialLocations],
       amenities: [...amenitiesList],
       enquiries: [],
-      viewings: []
+      viewings: [],
+      bookings: [],
+      favorites: {} // userId -> array of propertyIds
     };
     this.loadFromDisk();
   }
@@ -24,10 +39,16 @@ class DatabaseStore {
       if (fs.existsSync(DATA_FILE)) {
         const raw = fs.readFileSync(DATA_FILE, "utf-8");
         const parsed = JSON.parse(raw);
-        this.data = { ...this.data, ...parsed };
+        this.data = {
+          ...this.data,
+          ...parsed,
+          users: parsed.users && parsed.users.length > 0 ? parsed.users : this.data.users,
+          bookings: parsed.bookings || [],
+          favorites: parsed.favorites || {}
+        };
       }
     } catch (err) {
-      console.warn("Could not load store from disk, using seed data:", err.message);
+      console.warn("Could not load store from disk, using default seed:", err.message);
     }
   }
 
@@ -43,7 +64,147 @@ class DatabaseStore {
     }
   }
 
-  // Property queries
+  // ===================================
+  // User Management & Authentication
+  // ===================================
+  async createUser({ name, email, phone, password }) {
+    const existing = this.data.users.find((u) => u.email.toLowerCase() === email.toLowerCase());
+    if (existing) {
+      throw new Error("An account with this email address already exists.");
+    }
+
+    const passwordHash = await bcrypt.hash(password, 10);
+    const newUser = {
+      id: `user-${Date.now()}`,
+      name: name.trim(),
+      email: email.toLowerCase().trim(),
+      phone: phone ? phone.trim() : "",
+      passwordHash,
+      role: "USER",
+      createdAt: new Date().toISOString()
+    };
+
+    this.data.users.push(newUser);
+    this.saveToDisk();
+
+    const { passwordHash: _, ...safeUser } = newUser;
+    return safeUser;
+  }
+
+  async validateUser(email, password) {
+    const user = this.data.users.find((u) => u.email.toLowerCase() === email.toLowerCase().trim());
+    if (!user) return null;
+
+    const isValid = await bcrypt.compare(password, user.passwordHash);
+    if (!isValid) return null;
+
+    const { passwordHash: _, ...safeUser } = user;
+    return safeUser;
+  }
+
+  getUserById(id) {
+    const user = this.data.users.find((u) => u.id === id);
+    if (!user) return null;
+    const { passwordHash: _, ...safeUser } = user;
+    return safeUser;
+  }
+
+  updateUserProfile(id, { name, phone }) {
+    const user = this.data.users.find((u) => u.id === id);
+    if (!user) return null;
+
+    if (name) user.name = name.trim();
+    if (phone !== undefined) user.phone = phone.trim();
+    user.updatedAt = new Date().toISOString();
+
+    this.saveToDisk();
+    const { passwordHash: _, ...safeUser } = user;
+    return safeUser;
+  }
+
+  // ===================================
+  // Bookings System
+  // ===================================
+  createBooking(bookingData) {
+    const property = this.data.properties.find((p) => p.id === bookingData.propertyId);
+    
+    const booking = {
+      id: `bk-${Date.now()}`,
+      userId: bookingData.userId || null,
+      userName: bookingData.userName,
+      userEmail: bookingData.userEmail,
+      userPhone: bookingData.userPhone,
+      propertyId: bookingData.propertyId,
+      propertyTitle: property ? property.title : bookingData.propertyTitle || "Apartment Inspection",
+      propertyLocation: property ? property.location : "Lagos",
+      propertyPrice: property ? property.price : 0,
+      propertyImage: property?.images?.[0] || "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80",
+      inspectionDate: bookingData.inspectionDate,
+      timeSlot: bookingData.timeSlot || "10:00 AM - 12:00 PM",
+      status: "PENDING",
+      notes: bookingData.notes || "",
+      createdAt: new Date().toISOString()
+    };
+
+    this.data.bookings.unshift(booking);
+    this.saveToDisk();
+    return booking;
+  }
+
+  getUserBookings(userId, userEmail) {
+    return this.data.bookings.filter(
+      (b) => (userId && b.userId === userId) || (userEmail && b.userEmail?.toLowerCase() === userEmail.toLowerCase())
+    );
+  }
+
+  getAllBookings() {
+    return this.data.bookings;
+  }
+
+  updateBookingStatus(id, status) {
+    const booking = this.data.bookings.find((b) => b.id === id);
+    if (!booking) return null;
+    booking.status = status;
+    booking.updatedAt = new Date().toISOString();
+    this.saveToDisk();
+    return booking;
+  }
+
+  // ===================================
+  // Saved Favorites System
+  // ===================================
+  toggleFavorite(userId, propertyId) {
+    if (!this.data.favorites[userId]) {
+      this.data.favorites[userId] = [];
+    }
+
+    const index = this.data.favorites[userId].indexOf(propertyId);
+    let isSaved = false;
+
+    if (index > -1) {
+      this.data.favorites[userId].splice(index, 1);
+      isSaved = false;
+    } else {
+      this.data.favorites[userId].push(propertyId);
+      isSaved = true;
+    }
+
+    this.saveToDisk();
+    return { isSaved, propertyIds: this.data.favorites[userId] };
+  }
+
+  getUserFavorites(userId) {
+    const propertyIds = this.data.favorites[userId] || [];
+    return this.data.properties.filter((p) => propertyIds.includes(p.id));
+  }
+
+  getUserFavoriteIds(userId) {
+    return this.data.favorites[userId] || [];
+  }
+
+  // ===================================
+  // Properties Queries
+  // ===================================
   getProperties(filters = {}) {
     let result = [...this.data.properties];
 
@@ -87,15 +248,13 @@ class DatabaseStore {
       result = result.filter((p) => p.isFeatured);
     }
 
-    // Sorting
     if (filters.sort === "price-asc") {
       result.sort((a, b) => a.price - b.price);
     } else if (filters.sort === "price-desc") {
       result.sort((a, b) => b.price - a.price);
     } else if (filters.sort === "views") {
-      result.sort((a, b) => b.viewCount - a.viewCount);
+      result.sort((a, b) => (b.viewCount || 0) - (a.viewCount || 0));
     } else {
-      // default: newest
       result.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     }
 
@@ -144,7 +303,6 @@ class DatabaseStore {
     return true;
   }
 
-  // Location queries
   getLocations() {
     return this.data.locations.map((loc) => {
       const count = this.data.properties.filter(
@@ -154,7 +312,6 @@ class DatabaseStore {
     });
   }
 
-  // Enquiries
   createEnquiry(enquiryData) {
     const enquiry = {
       id: `enq-${Date.now()}`,
@@ -179,7 +336,6 @@ class DatabaseStore {
     return enquiry;
   }
 
-  // Viewings
   createViewing(viewingData) {
     const viewing = {
       id: `view-${Date.now()}`,

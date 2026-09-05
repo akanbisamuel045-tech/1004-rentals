@@ -1,4 +1,24 @@
 {
+  "users": [
+    {
+      "id": "user-admin",
+      "name": "Akanbi Samuel",
+      "email": "akanbisamuel045@gmail.com",
+      "phone": "+234 802 345 6789",
+      "passwordHash": "$2b$10$hEOkCavKFsqcN388dRSl.efk3moGu0uGlbcDD0zhhjebiQh.QsDby",
+      "role": "ADMIN",
+      "createdAt": "2026-09-05T07:38:23.981Z"
+    },
+    {
+      "id": "user-1788594471933",
+      "name": "Chioma Adeyemi",
+      "email": "chioma@example.com",
+      "phone": "+234 812 345 6789",
+      "passwordHash": "$2b$10$52m2tdaO/RuNeeXaYok95OMERV6Mc6D1wXA1txi7B28BRAhtqQrQC",
+      "role": "USER",
+      "createdAt": "2026-09-05T07:47:51.933Z"
+    }
+  ],
   "properties": [
     {
       "id": "prop-1",
@@ -116,7 +136,7 @@
       "cautionFee": 400000,
       "agencyFee": 800000,
       "isFeatured": true,
-      "viewCount": 1892,
+      "viewCount": 1898,
       "images": [
         "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
         "https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?auto=format&fit=crop&w=1200&q=80",
@@ -205,7 +225,7 @@
       "cautionFee": 200000,
       "agencyFee": 280000,
       "isFeatured": false,
-      "viewCount": 940,
+      "viewCount": 942,
       "images": [
         "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80",
         "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80",
@@ -248,7 +268,7 @@
       "cautionFee": 300000,
       "agencyFee": 420000,
       "isFeatured": false,
-      "viewCount": 1100,
+      "viewCount": 1102,
       "images": [
         "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80",
         "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1200&q=80",
@@ -349,5 +369,7 @@
     "Children's Play Area"
   ],
   "enquiries": [],
-  "viewings": []
+  "viewings": [],
+  "bookings": [],
+  "favorites": {}
 }

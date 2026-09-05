@@ -6,6 +6,8 @@ import enquiryRoutes from "./routes/enquiryRoutes.js";
 import viewingRoutes from "./routes/viewingRoutes.js";
 import locationRoutes from "./routes/locationRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
+import bookingRoutes from "./routes/bookingRoutes.js";
+import favoriteRoutes from "./routes/favoriteRoutes.js";
 
 dotenv.config();
 
@@ -17,11 +19,13 @@ app.use(cors({ origin: "*" }));
 app.use(express.json());
 
 // API Routes
+app.use("/api/auth", authRoutes);
 app.use("/api/properties", propertyRoutes);
+app.use("/api/bookings", bookingRoutes);
+app.use("/api/favorites", favoriteRoutes);
 app.use("/api/enquiries", enquiryRoutes);
 app.use("/api/viewings", viewingRoutes);
 app.use("/api/locations", locationRoutes);
-app.use("/api/auth", authRoutes);
 
 // Health Check
 app.get("/api/health", (req, res) => {
