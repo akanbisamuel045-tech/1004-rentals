@@ -1,0 +1,338 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// =============================================
+// Enums
+// =============================================
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum PropertyType {
+  APARTMENT
+  FLAT
+  STUDIO
+  DUPLEX
+  BUNGALOW
+  PENTHOUSE
+  TERRACED_HOUSE
+  DETACHED_HOUSE
+  SEMI_DETACHED
+  MANSION
+}
+
+enum RentalPeriod {
+  MONTHLY
+  QUARTERLY
+  BI_ANNUALLY
+  ANNUALLY
+}
+
+enum FurnishedStatus {
+  FURNISHED
+  SEMI_FURNISHED
+  UNFURNISHED
+}
+
+enum AvailabilityStatus {
+  AVAILABLE
+  UNAVAILABLE
+  RENTED
+  COMING_SOON
+}
+
+enum InquiryStatus {
+  NEW
+  READ
+  RESPONDED
+  CLOSED
+}
+
+enum ViewingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+// =============================================
+// Auth Models (NextAuth v5 / @auth/prisma-adapter)
+// =============================================
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?   // null for OAuth-only users
+  phone         String?
+  role          Role      @default(USER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts         Account[]
+  sessions         Session[]
+  inquiries        Inquiry[]
+  viewingRequests  ViewingRequest[]
+  favorites        Favorite[]
+  properties       Property[]       @relation("PropertyAgent")
+
+  @@map("users")
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
+  @@map("verification_tokens")
+}
+
+// =============================================
+// Location Model
+// =============================================
+
+model Location {
+  id          String  @id @default(cuid())
+  name        String  @unique // e.g. "Lekki Phase 1"
+  slug        String  @unique // e.g. "lekki-phase-1"
+  area        String          // e.g. "Lekki" (broader area)
+  city        String  @default("Lagos")
+  state       String  @default("Lagos State")
+  description String?
+  imageUrl    String?
+  isPopular   Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  properties Property[]
+
+  @@index([slug])
+  @@index([area])
+  @@map("locations")
+}
+
+// =============================================
+// Property Models
+// =============================================
+
+model Property {
+  id                 String             @id @default(cuid())
+  title              String
+  description        String
+  price              Decimal            @db.Decimal(12, 2)
+  rentalPeriod       RentalPeriod       @default(ANNUALLY)
+  propertyType       PropertyType
+  bedrooms           Int
+  bathrooms          Int
+  toilets            Int?
+  sizesqm            Decimal?           @db.Decimal(8, 2)
+  address            String
+  nearestLandmark    String?
+  latitude           Decimal?           @db.Decimal(10, 8)
+  longitude          Decimal?           @db.Decimal(11, 8)
+  availabilityStatus AvailabilityStatus @default(AVAILABLE)
+  furnishedStatus    FurnishedStatus    @default(UNFURNISHED)
+  parkingSpaces      Int                @default(0)
+  floor              Int?               // null = ground floor / not applicable
+  totalFloors        Int?
+  yearBuilt          Int?
+  serviceCharge      Decimal?           @db.Decimal(12, 2)
+  cautionFee         Decimal?           @db.Decimal(12, 2)
+  agencyFee          Decimal?           @db.Decimal(12, 2)
+  isFeatured         Boolean            @default(false)
+  isPublished        Boolean            @default(true)
+  viewCount          Int                @default(0)
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+
+  locationId String
+  location   Location @relation(fields: [locationId], references: [id])
+
+  agentId String?
+  agent   User?   @relation("PropertyAgent", fields: [agentId], references: [id], onDelete: SetNull)
+
+  images          PropertyImage[]
+  propertyAmenities PropertyAmenity[]
+  inquiries       Inquiry[]
+  viewingRequests ViewingRequest[]
+  favorites       Favorite[]
+
+  @@index([locationId])
+  @@index([propertyType])
+  @@index([availabilityStatus])
+  @@index([price])
+  @@index([bedrooms])
+  @@index([isFeatured])
+  @@index([isPublished])
+  @@index([createdAt])
+  @@map("properties")
+}
+
+model PropertyImage {
+  id         String  @id @default(cuid())
+  url        String
+  alt        String?
+  order      Int     @default(0)
+  isPrimary  Boolean @default(false)
+  publicId   String? // Cloudinary public ID for deletion
+
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@index([propertyId])
+  @@index([order])
+  @@map("property_images")
+}
+
+// =============================================
+// Amenities
+// =============================================
+
+model Amenity {
+  id          String  @id @default(cuid())
+  name        String  @unique
+  slug        String  @unique
+  icon        String? // icon name / class
+  category    String? // e.g. "Security", "Utilities", "Leisure"
+
+  propertyAmenities PropertyAmenity[]
+
+  @@index([category])
+  @@map("amenities")
+}
+
+model PropertyAmenity {
+  propertyId String
+  amenityId  String
+
+  property Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  amenity  Amenity  @relation(fields: [amenityId], references: [id], onDelete: Cascade)
+
+  @@id([propertyId, amenityId])
+  @@map("property_amenities")
+}
+
+// =============================================
+// Enquiry / Viewing
+// =============================================
+
+model Inquiry {
+  id         String        @id @default(cuid())
+  name       String
+  email      String
+  phone      String?
+  message    String
+  status     InquiryStatus @default(NEW)
+  adminNotes String?
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([propertyId])
+  @@index([userId])
+  @@index([status])
+  @@index([createdAt])
+  @@map("inquiries")
+}
+
+model ViewingRequest {
+  id              String        @id @default(cuid())
+  name            String
+  email           String
+  phone           String
+  message         String?
+  preferredDate   DateTime
+  preferredTime   String        // e.g. "10:00 AM - 12:00 PM"
+  status          ViewingStatus @default(PENDING)
+  adminNotes      String?
+  confirmedDate   DateTime?
+  confirmedTime   String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([propertyId])
+  @@index([userId])
+  @@index([status])
+  @@index([preferredDate])
+  @@map("viewing_requests")
+}
+
+// =============================================
+// Favorites
+// =============================================
+
+model Favorite {
+  userId     String
+  propertyId String
+  createdAt  DateTime @default(now())
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  property Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  @@id([userId, propertyId])
+  @@index([userId])
+  @@map("favorites")
+}
