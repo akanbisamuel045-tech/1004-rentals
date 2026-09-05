@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import {
-  MapPin, Bed, Bath, Car, Maximize2, Shield, Calendar,
-  MessageSquare, Phone, Mail, CheckCircle2, ArrowLeft,
-  Share2, Eye, Zap, Layers
+  MapPin, Heart, Share2, ArrowLeft, Check, Sparkles,
+  Shield, Zap, Droplet, CheckCircle2
 } from 'lucide-react';
 import { api } from '../services/api';
 import { formatPriceNGN } from '../components/PropertyCard';
@@ -14,12 +13,15 @@ export default function PropertyDetailPage() {
   const { id } = useParams();
   const [property, setProperty] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [selectedImg, setSelectedImg] = useState(0);
+  const [saved, setSaved] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   // Modals
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
   const [isViewingOpen, setIsViewingOpen] = useState(false);
+  const [showFeeModal, setShowFeeModal] = useState(false);
+  const [showSpecsModal, setShowSpecsModal] = useState(false);
+  const [galleryOpen, setGalleryOpen] = useState(false);
 
   useEffect(() => {
     async function loadProperty() {
@@ -28,7 +30,7 @@ export default function PropertyDetailPage() {
         const res = await api.getPropertyById(id);
         setProperty(res.data);
       } catch (err) {
-        setError(err.message || 'Failed to load property');
+        console.error(err);
       } finally {
         setLoading(false);
       }
@@ -36,250 +38,292 @@ export default function PropertyDetailPage() {
     loadProperty();
   }, [id]);
 
+  const handleShare = () => {
+    navigator.clipboard.writeText(window.location.href);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   if (loading) {
     return (
-      <div className="container" style={{ padding: '100px 0', textAlign: 'center', color: '#64748b' }}>
+      <div className="container" style={{ padding: '100px 0', textAlign: 'center', color: '#9ca3af' }}>
         Loading property details...
       </div>
     );
   }
 
-  if (error || !property) {
+  if (!property) {
     return (
       <div className="container" style={{ padding: '100px 0', textAlign: 'center' }}>
-        <h2 style={{ marginBottom: '12px' }}>Property Not Found</h2>
-        <p style={{ color: '#64748b', marginBottom: '24px' }}>
-          The rental listing you are looking for may have been moved or unlisted.
-        </p>
-        <Link to="/properties" className="btn btn-primary">
-          <ArrowLeft size={16} /> Back to Listings
+        <h2>Property Not Found</h2>
+        <Link to="/properties" className="btn-add-listing" style={{ marginTop: '16px' }}>
+          Back to Listings
         </Link>
       </div>
     );
   }
 
-  const images = property.images && property.images.length > 0
+  const imgs = property.images && property.images.length > 0
     ? property.images
-    : ['https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80'];
+    : [
+        'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
+        'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80'
+      ];
+
+  const totalPhotoCount = imgs.length >= 4 ? imgs.length + 12 : 16;
 
   return (
-    <div className="section" style={{ paddingTop: '32px' }}>
+    <div className="detail-page-wrapper">
       <div className="container">
-        {/* Breadcrumb & Navigation */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-          <Link to="/properties" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: '#64748b', fontWeight: '600', fontSize: '0.9rem' }}>
-            <ArrowLeft size={16} /> Back to search results
+        
+        {/* Navigation Link */}
+        <div style={{ marginBottom: '16px' }}>
+          <Link to="/properties" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.88rem', color: '#6b7280', fontWeight: '500' }}>
+            <ArrowLeft size={16} /> Back to listing
           </Link>
-          <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.85rem', color: '#64748b' }}>
-              <Eye size={16} /> {property.viewCount || 1} views
-            </span>
+        </div>
+
+        {/* 1. ASYMMETRIC 3-COLUMN MOSAIC GALLERY (Matches Reference Image) */}
+        <div className="mosaic-gallery">
+          {/* Main Large Photo */}
+          <div className="gallery-cell">
+            <img src={imgs[0]} alt={property.title} />
+          </div>
+
+          {/* Middle Column (2 Stacked Photos) */}
+          <div className="gallery-col-stack">
+            <div className="gallery-cell">
+              <img src={imgs[1] || imgs[0]} alt="Interior view 1" />
+            </div>
+            <div className="gallery-cell">
+              <img src={imgs[2] || imgs[0]} alt="Interior view 2" />
+            </div>
+          </div>
+
+          {/* Right Column (Tall Photo with Black Button Overlay) */}
+          <div className="gallery-cell">
+            <img src={imgs[3] || imgs[0]} alt="Exterior view" />
+            <button
+              onClick={() => setIsViewingOpen(true)}
+              className="show-all-photos-btn"
+            >
+              <span>Schedule Inspection</span>
+              <span>{totalPhotoCount} photos</span>
+            </button>
           </div>
         </div>
 
-        {/* Title Header */}
-        <div className="property-detail-header">
-          <div>
-            <div style={{ display: 'flex', gap: '8px', marginBottom: '8px' }}>
-              <span className="badge badge-featured">{property.propertyType}</span>
-              <span className="badge badge-type" style={{ background: '#ccfbf1', color: '#0f766e' }}>
-                {property.availabilityStatus || 'Available'}
-              </span>
-              <span className="badge badge-type" style={{ background: '#f1f5f9', color: '#475569' }}>
-                {property.furnishedStatus || 'Unfurnished'}
-              </span>
-            </div>
-            <h1 style={{ fontSize: '2.1rem', color: '#0f172a', marginBottom: '8px' }}>{property.title}</h1>
-            <p style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#64748b', fontSize: '1rem' }}>
-              <MapPin size={18} color="#0f766e" /> {property.address || `${property.location}, Lagos`}
-            </p>
+        {/* 2. SUB-ACTION BAR (Save, Share, Location) */}
+        <div className="detail-actions-bar">
+          <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+            <button
+              onClick={() => setSaved(!saved)}
+              className="action-link-btn"
+              style={{ color: saved ? '#ef4444' : '#111111' }}
+            >
+              <Heart size={18} fill={saved ? '#ef4444' : 'none'} />
+              <span>{saved ? 'Saved' : 'Save'}</span>
+            </button>
+
+            <button onClick={handleShare} className="action-link-btn">
+              <Share2 size={18} />
+              <span>{copied ? 'Link Copied!' : 'Share'}</span>
+            </button>
           </div>
 
-          <div style={{ textAlign: 'right' }}>
-            <span style={{ fontSize: '2.2rem', fontWeight: '800', color: '#0f766e', fontFamily: 'var(--font-heading)' }}>
+          <div className="detail-location-text">
+            <MapPin size={16} />
+            <span>{property.address || `${property.location}, Lagos`}</span>
+          </div>
+        </div>
+
+        {/* 3. SPLIT MAIN DETAILS SECTION (Matches Reference Image) */}
+        <div className="detail-main-grid">
+          
+          {/* LEFT COLUMN: Price, Calculation Link, Agency Card */}
+          <div>
+            <div className="detail-price-huge">
               {formatPriceNGN(property.price)}
-            </span>
-            <span style={{ display: 'block', fontSize: '0.85rem', color: '#64748b' }}>
-              per annum
-            </span>
-          </div>
-        </div>
-
-        {/* Gallery */}
-        <div className="gallery-grid">
-          <div className="gallery-main">
-            <img src={images[selectedImg]} alt={property.title} />
-          </div>
-          <div className="gallery-thumbs">
-            {images.slice(0, 3).map((imgUrl, idx) => (
-              <div
-                key={idx}
-                className="gallery-thumb"
-                style={{
-                  cursor: 'pointer',
-                  border: selectedImg === idx ? '3px solid #0f766e' : 'none',
-                  borderRadius: '8px'
-                }}
-                onClick={() => setSelectedImg(idx)}
-              >
-                <img src={imgUrl} alt={`Thumb ${idx + 1}`} />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Main Details & Sidebar */}
-        <div className="property-layout">
-          <div>
-            {/* Overview & Key Specs */}
-            <div className="detail-section">
-              <h3 style={{ fontSize: '1.25rem', marginBottom: '20px' }}>Property Overview</h3>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '20px' }}>
-                <div style={{ background: '#f8fafc', padding: '16px', borderRadius: '10px', textAlign: 'center' }}>
-                  <Bed size={22} color="#0f766e" style={{ margin: '0 auto 8px' }} />
-                  <span style={{ display: 'block', fontWeight: '700', fontSize: '1.1rem' }}>{property.bedrooms}</span>
-                  <span style={{ fontSize: '0.8rem', color: '#64748b' }}>Bedrooms</span>
-                </div>
-
-                <div style={{ background: '#f8fafc', padding: '16px', borderRadius: '10px', textAlign: 'center' }}>
-                  <Bath size={22} color="#0f766e" style={{ margin: '0 auto 8px' }} />
-                  <span style={{ display: 'block', fontWeight: '700', fontSize: '1.1rem' }}>{property.bathrooms}</span>
-                  <span style={{ fontSize: '0.8rem', color: '#64748b' }}>Bathrooms</span>
-                </div>
-
-                <div style={{ background: '#f8fafc', padding: '16px', borderRadius: '10px', textAlign: 'center' }}>
-                  <Car size={22} color="#0f766e" style={{ margin: '0 auto 8px' }} />
-                  <span style={{ display: 'block', fontWeight: '700', fontSize: '1.1rem' }}>{property.parkingSpaces || 1}</span>
-                  <span style={{ fontSize: '0.8rem', color: '#64748b' }}>Parking Bays</span>
-                </div>
-
-                <div style={{ background: '#f8fafc', padding: '16px', borderRadius: '10px', textAlign: 'center' }}>
-                  <Maximize2 size={22} color="#0f766e" style={{ margin: '0 auto 8px' }} />
-                  <span style={{ display: 'block', fontWeight: '700', fontSize: '1.1rem' }}>{property.sizesqm ? `${property.sizesqm} m²` : 'Spacious'}</span>
-                  <span style={{ fontSize: '0.8rem', color: '#64748b' }}>Floor Size</span>
-                </div>
-              </div>
             </div>
 
-            {/* Description */}
-            <div className="detail-section">
-              <h3 style={{ fontSize: '1.25rem', marginBottom: '16px' }}>About this Property</h3>
-              <p style={{ color: '#334155', fontSize: '1rem', lineHeight: '1.8', whiteSpace: 'pre-line' }}>
-                {property.description}
-              </p>
-            </div>
+            <button
+              onClick={() => setShowFeeModal(true)}
+              className="detail-underlined-link"
+              style={{ background: 'none', border: 'none', padding: 0 }}
+            >
+              Calculate rental breakdown
+            </button>
 
-            {/* Amenities Checklist */}
-            <div className="detail-section">
-              <h3 style={{ fontSize: '1.25rem', marginBottom: '16px' }}>Features & Amenities</h3>
-              <div className="amenities-list-grid">
-                {property.amenities && property.amenities.map((item, idx) => (
-                  <div key={idx} className="amenity-chip">
-                    <CheckCircle2 size={18} color="#0f766e" />
-                    <span>{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Cost & Fee Breakdown */}
-            <div className="detail-section">
-              <h3 style={{ fontSize: '1.25rem', marginBottom: '16px' }}>Fee Breakdown</h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '8px', borderBottom: '1px solid #f1f5f9' }}>
-                  <span style={{ color: '#64748b' }}>Annual Rent</span>
-                  <span style={{ fontWeight: '700' }}>{formatPriceNGN(property.price)}</span>
+            {/* Estate Agency Pill Card */}
+            <div>
+              <div className="agency-card-pill">
+                <div style={{ width: '36px', height: '36px', background: '#000000', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ffffff' }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/>
+                    <line x1="4" y1="22" x2="4" y2="15"/>
+                  </svg>
                 </div>
-                {property.serviceCharge && (
-                  <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '8px', borderBottom: '1px solid #f1f5f9' }}>
-                    <span style={{ color: '#64748b' }}>Service Charge (Power/Estate Mgt)</span>
-                    <span style={{ fontWeight: '700' }}>{formatPriceNGN(property.serviceCharge)}</span>
-                  </div>
-                )}
-                {property.cautionFee && (
-                  <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '8px', borderBottom: '1px solid #f1f5f9' }}>
-                    <span style={{ color: '#64748b' }}>Refundable Caution Deposit</span>
-                    <span style={{ fontWeight: '700' }}>{formatPriceNGN(property.cautionFee)}</span>
-                  </div>
-                )}
-                {property.agencyFee && (
-                  <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '8px', borderBottom: '1px solid #f1f5f9' }}>
-                    <span style={{ color: '#64748b' }}>Agency & Legal Fee</span>
-                    <span style={{ fontWeight: '700' }}>{formatPriceNGN(property.agencyFee)}</span>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
 
-          {/* Sticky Booking Sidebar */}
-          <div>
-            <div className="sidebar-sticky">
-              <div className="detail-section" style={{ border: '2px solid #0f766e' }}>
-                <h3 style={{ fontSize: '1.2rem', marginBottom: '16px' }}>Take Action</h3>
-                <p style={{ color: '#64748b', fontSize: '0.9rem', marginBottom: '20px' }}>
-                  Ready to inspect this apartment or need more details from our agent?
-                </p>
-
-                <button
-                  onClick={() => setIsViewingOpen(true)}
-                  className="btn btn-accent btn-block btn-lg"
-                  style={{ marginBottom: '12px' }}
-                >
-                  <Calendar size={18} /> Schedule Inspection
-                </button>
+                <div className="agency-info">
+                  <span className="agency-label">Estate agency</span>
+                  <span className="agency-name">
+                    Realco Lagos 🛡️
+                  </span>
+                </div>
 
                 <button
                   onClick={() => setIsEnquiryOpen(true)}
-                  className="btn btn-primary btn-block btn-lg"
-                  style={{ marginBottom: '16px' }}
+                  className="btn-contact-black"
                 >
-                  <MessageSquare size={18} /> Send Inquiry
+                  Contact Agent
                 </button>
-
-                <a
-                  href={`https://wa.me/2348023456789?text=Hi,%20I%20am%20interested%20in%20inspecting%20${encodeURIComponent(property.title)}%20(₦${property.price.toLocaleString()}/yr)%20on%20LagosRentals`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-secondary btn-block"
-                  style={{ color: '#16a34a', borderColor: '#86efac' }}
-                >
-                  <Phone size={16} /> Chat on WhatsApp
-                </a>
-              </div>
-
-              {/* Agent Profile */}
-              <div className="detail-section">
-                <h4 style={{ fontSize: '1rem', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '16px' }}>
-                  Listing Agent
-                </h4>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '16px' }}>
-                  <img
-                    src={property.agent?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80'}
-                    alt="Agent"
-                    style={{ width: '56px', height: '56px', borderRadius: '50%', objectFit: 'cover' }}
-                  />
-                  <div>
-                    <h4 style={{ fontSize: '1.1rem', fontWeight: '700' }}>{property.agent?.name || 'Samuel Akanbi'}</h4>
-                    <span style={{ fontSize: '0.85rem', color: '#0f766e', fontWeight: '600' }}>Verified Lagos Leasing Agent</span>
-                  </div>
-                </div>
-
-                <div style={{ fontSize: '0.85rem', color: '#64748b', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <Phone size={14} /> +234 802 345 6789
-                  </span>
-                  <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <Mail size={14} /> akanbisamuel045@gmail.com
-                  </span>
-                </div>
               </div>
             </div>
           </div>
+
+          {/* RIGHT COLUMN: Key Stats, Specs Link, Icons, Description */}
+          <div>
+            {/* Big Typography Specs */}
+            <div className="detail-stats-row">
+              <div className="stat-item-big">
+                <span className="stat-num-big">{property.sizesqm || 233}</span>
+                <span className="stat-unit-big">m²</span>
+              </div>
+
+              <div className="stat-item-big">
+                <span className="stat-num-big">{property.totalFloors || 2}</span>
+                <span className="stat-unit-big">floors</span>
+              </div>
+
+              <div className="stat-item-big">
+                <span className="stat-num-big">{property.bedrooms}</span>
+                <span className="stat-unit-big">beds</span>
+              </div>
+
+              <div className="stat-item-big">
+                <span className="stat-num-big">{property.bathrooms}</span>
+                <span className="stat-unit-big">baths</span>
+              </div>
+            </div>
+
+            {/* Technical Specifications Link */}
+            <button
+              onClick={() => setShowSpecsModal(true)}
+              className="detail-underlined-link"
+              style={{ background: 'none', border: 'none', padding: 0 }}
+            >
+              All Technical specifications
+            </button>
+
+            {/* Feature Tag Icons */}
+            <div className="detail-amenities-row">
+              <div className="amenity-inline-item">
+                <Zap size={18} color="#000000" />
+                <span>24/7 Electricity</span>
+              </div>
+              <div className="amenity-inline-item">
+                <Droplet size={18} color="#000000" />
+                <span>Treated Water</span>
+              </div>
+              <div className="amenity-inline-item">
+                <Shield size={18} color="#000000" />
+                <span>Uniformed Security</span>
+              </div>
+              <div className="amenity-inline-item">
+                <Sparkles size={18} color="#000000" />
+                <span>{property.furnishedStatus || 'Furnished'}</span>
+              </div>
+            </div>
+
+            {/* Editorial Description Paragraph */}
+            <p className="detail-desc-paragraph">
+              {property.description}
+            </p>
+          </div>
+
         </div>
+
       </div>
 
-      {/* Modals */}
+      {/* MODAL: RENTAL BREAKDOWN CALCULATOR */}
+      {showFeeModal && (
+        <div className="modal-backdrop" onClick={() => setShowFeeModal(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h3 style={{ fontSize: '1.25rem', fontWeight: '700' }}>Rental Breakdown</h3>
+              <button className="modal-close" onClick={() => setShowFeeModal(false)}>✕</button>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', marginBottom: '24px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '8px', borderBottom: '1px solid #f3f4f6' }}>
+                <span style={{ color: '#6b7280' }}>Base Annual Rent</span>
+                <span style={{ fontWeight: '700' }}>{formatPriceNGN(property.price)}</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '8px', borderBottom: '1px solid #f3f4f6' }}>
+                <span style={{ color: '#6b7280' }}>Service Charge (Power/Estate)</span>
+                <span style={{ fontWeight: '700' }}>{formatPriceNGN(property.serviceCharge || property.price * 0.12)}</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '8px', borderBottom: '1px solid #f3f4f6' }}>
+                <span style={{ color: '#6b7280' }}>Refundable Caution Deposit</span>
+                <span style={{ fontWeight: '700' }}>{formatPriceNGN(property.cautionFee || property.price * 0.05)}</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '8px', borderBottom: '1px solid #f3f4f6' }}>
+                <span style={{ color: '#6b7280' }}>Agency & Legal Fee</span>
+                <span style={{ fontWeight: '700' }}>{formatPriceNGN(property.agencyFee || property.price * 0.1)}</span>
+              </div>
+            </div>
+            <button className="btn-black-block" onClick={() => { setShowFeeModal(false); setIsViewingOpen(true); }}>
+              Schedule Inspection
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* MODAL: TECHNICAL SPECIFICATIONS */}
+      {showSpecsModal && (
+        <div className="modal-backdrop" onClick={() => setShowSpecsModal(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h3 style={{ fontSize: '1.25rem', fontWeight: '700' }}>Technical Specifications</h3>
+              <button className="modal-close" onClick={() => setShowSpecsModal(false)}>✕</button>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', marginBottom: '24px' }}>
+              <div style={{ background: '#f9fafb', padding: '12px', borderRadius: '10px' }}>
+                <small style={{ color: '#6b7280' }}>Property Type</small>
+                <div style={{ fontWeight: '700' }}>{property.propertyType}</div>
+              </div>
+              <div style={{ background: '#f9fafb', padding: '12px', borderRadius: '10px' }}>
+                <small style={{ color: '#6b7280' }}>Bedrooms</small>
+                <div style={{ fontWeight: '700' }}>{property.bedrooms} En-suite</div>
+              </div>
+              <div style={{ background: '#f9fafb', padding: '12px', borderRadius: '10px' }}>
+                <small style={{ color: '#6b7280' }}>Parking Spaces</small>
+                <div style={{ fontWeight: '700' }}>{property.parkingSpaces || 2} Dedicated Bays</div>
+              </div>
+              <div style={{ background: '#f9fafb', padding: '12px', borderRadius: '10px' }}>
+                <small style={{ color: '#6b7280' }}>Water Supply</small>
+                <div style={{ fontWeight: '700' }}>Industrial Borehole + Osmosis</div>
+              </div>
+            </div>
+
+            <h4 style={{ fontSize: '1rem', fontWeight: '700', marginBottom: '12px' }}>Included Amenities</h4>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '24px' }}>
+              {property.amenities && property.amenities.map((a, idx) => (
+                <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.88rem' }}>
+                  <CheckCircle2 size={15} color="#16a34a" /> {a}
+                </div>
+              ))}
+            </div>
+
+            <button className="btn-black-block" onClick={() => setShowSpecsModal(false)}>
+              Close Specifications
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Standard Action Modals */}
       <EnquiryModal
         isOpen={isEnquiryOpen}
         onClose={() => setIsEnquiryOpen(false)}

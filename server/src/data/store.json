@@ -1,0 +1,353 @@
+{
+  "properties": [
+    {
+      "id": "prop-1",
+      "title": "Luxury 3-Bedroom Serviced Apartment with Pool",
+      "slug": "luxury-3-bedroom-serviced-apartment-lekki",
+      "description": "Experience refined Lagos living in this contemporary 3-bedroom serviced apartment situated in the heart of Lekki Phase 1. Features 24/7 power, Olympic swimming pool, fully fitted Italian kitchen, and round-the-clock armed security.",
+      "price": 9500000,
+      "rentalPeriod": "ANNUALLY",
+      "propertyType": "Apartment",
+      "bedrooms": 3,
+      "bathrooms": 3,
+      "toilets": 4,
+      "sizesqm": 210,
+      "address": "Admiralty Way, Lekki Phase 1, Lagos",
+      "location": "Lekki Phase 1",
+      "area": "Lekki",
+      "furnishedStatus": "Furnished",
+      "availabilityStatus": "Available",
+      "parkingSpaces": 2,
+      "serviceCharge": 1200000,
+      "cautionFee": 500000,
+      "agencyFee": 950000,
+      "isFeatured": true,
+      "viewCount": 1420,
+      "images": [
+        "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "amenities": [
+        "24/7 Electricity",
+        "Treated Water Supply",
+        "Swimming Pool",
+        "Uniformed Security",
+        "CCTV Surveillance",
+        "Fitted Kitchen",
+        "Covered Parking",
+        "Air Conditioning"
+      ],
+      "agent": {
+        "name": "Samuel Akanbi",
+        "phone": "+234 802 345 6789",
+        "email": "akanbisamuel045@gmail.com",
+        "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80"
+      },
+      "createdAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "prop-2",
+      "title": "Ultra-Modern 4-Bedroom Waterfront Penthouse",
+      "slug": "ultra-modern-4-bedroom-waterfront-penthouse-ikoyi",
+      "description": "An iconic penthouse commanding panoramic views of Five Cowries Creek in Ikoyi. Complete with a private infinity plunge pool, smart home automation, private elevator access, and rooftop terrace.",
+      "price": 35000000,
+      "rentalPeriod": "ANNUALLY",
+      "propertyType": "Penthouse",
+      "bedrooms": 4,
+      "bathrooms": 4,
+      "toilets": 5,
+      "sizesqm": 420,
+      "address": "Bourdillon Road, Ikoyi, Lagos",
+      "location": "Ikoyi",
+      "area": "Ikoyi",
+      "furnishedStatus": "Furnished",
+      "availabilityStatus": "Available",
+      "parkingSpaces": 4,
+      "serviceCharge": 3500000,
+      "cautionFee": 2000000,
+      "agencyFee": 3500000,
+      "isFeatured": true,
+      "viewCount": 3210,
+      "images": [
+        "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "amenities": [
+        "24/7 Electricity",
+        "Swimming Pool",
+        "Fully Equipped Gym",
+        "Uniformed Security",
+        "CCTV Surveillance",
+        "Elevator / Lift",
+        "Smart Home Features",
+        "Balcony / Terrace"
+      ],
+      "agent": {
+        "name": "Samuel Akanbi",
+        "phone": "+234 802 345 6789",
+        "email": "akanbisamuel045@gmail.com",
+        "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80"
+      },
+      "createdAt": "2026-08-25T14:30:00.000Z"
+    },
+    {
+      "id": "prop-3",
+      "title": "Executive 2-Bedroom Apartment in Victoria Island",
+      "slug": "executive-2-bedroom-apartment-vi",
+      "description": "Perfect for corporate professionals and expats. Located minutes away from major bank headquarters and commercial towers. Includes high-speed fiber internet, fitness center, and dedicated facility management.",
+      "price": 8000000,
+      "rentalPeriod": "ANNUALLY",
+      "propertyType": "Apartment",
+      "bedrooms": 2,
+      "bathrooms": 2,
+      "toilets": 3,
+      "sizesqm": 140,
+      "address": "Ahmadu Bello Way, Victoria Island, Lagos",
+      "location": "Victoria Island",
+      "area": "Victoria Island",
+      "furnishedStatus": "Semi-Furnished",
+      "availabilityStatus": "Available",
+      "parkingSpaces": 2,
+      "serviceCharge": 1500000,
+      "cautionFee": 400000,
+      "agencyFee": 800000,
+      "isFeatured": true,
+      "viewCount": 1892,
+      "images": [
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1600585152220-90363fe7e115?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "amenities": [
+        "24/7 Electricity",
+        "Fully Equipped Gym",
+        "Uniformed Security",
+        "CCTV Surveillance",
+        "High-Speed Wi-Fi",
+        "Covered Parking",
+        "Air Conditioning"
+      ],
+      "agent": {
+        "name": "Samuel Akanbi",
+        "phone": "+234 802 345 6789",
+        "email": "akanbisamuel045@gmail.com",
+        "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80"
+      },
+      "createdAt": "2026-08-28T09:15:00.000Z"
+    },
+    {
+      "id": "prop-4",
+      "title": "Charming 4-Bedroom Detached Duplex in Ikeja GRA",
+      "slug": "charming-4-bedroom-detached-duplex-ikeja-gra",
+      "description": "Spacious private family residence within the prestigious and peaceful Ikeja GRA. Features a private landscaped compound, generator house, en-suite staff quarters (BQ), and large master suite.",
+      "price": 14000000,
+      "rentalPeriod": "ANNUALLY",
+      "propertyType": "Duplex",
+      "bedrooms": 4,
+      "bathrooms": 4,
+      "toilets": 5,
+      "sizesqm": 380,
+      "address": "Isaac John Street, Ikeja GRA, Lagos",
+      "location": "Ikeja GRA",
+      "area": "Ikeja",
+      "furnishedStatus": "Unfurnished",
+      "availabilityStatus": "Available",
+      "parkingSpaces": 5,
+      "serviceCharge": 800000,
+      "cautionFee": 1000000,
+      "agencyFee": 1400000,
+      "isFeatured": true,
+      "viewCount": 2150,
+      "images": [
+        "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "amenities": [
+        "Uniformed Security",
+        "CCTV Surveillance",
+        "Treated Water Supply",
+        "Covered Parking",
+        "Fitted Kitchen",
+        "Children's Play Area"
+      ],
+      "agent": {
+        "name": "Samuel Akanbi",
+        "phone": "+234 802 345 6789",
+        "email": "akanbisamuel045@gmail.com",
+        "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80"
+      },
+      "createdAt": "2026-08-30T11:45:00.000Z"
+    },
+    {
+      "id": "prop-5",
+      "title": "Chic 1-Bedroom Studio for Tech Professionals",
+      "slug": "chic-1-bedroom-studio-yaba",
+      "description": "Modern, minimalist studio loft apartment located in the tech corridor of Yaba. Fast fiber broadband pre-installed, backup solar inverter system, and walkable distance to co-working spaces and transit hubs.",
+      "price": 2800000,
+      "rentalPeriod": "ANNUALLY",
+      "propertyType": "Studio",
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "toilets": 1,
+      "sizesqm": 55,
+      "address": "Commercial Avenue, Sabo, Yaba, Lagos",
+      "location": "Yaba",
+      "area": "Mainland",
+      "furnishedStatus": "Furnished",
+      "availabilityStatus": "Available",
+      "parkingSpaces": 1,
+      "serviceCharge": 350000,
+      "cautionFee": 200000,
+      "agencyFee": 280000,
+      "isFeatured": false,
+      "viewCount": 940,
+      "images": [
+        "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "amenities": [
+        "24/7 Electricity",
+        "High-Speed Wi-Fi",
+        "Uniformed Security",
+        "Air Conditioning",
+        "Fitted Kitchen"
+      ],
+      "agent": {
+        "name": "Samuel Akanbi",
+        "phone": "+234 802 345 6789",
+        "email": "akanbisamuel045@gmail.com",
+        "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80"
+      },
+      "createdAt": "2026-09-01T16:20:00.000Z"
+    },
+    {
+      "id": "prop-6",
+      "title": "Spacious 3-Bedroom Flat with Modern Finishing",
+      "slug": "spacious-3-bedroom-flat-surulere",
+      "description": "Nicely finished 3-bedroom flat in a gated residential estate in Surulere. All rooms ensuite with contemporary wardrobe fittings, dedicated prepaid meter, and paved compound with ample parking.",
+      "price": 4200000,
+      "rentalPeriod": "ANNUALLY",
+      "propertyType": "Flat",
+      "bedrooms": 3,
+      "bathrooms": 3,
+      "toilets": 4,
+      "sizesqm": 160,
+      "address": "Adeniran Ogunsanya, Surulere, Lagos",
+      "location": "Surulere",
+      "area": "Mainland",
+      "furnishedStatus": "Semi-Furnished",
+      "availabilityStatus": "Available",
+      "parkingSpaces": 2,
+      "serviceCharge": 400000,
+      "cautionFee": 300000,
+      "agencyFee": 420000,
+      "isFeatured": false,
+      "viewCount": 1100,
+      "images": [
+        "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "amenities": [
+        "Uniformed Security",
+        "Treated Water Supply",
+        "Covered Parking",
+        "Fitted Kitchen",
+        "Balcony / Terrace"
+      ],
+      "agent": {
+        "name": "Samuel Akanbi",
+        "phone": "+234 802 345 6789",
+        "email": "akanbisamuel045@gmail.com",
+        "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80"
+      },
+      "createdAt": "2026-09-02T08:10:00.000Z"
+    }
+  ],
+  "locations": [
+    {
+      "id": "loc-lekki-1",
+      "name": "Lekki Phase 1",
+      "slug": "lekki-phase-1",
+      "area": "Lekki",
+      "city": "Lagos",
+      "isPopular": true,
+      "description": "Premium coastal neighborhood known for vibrant nightlife, upscale dining, and modern residential estates.",
+      "imageUrl": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "loc-ikoyi",
+      "name": "Ikoyi",
+      "slug": "ikoyi",
+      "area": "Ikoyi",
+      "city": "Lagos",
+      "isPopular": true,
+      "description": "One of Nigeria's most affluent residential districts, featuring luxury high-rises and serene waterfront views.",
+      "imageUrl": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "loc-vi",
+      "name": "Victoria Island",
+      "slug": "victoria-island",
+      "area": "Victoria Island",
+      "city": "Lagos",
+      "isPopular": true,
+      "description": "The premier financial and business hub of Lagos, offering sleek corporate suites and luxury serviced flats.",
+      "imageUrl": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "loc-ikeja-gra",
+      "name": "Ikeja GRA",
+      "slug": "ikeja-gra",
+      "area": "Ikeja",
+      "city": "Lagos",
+      "isPopular": true,
+      "description": "Serene, leafy Mainland enclave with top security, close to the international airport and commercial centers.",
+      "imageUrl": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "loc-yaba",
+      "name": "Yaba",
+      "slug": "yaba",
+      "area": "Mainland",
+      "city": "Lagos",
+      "isPopular": true,
+      "description": "The bustling tech and university hub of Lagos with vibrant energy, cafes, and accessible transit.",
+      "imageUrl": "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "loc-surulere",
+      "name": "Surulere",
+      "slug": "surulere",
+      "area": "Mainland",
+      "city": "Lagos",
+      "isPopular": false,
+      "description": "Cultural hotspot rich in entertainment history, central access, and charming residential streets.",
+      "imageUrl": "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80"
+    }
+  ],
+  "amenities": [
+    "24/7 Electricity",
+    "Treated Water Supply",
+    "Swimming Pool",
+    "Fully Equipped Gym",
+    "Uniformed Security",
+    "CCTV Surveillance",
+    "Fitted Kitchen",
+    "High-Speed Wi-Fi",
+    "Elevator / Lift",
+    "Balcony / Terrace",
+    "Covered Parking",
+    "Air Conditioning",
+    "Smart Home Features",
+    "Children's Play Area"
+  ],
+  "enquiries": [],
+  "viewings": []
+}

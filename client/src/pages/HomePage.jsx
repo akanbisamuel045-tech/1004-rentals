@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Bed, Bath, Car, MapPin, Check } from 'lucide-react';
+import { ArrowRight, Bed, Bath, Car, MapPin } from 'lucide-react';
 import { api } from '../services/api';
 import { formatPriceNGN } from '../components/PropertyCard';
 
@@ -196,31 +196,6 @@ export default function HomePage() {
           )}
         </div>
       </section>
-
-      {/* 3. CLEAN FOOTER */}
-      <footer className="footer-clean">
-        <div className="container footer-inner">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: '800', fontSize: '1.15rem' }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-              <polyline points="9 22 9 12 15 12 15 22"/>
-            </svg>
-            <span>Realco</span>
-          </div>
-
-          <div style={{ display: 'flex', gap: '24px', fontSize: '0.88rem', color: '#6b7280' }}>
-            <Link to="/">Home</Link>
-            <Link to="/about">About Us</Link>
-            <Link to="/properties">Listing</Link>
-            <Link to="/contact">Contact</Link>
-            <Link to="/admin">Admin</Link>
-          </div>
-
-          <div style={{ fontSize: '0.85rem', color: '#9ca3af' }}>
-            © {new Date().getFullYear()} Realco Lagos Rentals. All rights reserved.
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
