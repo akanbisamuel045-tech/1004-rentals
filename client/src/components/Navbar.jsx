@@ -19,7 +19,7 @@ export default function Navbar() {
             <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
             <polyline points="9 22 9 12 15 12 15 22"/>
           </svg>
-          <span>Realco</span>
+          <span>1004</span>Rentals
         </Link>
 
         {/* Center Pill Menu Segmented Controls */}
@@ -29,10 +29,10 @@ export default function Navbar() {
             <span>Home</span>
           </Link>
           <Link to="/about" className={`nav-pill-item ${isActive('/about') ? 'active' : ''}`}>
-            About Us
+            About 1004
           </Link>
           <Link to="/properties" className={`nav-pill-item ${isActive('/properties') ? 'active' : ''}`}>
-            Listing
+            Apartments
           </Link>
           <Link to="/contact" className={`nav-pill-item ${isActive('/contact') ? 'active' : ''}`}>
             Contact
@@ -93,10 +93,8 @@ export default function Navbar() {
                       borderRadius: '10px',
                       fontSize: '0.88rem',
                       fontWeight: '600',
-                      color: '#111111',
-                      transition: 'background 0.15s'
+                      color: '#111111'
                     }}
-                    className="dropdown-item"
                   >
                     <Calendar size={16} /> My Bookings
                   </Link>
@@ -177,7 +175,6 @@ export default function Navbar() {
               )}
             </div>
           ) : (
-            /* Logged Out Login Button */
             <button
               onClick={() => openAuthModal('login')}
               className="nav-login-link"

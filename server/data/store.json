@@ -18,6 +18,15 @@
       "role": "USER",
       "createdAt": "2026-09-05T07:48:58.897Z",
       "updatedAt": "2026-09-05T07:48:59.076Z"
+    },
+    {
+      "id": "user-1788595418076",
+      "name": "samuel Akanbi",
+      "email": "akanbisamue908@gmail.com",
+      "phone": "09160575724",
+      "passwordHash": "$2b$10$rh8.NH7nqP.kwC4Tc7gkouHMVaWAUiNNlgOBsa942PK1aKCXZ5bLu",
+      "role": "USER",
+      "createdAt": "2026-09-05T08:03:38.076Z"
     }
   ],
   "properties": [
@@ -90,7 +99,7 @@
       "cautionFee": 2000000,
       "agencyFee": 3500000,
       "isFeatured": true,
-      "viewCount": 3210,
+      "viewCount": 3214,
       "images": [
         "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
         "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
@@ -269,7 +278,7 @@
       "cautionFee": 300000,
       "agencyFee": 420000,
       "isFeatured": false,
-      "viewCount": 1100,
+      "viewCount": 1104,
       "images": [
         "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80",
         "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1200&q=80",
@@ -393,6 +402,9 @@
   "favorites": {
     "user-1788594538897": [
       "prop-1"
+    ],
+    "user-1788595418076": [
+      "prop-6"
     ]
   }
 }

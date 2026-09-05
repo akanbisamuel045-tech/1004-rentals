@@ -3,17 +3,19 @@ import { useSearchParams, Link } from 'react-router-dom';
 import { Search, MapPin, Bed, Bath, Car, ArrowLeft } from 'lucide-react';
 import { api } from '../services/api';
 import { formatPriceNGN } from '../components/PropertyCard';
+import { useAuth } from '../context/AuthContext';
 
 export default function PropertiesPage() {
+  const { openBookingModal } = useAuth();
   const [searchParams] = useSearchParams();
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [selectedType, setSelectedType] = useState('All');
-  const [selectedLoc, setSelectedLoc] = useState('All');
+  const [selectedLoc, setSelectedLoc] = useState(searchParams.get('location') || 'All');
 
-  const locations = ['All', 'Lekki Phase 1', 'Ikoyi', 'Victoria Island', 'Ikeja GRA', 'Yaba', 'Surulere'];
-  const types = ['All', 'Apartment', 'Penthouse', 'Duplex', 'Studio', 'Flat'];
+  const clusters = ['All', '1004 High-Rise Towers', '1004 Cluster A', '1004 Cluster B', '1004 Cluster C & D'];
+  const types = ['All', 'Apartment', 'Penthouse', 'Duplex', 'Studio'];
 
   useEffect(() => {
     async function loadProperties() {
@@ -33,9 +35,12 @@ export default function PropertiesPage() {
   const filtered = properties.filter((p) => {
     const matchesSearch = !search ||
       p.title.toLowerCase().includes(search.toLowerCase()) ||
-      p.location.toLowerCase().includes(search.toLowerCase());
+      p.location.toLowerCase().includes(search.toLowerCase()) ||
+      p.description?.toLowerCase().includes(search.toLowerCase());
+
     const matchesType = selectedType === 'All' || p.propertyType?.toLowerCase() === selectedType.toLowerCase();
     const matchesLoc = selectedLoc === 'All' || p.location?.toLowerCase() === selectedLoc.toLowerCase();
+
     return matchesSearch && matchesType && matchesLoc;
   });
 
@@ -44,21 +49,24 @@ export default function PropertiesPage() {
       <div className="container">
         {/* Header */}
         <div style={{ marginBottom: '32px' }}>
-          <h1 style={{ fontSize: '2.4rem', fontWeight: '700', letterSpacing: '-0.03em', marginBottom: '8px' }}>
-            Property Listings
+          <span className="explore-badge" style={{ background: '#f3f4f6', color: '#111111', marginBottom: '8px', display: 'inline-block' }}>
+            Victoria Island, Lagos
+          </span>
+          <h1 style={{ fontSize: '2.4rem', fontWeight: '800', letterSpacing: '-0.03em', marginBottom: '8px' }}>
+            1004 Estate Apartment Listings
           </h1>
           <p style={{ color: '#6b7280' }}>
-            Showing {filtered.length} verified available properties in Lagos
+            Showing {filtered.length} verified apartments, flats, and penthouses in 1004 Estate
           </p>
         </div>
 
-        {/* Search & Minimalist Filter Bar */}
+        {/* Search & Cluster Filter Bar */}
         <div style={{ background: '#ffffff', padding: '20px', borderRadius: '20px', border: '1px solid #e5e7eb', marginBottom: '36px', display: 'flex', flexWrap: 'wrap', gap: '16px', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', gap: '12px', flex: 1, minWidth: '260px' }}>
             <div style={{ position: 'relative', width: '100%' }}>
               <input
                 type="text"
-                placeholder="Search Lekki, Penthouse, Duplex..."
+                placeholder="Search High-Rise, Studio, Penthouse..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 style={{
@@ -75,14 +83,14 @@ export default function PropertiesPage() {
           </div>
 
           <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-            {locations.map((loc) => (
+            {clusters.map((c) => (
               <button
-                key={loc}
-                onClick={() => setSelectedLoc(loc)}
-                className={`filter-pill-btn ${selectedLoc === loc ? 'active' : ''}`}
+                key={c}
+                onClick={() => setSelectedLoc(c)}
+                className={`filter-pill-btn ${selectedLoc === c ? 'active' : ''}`}
                 style={{ padding: '6px 14px', fontSize: '0.82rem' }}
               >
-                {loc}
+                {c === 'All' ? 'All Clusters' : c.replace('1004 ', '')}
               </button>
             ))}
           </div>
@@ -91,12 +99,12 @@ export default function PropertiesPage() {
         {/* Listings Grid */}
         {loading ? (
           <div style={{ textAlign: 'center', padding: '60px 0', color: '#9ca3af' }}>
-            Loading available properties...
+            Loading 1004 apartments...
           </div>
         ) : filtered.length === 0 ? (
           <div style={{ textAlign: 'center', padding: '60px 20px', background: '#ffffff', borderRadius: '24px', border: '1px solid #e5e7eb' }}>
-            <h3>No properties found</h3>
-            <p style={{ color: '#6b7280', marginTop: '6px' }}>Try adjusting your search criteria</p>
+            <h3>No apartments found in this cluster</h3>
+            <p style={{ color: '#6b7280', marginTop: '6px' }}>Try selecting "All Clusters" or resetting your search</p>
           </div>
         ) : (
           <div className="property-grid-clean">
@@ -108,13 +116,13 @@ export default function PropertiesPage() {
                     alt={prop.title}
                     loading="lazy"
                   />
-                  <span className="clean-card-badge">{prop.propertyType}</span>
+                  <span className="clean-card-badge">{prop.location}</span>
                 </div>
 
                 <div className="clean-card-body">
                   <div className="clean-card-loc">
                     <MapPin size={13} />
-                    <span>{prop.location}, Lagos</span>
+                    <span>{prop.address || `${prop.location}, Victoria Island`}</span>
                   </div>
 
                   <h3 className="clean-card-title">
@@ -141,9 +149,18 @@ export default function PropertiesPage() {
                       <span className="clean-price-unit">/yr</span>
                     </div>
 
-                    <Link to={`/properties/${prop.id || prop.slug}`} className="btn-view-pill">
-                      Details
-                    </Link>
+                    <div style={{ display: 'flex', gap: '8px' }}>
+                      <button
+                        onClick={() => openBookingModal(prop)}
+                        className="btn-view-pill"
+                        style={{ background: '#000000', color: '#ffffff' }}
+                      >
+                        Book Now
+                      </button>
+                      <Link to={`/properties/${prop.id || prop.slug}`} className="btn-view-pill">
+                        Details
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
