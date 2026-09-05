@@ -1,100 +1,152 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
+import { Search, MapPin, Bed, Bath, Car, ArrowLeft } from 'lucide-react';
 import { api } from '../services/api';
-import PropertyCard from '../components/PropertyCard';
-import FilterBar from '../components/FilterBar';
+import { formatPriceNGN } from '../components/PropertyCard';
 
 export default function PropertiesPage() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const [properties, setProperties] = useState([]);
-  const [locations, setLocations] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState('');
+  const [selectedType, setSelectedType] = useState('All');
+  const [selectedLoc, setSelectedLoc] = useState('All');
 
-  // Filter state
-  const [filters, setFilters] = useState({
-    search: searchParams.get('search') || '',
-    location: searchParams.get('location') || 'all',
-    propertyType: searchParams.get('propertyType') || 'all',
-    bedrooms: searchParams.get('bedrooms') || 'all',
-    sort: searchParams.get('sort') || 'newest',
-  });
+  const locations = ['All', 'Lekki Phase 1', 'Ikoyi', 'Victoria Island', 'Ikeja GRA', 'Yaba', 'Surulere'];
+  const types = ['All', 'Apartment', 'Penthouse', 'Duplex', 'Studio', 'Flat'];
 
   useEffect(() => {
-    async function fetchLocations() {
-      try {
-        const res = await api.getLocations();
-        setLocations(res.data || []);
-      } catch (err) {
-        console.error('Error fetching locations:', err);
-      }
-    }
-    fetchLocations();
-  }, []);
-
-  useEffect(() => {
-    async function fetchProperties() {
+    async function loadProperties() {
       setLoading(true);
       try {
-        const res = await api.getProperties(filters);
+        const res = await api.getProperties();
         setProperties(res.data || []);
       } catch (err) {
-        console.error('Error fetching properties:', err);
+        console.error(err);
       } finally {
         setLoading(false);
       }
     }
+    loadProperties();
+  }, []);
 
-    fetchProperties();
-  }, [filters]);
-
-  const handleReset = () => {
-    setFilters({
-      search: '',
-      location: 'all',
-      propertyType: 'all',
-      bedrooms: 'all',
-      sort: 'newest',
-    });
-    setSearchParams({});
-  };
+  const filtered = properties.filter((p) => {
+    const matchesSearch = !search ||
+      p.title.toLowerCase().includes(search.toLowerCase()) ||
+      p.location.toLowerCase().includes(search.toLowerCase());
+    const matchesType = selectedType === 'All' || p.propertyType?.toLowerCase() === selectedType.toLowerCase();
+    const matchesLoc = selectedLoc === 'All' || p.location?.toLowerCase() === selectedLoc.toLowerCase();
+    return matchesSearch && matchesType && matchesLoc;
+  });
 
   return (
-    <div className="section" style={{ paddingTop: '40px' }}>
+    <div className="section" style={{ paddingTop: '24px' }}>
       <div className="container">
-        <div style={{ marginBottom: '28px' }}>
-          <h1 style={{ fontSize: '2.2rem', marginBottom: '8px' }}>Available Rentals in Lagos</h1>
-          <p style={{ color: '#64748b' }}>
-            Showing {properties.length} verified apartments, flats, and duplexes ready for occupancy
+        {/* Header */}
+        <div style={{ marginBottom: '32px' }}>
+          <h1 style={{ fontSize: '2.4rem', fontWeight: '700', letterSpacing: '-0.03em', marginBottom: '8px' }}>
+            Property Listings
+          </h1>
+          <p style={{ color: '#6b7280' }}>
+            Showing {filtered.length} verified available properties in Lagos
           </p>
         </div>
 
-        {/* Filter Bar */}
-        <FilterBar
-          filters={filters}
-          setFilters={setFilters}
-          onReset={handleReset}
-          locations={locations}
-        />
+        {/* Search & Minimalist Filter Bar */}
+        <div style={{ background: '#ffffff', padding: '20px', borderRadius: '20px', border: '1px solid #e5e7eb', marginBottom: '36px', display: 'flex', flexWrap: 'wrap', gap: '16px', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex', gap: '12px', flex: 1, minWidth: '260px' }}>
+            <div style={{ position: 'relative', width: '100%' }}>
+              <input
+                type="text"
+                placeholder="Search Lekki, Penthouse, Duplex..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                style={{
+                  width: '100%',
+                  padding: '10px 16px 10px 38px',
+                  borderRadius: '9999px',
+                  border: '1px solid #e5e7eb',
+                  fontSize: '0.9rem',
+                  outline: 'none'
+                }}
+              />
+              <Search size={16} style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: '#9ca3af' }} />
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+            {locations.map((loc) => (
+              <button
+                key={loc}
+                onClick={() => setSelectedLoc(loc)}
+                className={`filter-pill-btn ${selectedLoc === loc ? 'active' : ''}`}
+                style={{ padding: '6px 14px', fontSize: '0.82rem' }}
+              >
+                {loc}
+              </button>
+            ))}
+          </div>
+        </div>
 
         {/* Listings Grid */}
         {loading ? (
-          <div style={{ textAlign: 'center', padding: '80px 0', color: '#64748b' }}>
-            Loading properties...
+          <div style={{ textAlign: 'center', padding: '60px 0', color: '#9ca3af' }}>
+            Loading available properties...
           </div>
-        ) : properties.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '80px 20px', background: '#ffffff', borderRadius: '16px', border: '1px solid #e2e8f0' }}>
-            <h3 style={{ fontSize: '1.4rem', marginBottom: '8px' }}>No properties matched your search</h3>
-            <p style={{ color: '#64748b', marginBottom: '20px' }}>
-              Try adjusting or resetting your filter criteria to see available listings.
-            </p>
-            <button onClick={handleReset} className="btn btn-primary">
-              Reset All Filters
-            </button>
+        ) : filtered.length === 0 ? (
+          <div style={{ textAlign: 'center', padding: '60px 20px', background: '#ffffff', borderRadius: '24px', border: '1px solid #e5e7eb' }}>
+            <h3>No properties found</h3>
+            <p style={{ color: '#6b7280', marginTop: '6px' }}>Try adjusting your search criteria</p>
           </div>
         ) : (
-          <div className="property-grid">
-            {properties.map((property) => (
-              <PropertyCard key={property.id} property={property} />
+          <div className="property-grid-clean">
+            {filtered.map((prop) => (
+              <div key={prop.id} className="clean-card">
+                <div className="clean-card-img-wrap">
+                  <img
+                    src={prop.images?.[0] || 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80'}
+                    alt={prop.title}
+                    loading="lazy"
+                  />
+                  <span className="clean-card-badge">{prop.propertyType}</span>
+                </div>
+
+                <div className="clean-card-body">
+                  <div className="clean-card-loc">
+                    <MapPin size={13} />
+                    <span>{prop.location}, Lagos</span>
+                  </div>
+
+                  <h3 className="clean-card-title">
+                    <Link to={`/properties/${prop.id || prop.slug}`}>
+                      {prop.title}
+                    </Link>
+                  </h3>
+
+                  <div className="clean-card-specs">
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                      <Bed size={15} /> {prop.bedrooms} Beds
+                    </span>
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                      <Bath size={15} /> {prop.bathrooms} Baths
+                    </span>
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                      <Car size={15} /> {prop.parkingSpaces || 1} Park
+                    </span>
+                  </div>
+
+                  <div className="clean-card-footer">
+                    <div>
+                      <span className="clean-price-num">{formatPriceNGN(prop.price)}</span>
+                      <span className="clean-price-unit">/yr</span>
+                    </div>
+
+                    <Link to={`/properties/${prop.id || prop.slug}`} className="btn-view-pill">
+                      Details
+                    </Link>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         )}
