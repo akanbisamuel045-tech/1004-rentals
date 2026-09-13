@@ -101,7 +101,7 @@ export const properties = [
       name: "Mrs. Joke Popoola",
       phone: "+234 703 846 2284",
       email: "akanbisamuel045@gmail.com",
-      role: "Lead Property Hostess & Manager, 1004 Estate",
+      role: "Lead Property Agent & Manager, 1004 Estate",
       avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
     },
     createdAt: "2026-09-01T10:00:00.000Z"
@@ -148,7 +148,7 @@ export const properties = [
       name: "Mrs. Joke Popoola",
       phone: "+234 703 846 2284",
       email: "akanbisamuel045@gmail.com",
-      role: "Lead Property Hostess & Manager, 1004 Estate",
+      role: "Lead Property Agent & Manager, 1004 Estate",
       avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
     },
     createdAt: "2026-09-02T14:30:00.000Z"
@@ -196,7 +196,7 @@ export const properties = [
       name: "Mrs. Joke Popoola",
       phone: "+234 703 846 2284",
       email: "akanbisamuel045@gmail.com",
-      role: "Lead Property Hostess & Manager, 1004 Estate",
+      role: "Lead Property Agent & Manager, 1004 Estate",
       avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
     },
     createdAt: "2026-09-03T09:15:00.000Z"
@@ -241,7 +241,7 @@ export const properties = [
       name: "Mrs. Joke Popoola",
       phone: "+234 703 846 2284",
       email: "akanbisamuel045@gmail.com",
-      role: "Lead Property Hostess & Manager, 1004 Estate",
+      role: "Lead Property Agent & Manager, 1004 Estate",
       avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
     },
     createdAt: "2026-09-04T11:45:00.000Z"
@@ -287,7 +287,7 @@ export const properties = [
       name: "Mrs. Joke Popoola",
       phone: "+234 703 846 2284",
       email: "akanbisamuel045@gmail.com",
-      role: "Lead Property Hostess & Manager, 1004 Estate",
+      role: "Lead Property Agent & Manager, 1004 Estate",
       avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
     },
     createdAt: "2026-09-04T16:20:00.000Z"
@@ -332,7 +332,7 @@ export const properties = [
       name: "Mrs. Joke Popoola",
       phone: "+234 703 846 2284",
       email: "akanbisamuel045@gmail.com",
-      role: "Lead Property Hostess & Manager, 1004 Estate",
+      role: "Lead Property Agent & Manager, 1004 Estate",
       avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
     },
     createdAt: "2026-09-05T08:10:00.000Z"

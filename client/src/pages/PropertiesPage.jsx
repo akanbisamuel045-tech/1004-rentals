@@ -77,7 +77,7 @@ export default function PropertiesPage() {
     <div className="section" style={{ paddingTop: '24px' }}>
       <SEO
         title={activeCategoryTitle || '1004 Estate Apartment Listings'}
-        description={`Browse ${filtered.length} verified ${activeCategoryTitle ? activeCategoryTitle.toLowerCase() : 'apartments and flats'} for rent in 1004 Estate, Victoria Island, Lagos. 24/7 power, treated water, and on-site hostess management.`}
+        description={`Browse ${filtered.length} verified ${activeCategoryTitle ? activeCategoryTitle.toLowerCase() : 'apartments and flats'} for rent in 1004 Estate, Victoria Island, Lagos. 24/7 power, treated water, and on-site agent management.`}
         canonicalPath={categoryParam ? `/apartments/${categoryParam}` : '/properties'}
       />
       <div className="container">

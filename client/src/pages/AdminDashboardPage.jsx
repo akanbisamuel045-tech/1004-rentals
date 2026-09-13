@@ -319,7 +319,7 @@ export default function AdminDashboardPage() {
           name: 'Mrs. Joke Popoola',
           phone: '+234 703 846 2284',
           email: 'akanbisamuel045@gmail.com',
-          role: 'Lead Property Hostess & Manager, 1004 Estate',
+          role: 'Lead Property Agent & Manager, 1004 Estate',
           avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80'
         }
       });
@@ -367,7 +367,7 @@ export default function AdminDashboardPage() {
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
               <span className="badge" style={{ background: '#000000', color: '#ffffff', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
-                <ShieldCheck size={14} /> 1004 Estate Hostess Desk
+                <ShieldCheck size={14} /> 1004 Estate Agent Desk
               </span>
               <span className="explore-badge" style={{ background: '#e0f2fe', color: '#0369a1' }}>
                 Victoria Island, Lagos
@@ -377,7 +377,7 @@ export default function AdminDashboardPage() {
               Management & Leasing Console
             </h1>
             <p style={{ color: '#4b5563', marginTop: '6px', fontSize: '0.95rem' }}>
-              Hostess Lead: <strong>Mrs. Joke Popoola</strong> (Direct: +234 703 846 2284) • 1004 Estate Central Administration
+              Agent Lead: <strong>Mrs. Joke Popoola</strong> (Direct: +234 703 846 2284) • 1004 Estate Central Administration
             </p>
           </div>
 
@@ -411,7 +411,7 @@ export default function AdminDashboardPage() {
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#92400e', fontSize: '0.95rem' }}>
               <AlertCircle size={20} />
-              <span>You are viewing in review mode. Sign in as <strong>Hostess Admin</strong> to activate full verified permissions.</span>
+              <span>You are viewing in review mode. Sign in as <strong>Agent Admin</strong> to activate full verified permissions.</span>
             </div>
             <button
               onClick={handleDemoAdminLogin}
@@ -459,7 +459,7 @@ export default function AdminDashboardPage() {
             </div>
             <div style={{ fontSize: '1.9rem', fontWeight: '800', color: '#111827' }}>{enquiries.length}</div>
             <div style={{ fontSize: '0.8rem', color: newEnquiries > 0 ? '#ef4444' : '#10b981', marginTop: '4px', fontWeight: '600' }}>
-              {newEnquiries} Awaiting Hostess Contact
+              {newEnquiries} Awaiting Agent Contact
             </div>
           </div>
 

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export default function AboutPage() {
   return (
     <div className="section" style={{ paddingTop: '50px' }}>
-      <div className="container" style={{ maxWidth: '960px' }}>
+      <div className="container" style={{ maxWidth: '1200px' }}>
         <div style={{ textAlign: 'center', marginBottom: '50px' }}>
           <span className="explore-badge" style={{ background: '#000000', color: '#ffffff', marginBottom: '12px', display: 'inline-block' }}>
             About 1004 Estate Rentals
@@ -14,7 +14,7 @@ export default function AboutPage() {
             Exclusive Apartments in 1004 Estate, Victoria Island
           </h1>
           <p style={{ color: '#6b7280', fontSize: '1.15rem', maxWidth: '720px', margin: '0 auto' }}>
-            Managed by <strong>Mrs. Joke Popoola</strong>, your dedicated leasing hostess for verified high-rise flats, executive studios, and luxury penthouses in 1004 Estate.
+            Managed by <strong>Mrs. Joke Popoola</strong>, your dedicated leasing agent for verified high-rise flats, executive studios, and luxury penthouses in 1004 Estate.
           </p>
         </div>
 
@@ -26,7 +26,7 @@ export default function AboutPage() {
           </p>
 
           <p style={{ color: '#374151', fontSize: '1.05rem', lineHeight: '1.8', marginBottom: '32px' }}>
-            Our hostess desk ensures every apartment in our portfolio is fully serviced, furnished or semi-furnished, with guaranteed 24/7 electricity, industrial water purification, high-speed fiber internet, and immediate physical inspection assistance.
+            Our agent desk ensures every apartment in our portfolio is fully serviced, furnished or semi-furnished, with guaranteed 24/7 electricity, industrial water purification, high-speed fiber internet, and immediate physical inspection assistance.
           </p>
 
           {/* Key Advantages */}
@@ -49,7 +49,7 @@ export default function AboutPage() {
 
             <div style={{ padding: '24px', background: '#f9fafb', borderRadius: '16px', border: '1px solid #e5e7eb' }}>
               <Sparkles size={26} color="#000000" style={{ marginBottom: '12px' }} />
-              <h3 style={{ fontSize: '1.1rem', fontWeight: '700', marginBottom: '8px' }}>Direct Hostess Care</h3>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: '700', marginBottom: '8px' }}>Direct Agent Care</h3>
               <p style={{ color: '#6b7280', fontSize: '0.9rem', lineHeight: '1.5' }}>
                 Zero middleman drama. Direct landlord liaison, swift tenancy onboarding, and hassle-free renewals.
               </p>
@@ -57,10 +57,10 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* Hostess Card */}
+        {/* Agent Card */}
         <div style={{ background: '#000000', color: '#ffffff', borderRadius: '24px', padding: '40px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '24px' }}>
           <div>
-            <h3 style={{ fontSize: '1.5rem', fontWeight: '800', marginBottom: '8px' }}>Meet Your 1004 Estate Hostess</h3>
+            <h3 style={{ fontSize: '1.5rem', fontWeight: '800', marginBottom: '8px' }}>Meet Your 1004 Estate Agent</h3>
             <p style={{ color: '#a1a1aa', fontSize: '0.95rem', maxWidth: '500px' }}>
               <strong>Mrs. Joke Popoola</strong> is on-site daily in 1004 Estate to guide you through property tours, lease agreements, and move-in logistics.
             </p>

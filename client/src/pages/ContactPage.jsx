@@ -27,17 +27,17 @@ export default function ContactPage() {
   return (
     <div className="section" style={{ paddingTop: '50px' }}>
       <SEO
-        title="Contact Hostess Desk | 1004 Estate Rentals"
+        title="Contact Agent Desk | 1004 Estate Rentals"
         description="Contact Mrs. Joke Popoola at the 1004 Estate Leasing Desk in Victoria Island, Lagos. Direct phone / WhatsApp: +234 703 846 2284."
         canonicalPath="/contact"
       />
-      <div className="container" style={{ maxWidth: '1000px' }}>
+      <div className="container" style={{ maxWidth: '1200px' }}>
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
           <span className="explore-badge" style={{ background: '#f3f4f6', color: '#111111', marginBottom: '8px', display: 'inline-block' }}>
             On-Site Leasing Desk
           </span>
           <h1 style={{ fontSize: '2.5rem', fontWeight: '800', letterSpacing: '-0.03em', marginBottom: '12px' }}>
-            Contact 1004 Estate Hostess Desk
+            Contact 1004 Estate Agent Desk
           </h1>
           <p style={{ color: '#6b7280', fontSize: '1.05rem' }}>
             Looking to inspect an apartment in 1004 Estate today or have questions about estate guidelines?
@@ -45,7 +45,7 @@ export default function ContactPage() {
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '36px' }}>
-          {/* Hostess Info */}
+          {/* Agent Info */}
           <div style={{ background: '#ffffff', padding: '36px', borderRadius: '24px', border: '1px solid #e5e7eb', boxShadow: 'var(--shadow-subtle)' }}>
             <h3 style={{ fontSize: '1.3rem', fontWeight: '700', marginBottom: '20px' }}>On-Site Office & Contact</h3>
 
@@ -71,7 +71,7 @@ export default function ContactPage() {
               <div style={{ display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
                 <Mail size={22} color="#000000" />
                 <div>
-                  <h4 style={{ fontSize: '1rem', fontWeight: '700' }}>Email Hostess</h4>
+                  <h4 style={{ fontSize: '1rem', fontWeight: '700' }}>Email Agent</h4>
                   <p style={{ color: '#6b7280', fontSize: '0.9rem' }}>akanbisamuel045@gmail.com</p>
                 </div>
               </div>
@@ -86,7 +86,7 @@ export default function ContactPage() {
                 className="btn-add-listing"
                 style={{ width: '100%', justifyContent: 'center', background: '#16a34a' }}
               >
-                Chat with 1004 Hostess on WhatsApp
+                Chat with 1004 Agent on WhatsApp
               </a>
             </div>
           </div>
@@ -153,7 +153,7 @@ export default function ContactPage() {
                 </div>
 
                 <button type="submit" disabled={loading} className="btn-black-block">
-                  {loading ? 'Sending...' : <><Send size={16} /> Send Message to Hostess</>}
+                  {loading ? 'Sending...' : <><Send size={16} /> Send Message to Agent</>}
                 </button>
               </form>
             )}

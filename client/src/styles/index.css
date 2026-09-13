@@ -39,9 +39,10 @@ button, input, select, textarea {
 }
 
 .container {
-  max-width: 1240px;
+  max-width: 1540px;
+  width: 95%;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 20px;
 }
 
 /* =========================================
@@ -161,7 +162,7 @@ button, input, select, textarea {
   position: relative;
   border-radius: var(--radius-card);
   overflow: hidden;
-  height: 520px;
+  height: 540px;
   box-shadow: var(--shadow-subtle);
   background: #eaeaea;
 }

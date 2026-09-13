@@ -1,35 +1,38 @@
 import rateLimit from "express-rate-limit";
 
-// Rate Limiter: Global API protection (150 requests / 15 mins per IP)
+// Rate Limiter: Global API protection (Generous limit + bypass for local development)
 export const globalLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 150,
+  max: 2000,
   standardHeaders: true,
   legacyHeaders: false,
+  skip: (req) => process.env.NODE_ENV === "development" || req.ip === "127.0.0.1" || req.ip === "::1" || (req.ip && req.ip.includes("127.0.0.1")),
   message: {
     success: false,
     message: "Too many requests from this IP address. Please try again after 15 minutes."
   }
 });
 
-// Rate Limiter: Auth endpoints (10 attempts / 15 mins per IP)
+// Rate Limiter: Auth endpoints (100 attempts / 15 mins per IP + bypass for local development)
 export const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 10,
+  max: 100,
   standardHeaders: true,
   legacyHeaders: false,
+  skip: (req) => process.env.NODE_ENV === "development" || req.ip === "127.0.0.1" || req.ip === "::1" || (req.ip && req.ip.includes("127.0.0.1")),
   message: {
     success: false,
     message: "Too many authentication attempts. Please try again after 15 minutes."
   }
 });
 
-// Rate Limiter: Public Form submissions (5 requests / 15 mins per IP to protect Mrs. Joke Popoola from spam)
+// Rate Limiter: Public Form submissions (50 requests / 15 mins per IP to protect Mrs. Joke Popoola from spam)
 export const submissionLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 5,
+  max: 50,
   standardHeaders: true,
   legacyHeaders: false,
+  skip: (req) => process.env.NODE_ENV === "development" || req.ip === "127.0.0.1" || req.ip === "::1" || (req.ip && req.ip.includes("127.0.0.1")),
   message: {
     success: false,
     message: "Submission limit reached. Please wait a few minutes before submitting another enquiry or booking."

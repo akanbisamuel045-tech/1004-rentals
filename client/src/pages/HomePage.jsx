@@ -61,7 +61,7 @@ export default function HomePage() {
     <div>
       <SEO
         title="Serviced Apartments & Penthouses in 1004 Estate, Victoria Island"
-        description="Explore verified 1, 2, 3-bedroom flats, maisonettes, and luxury penthouses for rent in 1004 Estate, Victoria Island, Lagos. 24/7 dedicated power, treated water, and on-site hostess management by Mrs. Joke Popoola."
+        description="Explore verified 1, 2, 3-bedroom flats, maisonettes, and luxury penthouses for rent in 1004 Estate, Victoria Island, Lagos. 24/7 dedicated power, treated water, and on-site agent management by Mrs. Joke Popoola."
         canonicalPath="/"
       />
       {/* 1. HERO SECTION (Minimalist Realco Layout for 1004 Estate, Victoria Island) */}
@@ -84,7 +84,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Right Column: Clean Large Typography, Cluster Pills, and Hostess Highlight Card */}
+            {/* Right Column: Clean Large Typography, Cluster Pills, and Agent Highlight Card */}
             <div className="hero-right-col">
               <div>
                 <h1 className="hero-main-title">
@@ -110,13 +110,13 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Dark Hostess Highlight Banner Card */}
+              {/* Dark Agent Highlight Banner Card */}
               <div className="hero-dark-card">
                 <div>
-                  <span className="explore-badge">1004 Hostess Desk</span>
+                  <span className="explore-badge">1004 Agent Desk</span>
                   <h3 className="hero-dark-title">Direct 1004 Estate Rentals</h3>
                   <p className="hero-dark-desc">
-                    Managed by lead hostess Mrs. Joke Popoola. 24/7 turbine power, treated water, swimming pools, tennis courts, and verified security.
+                    Managed by lead agent Mrs. Joke Popoola. 24/7 turbine power, treated water, swimming pools, tennis courts, and verified security.
                   </p>
                   <button
                     onClick={() => openBookingModal(null)}
@@ -260,7 +260,7 @@ export default function HomePage() {
               Exclusive Living in 1004 Estate, Victoria Island
             </h2>
             <p style={{ color: '#6b7280', fontSize: '1.1rem', maxWidth: '720px', margin: '0 auto', lineHeight: '1.6' }}>
-              Managed by <strong>Mrs. Joke Popoola</strong>, your dedicated on-site leasing hostess for verified high-rise flats, executive studios, and luxury penthouses in 1004 Estate.
+              Managed by <strong>Mrs. Joke Popoola</strong>, your dedicated on-site leasing agent for verified high-rise flats, executive studios, and luxury penthouses in 1004 Estate.
             </p>
           </div>
 
@@ -273,7 +273,7 @@ export default function HomePage() {
               Situated right in the heart of Victoria Island along Ozumba Mbadiwe Way and Adetokunbo Ademola, <strong>1004 Estate</strong> is one of Lagos' most iconic and interconnected residential communities. Whether you are an expatriate, a financial services professional on VI, a tech leader, or a family seeking central luxury living, 1004 offers unmatched convenience without daily mainland traffic.
             </p>
             <p style={{ color: '#374151', fontSize: '1rem', lineHeight: '1.8', marginBottom: '28px' }}>
-              Our hostess desk ensures every apartment in our portfolio is fully serviced, verified, with guaranteed 24/7 dedicated electricity, treated water supply, high-speed fiber connectivity, and immediate physical inspection assistance.
+              Our agent desk ensures every apartment in our portfolio is fully serviced, verified, with guaranteed 24/7 dedicated electricity, treated water supply, high-speed fiber connectivity, and immediate physical inspection assistance.
             </p>
 
             {/* Key Advantages 3-Grid */}
@@ -296,7 +296,7 @@ export default function HomePage() {
 
               <div style={{ padding: '24px', background: '#f9fafb', borderRadius: '16px', border: '1px solid #e5e7eb' }}>
                 <Sparkles size={24} color="#000000" style={{ marginBottom: '12px' }} />
-                <h4 style={{ fontSize: '1.05rem', fontWeight: '700', marginBottom: '6px' }}>Direct Hostess Care</h4>
+                <h4 style={{ fontSize: '1.05rem', fontWeight: '700', marginBottom: '6px' }}>Direct Agent Care</h4>
                 <p style={{ color: '#6b7280', fontSize: '0.88rem', lineHeight: '1.5' }}>
                   Zero middleman drama. Direct landlord liaison, swift tenancy onboarding, and hassle-free renewals.
                 </p>
@@ -325,7 +325,7 @@ export default function HomePage() {
             />
           </div>
 
-          {/* Hostess Spotlight Card */}
+          {/* Agent Spotlight Card */}
           <div style={{ background: '#000000', color: '#ffffff', borderRadius: '24px', padding: '36px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '24px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '20px', flexWrap: 'wrap' }}>
               <img
@@ -341,7 +341,7 @@ export default function HomePage() {
                   Meet Mrs. Joke Popoola
                 </h3>
                 <p style={{ color: '#a1a1aa', fontSize: '0.92rem', maxWidth: '520px', lineHeight: '1.5', margin: 0 }}>
-                  Dedicated on-site leasing hostess in 1004 Estate to personally guide you through property tours, lease agreements, and move-in logistics.
+                  Dedicated on-site leasing agent in 1004 Estate to personally guide you through property tours, lease agreements, and move-in logistics.
                 </p>
               </div>
             </div>
@@ -361,7 +361,7 @@ export default function HomePage() {
                 className="btn-add-listing"
                 style={{ background: '#16a34a', color: '#ffffff', padding: '12px 20px', fontWeight: '700' }}
               >
-                WhatsApp Hostess
+                WhatsApp Agent
               </a>
             </div>
           </div>

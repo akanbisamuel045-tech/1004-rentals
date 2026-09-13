@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 const DEFAULT_TITLE = '1004 Rentals | Serviced Apartments in 1004 Estate, Victoria Island, Lagos';
-const DEFAULT_DESC = 'Explore verified 1, 2, 3-bedroom flats, maisonettes, and luxury penthouses for rent in 1004 Estate, Victoria Island, Lagos. 24/7 power, treated water, and on-site hostess management.';
+const DEFAULT_DESC = 'Explore verified 1, 2, 3-bedroom flats, maisonettes, and luxury penthouses for rent in 1004 Estate, Victoria Island, Lagos. 24/7 power, treated water, and on-site agent management.';
 const DEFAULT_IMAGE = 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80';
 const DOMAIN = 'https://1004rentals.ng';
 
@@ -107,7 +107,7 @@ export default function SEO({
         'landlord': {
           '@type': 'Person',
           'name': 'Mrs. Joke Popoola',
-          'jobTitle': 'Lead Property Hostess & Leasing Manager, 1004 Estate',
+          'jobTitle': 'Lead Property Agent & Leasing Manager, 1004 Estate',
           'telephone': '+2347038462284'
         }
       };

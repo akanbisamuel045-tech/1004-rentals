@@ -10,7 +10,7 @@
 
 **1004 Rentals (Lagos Rentals)** is a production-ready apartment rental platform exclusively focused on **1004 Estate, Victoria Island, Lagos, Nigeria**. It connects prospective tenants with verified high-rise flats, executive studios, multi-floor maisonettes, and luxury penthouses across 1004 Estate clusters (Clusters A, B, C, D, and High-Rise Towers).
 
-The platform is managed on-site by dedicated leasing hostess **Mrs. Joke Popoola** (Direct Phone / WhatsApp: `+234 703 846 2284`).
+The platform is managed on-site by dedicated leasing agent **Mrs. Joke Popoola** (Direct Phone / WhatsApp: `+234 703 846 2284`).
 
 Rather than overwhelming visitors with an unstructured collection of individual properties on the landing page, the user experience is purposefully architected around **database-driven apartment categories**, guiding tenants seamlessly from category exploration to dedicated listing views, apartment details, and instant inspection booking.
 
