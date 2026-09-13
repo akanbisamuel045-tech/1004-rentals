@@ -134,6 +134,19 @@ export const api = {
     return res.json();
   },
 
+  async updateProperty(id, propertyData) {
+    const res = await fetch(`${API_BASE}/properties/${id}`, {
+      method: 'PUT',
+      headers: getAuthHeaders(),
+      body: JSON.stringify(propertyData),
+    });
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.message || 'Failed to update property');
+    }
+    return res.json();
+  },
+
   async deleteProperty(id) {
     const res = await fetch(`${API_BASE}/properties/${id}`, {
       method: 'DELETE',
@@ -147,6 +160,34 @@ export const api = {
   async getLocations() {
     const res = await fetch(`${API_BASE}/locations`);
     if (!res.ok) throw new Error('Failed to fetch locations');
+    return res.json();
+  },
+
+  // Admin Bookings
+  async getAllBookings() {
+    const res = await fetch(`${API_BASE}/bookings`, {
+      headers: getAuthHeaders(),
+    });
+    if (!res.ok) throw new Error('Failed to fetch all bookings');
+    return res.json();
+  },
+
+  // Viewings / Inspections
+  async getViewings() {
+    const res = await fetch(`${API_BASE}/viewings`, {
+      headers: getAuthHeaders(),
+    });
+    if (!res.ok) throw new Error('Failed to fetch viewing appointments');
+    return res.json();
+  },
+
+  async updateViewingStatus(id, status) {
+    const res = await fetch(`${API_BASE}/viewings/${id}/status`, {
+      method: 'PATCH',
+      headers: getAuthHeaders(),
+      body: JSON.stringify({ status }),
+    });
+    if (!res.ok) throw new Error('Failed to update viewing status');
     return res.json();
   },
 
@@ -168,5 +209,52 @@ export const api = {
     });
     if (!res.ok) throw new Error('Failed to fetch enquiries');
     return res.json();
+  },
+
+  async updateEnquiryStatus(id, status) {
+    const res = await fetch(`${API_BASE}/enquiries/${id}/status`, {
+      method: 'PATCH',
+      headers: getAuthHeaders(),
+      body: JSON.stringify({ status }),
+    });
+    if (!res.ok) throw new Error('Failed to update enquiry status');
+    return res.json();
+  },
+
+  // Media / Image Upload
+  async uploadImage(file) {
+    const formData = new FormData();
+    formData.append('image', file);
+    const headers = {};
+    const token = localStorage.getItem('lagos_auth_token');
+    if (token) headers['Authorization'] = `Bearer ${token}`;
+
+    const res = await fetch(`${API_BASE}/upload`, {
+      method: 'POST',
+      headers,
+      body: formData,
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || 'Failed to upload image');
+    return data;
+  },
+
+  async uploadMultipleImages(files) {
+    const formData = new FormData();
+    Array.from(files).forEach((file) => {
+      formData.append('images', file);
+    });
+    const headers = {};
+    const token = localStorage.getItem('lagos_auth_token');
+    if (token) headers['Authorization'] = `Bearer ${token}`;
+
+    const res = await fetch(`${API_BASE}/upload/multiple`, {
+      method: 'POST',
+      headers,
+      body: formData,
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || 'Failed to upload images');
+    return data;
   }
 };

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send, CheckCircle2 } from 'lucide-react';
 import { api } from '../services/api';
+import SEO from '../components/SEO';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
@@ -25,6 +26,11 @@ export default function ContactPage() {
 
   return (
     <div className="section" style={{ paddingTop: '50px' }}>
+      <SEO
+        title="Contact Hostess Desk | 1004 Estate Rentals"
+        description="Contact Mrs. Joke Popoola at the 1004 Estate Leasing Desk in Victoria Island, Lagos. Direct phone / WhatsApp: +234 703 846 2284."
+        canonicalPath="/contact"
+      />
       <div className="container" style={{ maxWidth: '1000px' }}>
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
           <span className="explore-badge" style={{ background: '#f3f4f6', color: '#111111', marginBottom: '8px', display: 'inline-block' }}>

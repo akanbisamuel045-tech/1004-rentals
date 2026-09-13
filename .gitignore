@@ -33,3 +33,7 @@ server/data/*.sqlite
 Thumbs.db
 .vscode/
 .idea/
+
+# Uploads
+server/uploads/*
+!server/uploads/.gitkeep

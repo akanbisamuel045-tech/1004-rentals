@@ -1,6 +1,7 @@
 import express from "express";
 import { db } from "../models/db.js";
 import { authMiddleware, optionalAuthMiddleware } from "../middleware/auth.js";
+import { submissionLimiter, adminOnlyMiddleware, sanitizeBodyMiddleware } from "../middleware/security.js";
 
 const router = express.Router();
 
@@ -15,11 +16,8 @@ router.get("/my", authMiddleware, (req, res) => {
 });
 
 // GET /api/bookings (Admin: view all bookings)
-router.get("/", authMiddleware, (req, res) => {
+router.get("/", authMiddleware, adminOnlyMiddleware, (req, res) => {
   try {
-    if (req.user.role !== "ADMIN") {
-      return res.status(403).json({ success: false, message: "Admin access required" });
-    }
     const bookings = db.getAllBookings();
     res.json({ success: true, count: bookings.length, data: bookings });
   } catch (error) {
@@ -28,7 +26,7 @@ router.get("/", authMiddleware, (req, res) => {
 });
 
 // POST /api/bookings (Create a new apartment inspection/rental booking)
-router.post("/", optionalAuthMiddleware, (req, res) => {
+router.post("/", submissionLimiter, optionalAuthMiddleware, sanitizeBodyMiddleware, (req, res) => {
   try {
     const {
       propertyId,
@@ -74,8 +72,8 @@ router.post("/", optionalAuthMiddleware, (req, res) => {
   }
 });
 
-// PATCH /api/bookings/:id/status (Update status, or cancel)
-router.patch("/:id/status", authMiddleware, (req, res) => {
+// PATCH /api/bookings/:id/status (Admin: update status, or cancel)
+router.patch("/:id/status", authMiddleware, adminOnlyMiddleware, sanitizeBodyMiddleware, (req, res) => {
   try {
     const { status } = req.body;
     const booking = db.updateBookingStatus(req.params.id, status);
@@ -89,3 +87,4 @@ router.patch("/:id/status", authMiddleware, (req, res) => {
 });
 
 export default router;
+

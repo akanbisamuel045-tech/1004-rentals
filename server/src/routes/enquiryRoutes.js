@@ -1,10 +1,12 @@
 import express from "express";
 import { db } from "../models/db.js";
+import { authMiddleware } from "../middleware/auth.js";
+import { submissionLimiter, adminOnlyMiddleware, sanitizeBodyMiddleware } from "../middleware/security.js";
 
 const router = express.Router();
 
 // GET /api/enquiries (Admin: list all enquiries)
-router.get("/", (req, res) => {
+router.get("/", authMiddleware, adminOnlyMiddleware, (req, res) => {
   try {
     const enquiries = db.getEnquiries();
     res.json({ success: true, count: enquiries.length, data: enquiries });
@@ -14,7 +16,7 @@ router.get("/", (req, res) => {
 });
 
 // POST /api/enquiries (Tenant submits enquiry)
-router.post("/", (req, res) => {
+router.post("/", submissionLimiter, sanitizeBodyMiddleware, (req, res) => {
   try {
     const { name, email, phone, message, propertyId, propertyTitle } = req.body;
     if (!name || !email || !message) {
@@ -44,7 +46,7 @@ router.post("/", (req, res) => {
 });
 
 // PATCH /api/enquiries/:id/status (Admin: update enquiry status)
-router.patch("/:id/status", (req, res) => {
+router.patch("/:id/status", authMiddleware, adminOnlyMiddleware, sanitizeBodyMiddleware, (req, res) => {
   try {
     const { status } = req.body;
     const updated = db.updateEnquiryStatus(req.params.id, status);
@@ -58,3 +60,4 @@ router.patch("/:id/status", (req, res) => {
 });
 
 export default router;
+

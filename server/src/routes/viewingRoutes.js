@@ -1,10 +1,12 @@
 import express from "express";
 import { db } from "../models/db.js";
+import { authMiddleware } from "../middleware/auth.js";
+import { submissionLimiter, adminOnlyMiddleware, sanitizeBodyMiddleware } from "../middleware/security.js";
 
 const router = express.Router();
 
 // GET /api/viewings (Admin: list all viewing appointments)
-router.get("/", (req, res) => {
+router.get("/", authMiddleware, adminOnlyMiddleware, (req, res) => {
   try {
     const viewings = db.getViewings();
     res.json({ success: true, count: viewings.length, data: viewings });
@@ -14,7 +16,7 @@ router.get("/", (req, res) => {
 });
 
 // POST /api/viewings (Tenant schedules an inspection/viewing)
-router.post("/", (req, res) => {
+router.post("/", submissionLimiter, sanitizeBodyMiddleware, (req, res) => {
   try {
     const { name, email, phone, preferredDate, preferredTime, propertyId, propertyTitle, notes } = req.body;
     if (!name || !email || !phone || !preferredDate || !preferredTime) {
@@ -46,7 +48,7 @@ router.post("/", (req, res) => {
 });
 
 // PATCH /api/viewings/:id/status (Admin: confirm / cancel viewing)
-router.patch("/:id/status", (req, res) => {
+router.patch("/:id/status", authMiddleware, adminOnlyMiddleware, sanitizeBodyMiddleware, (req, res) => {
   try {
     const { status } = req.body;
     const updated = db.updateViewingStatus(req.params.id, status);
@@ -60,3 +62,4 @@ router.patch("/:id/status", (req, res) => {
 });
 
 export default router;
+

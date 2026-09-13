@@ -1,11 +1,15 @@
 import express from "express";
 import { db } from "../models/db.js";
 import { generateToken, authMiddleware } from "../middleware/auth.js";
+import { authLimiter, sanitizeBodyMiddleware } from "../middleware/security.js";
 
 const router = express.Router();
 
+// Apply sanitization across auth body inputs
+router.use(sanitizeBodyMiddleware);
+
 // POST /api/auth/register
-router.post("/register", async (req, res) => {
+router.post("/register", authLimiter, async (req, res) => {
   try {
     const { name, email, phone, password } = req.body;
 
@@ -38,7 +42,7 @@ router.post("/register", async (req, res) => {
 });
 
 // POST /api/auth/login
-router.post("/login", async (req, res) => {
+router.post("/login", authLimiter, async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -93,3 +97,4 @@ router.put("/profile", authMiddleware, (req, res) => {
 });
 
 export default router;
+

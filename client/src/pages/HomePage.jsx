@@ -4,6 +4,8 @@ import { ArrowRight, Bed, Bath, Car, MapPin, Sparkles, Shield, Zap, Droplet } fr
 import { api } from '../services/api';
 import { formatPriceNGN } from '../components/PropertyCard';
 import { useAuth } from '../context/AuthContext';
+import EstateMap from '../components/EstateMap';
+import SEO from '../components/SEO';
 
 export default function HomePage() {
   const { openBookingModal } = useAuth();
@@ -57,6 +59,11 @@ export default function HomePage() {
 
   return (
     <div>
+      <SEO
+        title="Serviced Apartments & Penthouses in 1004 Estate, Victoria Island"
+        description="Explore verified 1, 2, 3-bedroom flats, maisonettes, and luxury penthouses for rent in 1004 Estate, Victoria Island, Lagos. 24/7 dedicated power, treated water, and on-site hostess management by Mrs. Joke Popoola."
+        canonicalPath="/"
+      />
       {/* 1. HERO SECTION (Minimalist Realco Layout for 1004 Estate, Victoria Island) */}
       <section className="hero-wrapper">
         <div className="container">
@@ -295,6 +302,27 @@ export default function HomePage() {
                 </p>
               </div>
             </div>
+          </div>
+
+          {/* Interactive 1004 Estate Map & Cluster Navigator */}
+          <div style={{ marginBottom: '32px' }}>
+            <div style={{ marginBottom: '16px' }}>
+              <span className="explore-badge" style={{ background: '#f3f4f6', color: '#111827', marginBottom: '8px', display: 'inline-block' }}>
+                Interactive Cluster Navigation Map
+              </span>
+              <h3 style={{ fontSize: '1.5rem', fontWeight: '800', letterSpacing: '-0.02em', color: '#111827', margin: 0 }}>
+                Explore 1004 Estate Clusters & Landmarks
+              </h3>
+              <p style={{ color: '#6b7280', marginTop: '4px', fontSize: '0.95rem' }}>
+                Click on any cluster to view available apartment listings, swimming pools, tennis courts, and main security gates in Victoria Island.
+              </p>
+            </div>
+
+            <EstateMap
+              properties={properties}
+              height="480px"
+              showClusterControls={true}
+            />
           </div>
 
           {/* Hostess Spotlight Card */}

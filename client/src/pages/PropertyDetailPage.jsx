@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import {
-  MapPin, Heart, Share2, ArrowLeft,
-  Shield, Zap, Droplet, CheckCircle2, Calendar
-} from 'lucide-react';
+import { MapPin, Bed, Bath, ArrowLeft, Heart, CheckCircle2, Shield, Phone, Mail, Zap, Droplet, User, Calendar, Share2, Layers } from 'lucide-react';
 import { api } from '../services/api';
 import { formatPriceNGN } from '../components/PropertyCard';
 import { useAuth } from '../context/AuthContext';
+import EstateMap from '../components/EstateMap';
 import EnquiryModal from '../components/EnquiryModal';
+import SEO from '../components/SEO';
 
 export default function PropertyDetailPage() {
   const { id } = useParams();
@@ -82,6 +81,13 @@ export default function PropertyDetailPage() {
 
   return (
     <div className="detail-page-wrapper">
+      <SEO
+        title={property.title}
+        description={`${property.bedrooms} Bed, ${property.bathrooms} Bath ${property.propertyType} in ${property.location}, 1004 Estate, Victoria Island. ${property.description?.slice(0, 150)}...`}
+        image={imgs[0]}
+        canonicalPath={`/properties/${property.id}`}
+        property={property}
+      />
       <div className="container">
         
         {/* Navigation Link */}
@@ -258,7 +264,29 @@ export default function PropertyDetailPage() {
               {property.description}
             </p>
           </div>
+        </div>
 
+        {/* Interactive Location & Estate Map Section */}
+        <div style={{ marginTop: '56px', paddingTop: '40px', borderTop: '1px solid #e5e7eb' }}>
+          <div style={{ marginBottom: '20px' }}>
+            <span className="explore-badge" style={{ background: '#f3f4f6', color: '#111827', marginBottom: '8px', display: 'inline-block' }}>
+              1004 Estate Map & Cluster Layout
+            </span>
+            <h3 style={{ fontSize: '1.6rem', fontWeight: '800', letterSpacing: '-0.02em', color: '#111827', margin: 0 }}>
+              {property.location} Pinpoint & Proximity Map
+            </h3>
+            <p style={{ color: '#6b7280', marginTop: '4px', fontSize: '0.95rem' }}>
+              Located in <strong>{property.location}</strong>, Victoria Island, Lagos. Explore walking distance to Five Cowries Creek lagoon, swimming pools, tennis courts, and security gates.
+            </p>
+          </div>
+
+          <EstateMap
+            properties={[property]}
+            activeCluster={property.location}
+            selectedPropertyId={property.id}
+            height="440px"
+            showClusterControls={true}
+          />
         </div>
 
       </div>
