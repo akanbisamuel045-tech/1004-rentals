@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ArrowRight, Bed, Bath, Car, MapPin, Sparkles, Shield, Zap, Droplet } from 'lucide-react';
 import { api } from '../services/api';
 import { formatPriceNGN } from '../components/PropertyCard';
@@ -7,10 +7,25 @@ import { useAuth } from '../context/AuthContext';
 
 export default function HomePage() {
   const { openBookingModal } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [properties, setProperties] = useState([]);
   const [activeCategory, setActiveCategory] = useState('All 1004 Units');
   const [activeType, setActiveType] = useState('All');
   const [loading, setLoading] = useState(true);
+
+  // Auto-scroll to #about if navigating to hash
+  useEffect(() => {
+    if (location.hash === '#about') {
+      const timer = setTimeout(() => {
+        const el = document.getElementById('about');
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [location]);
 
   const heroTags = ['High-Rise', 'Serviced Flat', '1004 Victoria Island'];
   const categoryPills = ['All 1004 Units', 'High-Rise Towers', 'Cluster A', 'Cluster B', 'Cluster C & D', 'Penthouse'];
@@ -46,7 +61,7 @@ export default function HomePage() {
       <section className="hero-wrapper">
         <div className="container">
           <div className="hero-grid">
-            
+
             {/* Left Column: Iconic 1004 Estate High-Rise Architectural Image with Floating Glass Tags */}
             <div className="hero-img-container">
               <img
@@ -74,7 +89,12 @@ export default function HomePage() {
                   {categoryPills.map((pill) => (
                     <button
                       key={pill}
-                      onClick={() => setActiveCategory(pill)}
+                      onClick={() => {
+                        setActiveCategory(pill);
+                        if (pill === 'All 1004 Units') navigate('/properties');
+                        else if (pill === 'Penthouse') navigate('/apartments/4-bedroom');
+                        else navigate(`/properties?location=${encodeURIComponent('1004 ' + pill.replace('1004 ', ''))}`);
+                      }}
                       className={`filter-pill-btn ${activeCategory === pill ? 'active' : ''}`}
                     >
                       {pill}
@@ -89,7 +109,7 @@ export default function HomePage() {
                   <span className="explore-badge">1004 Hostess Desk</span>
                   <h3 className="hero-dark-title">Direct 1004 Estate Rentals</h3>
                   <p className="hero-dark-desc">
-                    Managed by lead hostess Mrs. Folashade Akanbi. 24/7 turbine power, treated water, swimming pools, tennis courts, and verified security.
+                    Managed by lead hostess Mrs. Joke Popoola. 24/7 turbine power, treated water, swimming pools, tennis courts, and verified security.
                   </p>
                   <button
                     onClick={() => openBookingModal(null)}
@@ -124,106 +144,203 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 2. "FIND THE BEST PLACE IN 1004" SECTION */}
-      <section className="listing-section">
+      {/* 2. CURATED COLLECTIONS MOSAIC SECTION (Matched to Reference Layout) */}
+      <section className="curated-collections-section">
         <div className="container">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '24px', flexWrap: 'wrap', gap: '16px' }}>
-            <div>
-              <h2 className="section-title-clean">Curated 1004 Estate Apartments</h2>
-              <p style={{ color: '#6b7280', fontSize: '0.95rem' }}>
-                Handpicked 1-bed studios, 2-bed flats, 3-bed family suites, and 4-bed penthouses
-              </p>
-            </div>
-
-            {/* Quick Type Filter Tabs */}
-            <div className="category-tabs-bar" style={{ marginBottom: 0 }}>
-              {['All', 'Apartment', 'Penthouse', 'Duplex', 'Studio'].map((t) => (
-                <button
-                  key={t}
-                  onClick={() => setActiveType(t)}
-                  className={`filter-pill-btn ${activeType === t ? 'active' : ''}`}
-                  style={{ padding: '6px 16px', fontSize: '0.85rem' }}
-                >
-                  {t}
-                </button>
-              ))}
-            </div>
+          {/* Header */}
+          <div className="curated-header">
+            <h2 className="curated-title">Curated Collections</h2>
+            <span className="curated-subtitle">
+              For waterfront gatherings, nature explorations, and cherished family vacations.
+            </span>
           </div>
 
-          {loading ? (
-            <div style={{ textAlign: 'center', padding: '60px 0', color: '#9ca3af' }}>
-              Loading 1004 Estate listings...
-            </div>
-          ) : filteredProperties.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '60px 20px', background: '#ffffff', borderRadius: '24px', border: '1px solid #e5e7eb' }}>
-              <h3>No apartments match this selection</h3>
-              <p style={{ color: '#6b7280', marginTop: '6px' }}>Try selecting "All 1004 Units" or resetting your filter</p>
-            </div>
-          ) : (
-            <div className="property-grid-clean">
-              {filteredProperties.map((prop) => (
-                <div key={prop.id} className="clean-card">
-                  <div className="clean-card-img-wrap">
-                    <img
-                      src={prop.images?.[0] || 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80'}
-                      alt={prop.title}
-                      loading="lazy"
-                    />
-                    <span className="clean-card-badge">{prop.location}</span>
-                  </div>
+          {/* 5-Card Asymmetrical Mosaic Grid (1 Large Left Card + 4 Smaller Right Cards) */}
+          <div className="curated-mosaic-grid">
+            {/* Card 1: Large Featured Left Card (Spans 2 Rows) - 3-Bedroom Maisonettes */}
+            <Link to="/apartments/3-bedroom-maisonette" className="curated-card curated-card-large">
+              <div className="curated-card-img">
+                <img
+                  src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"
+                  alt="3-Bedroom Maisonette Rentals"
+                  loading="lazy"
+                />
+              </div>
+              <div className="curated-card-caption">
+                <h3 className="curated-card-title">3-Bedroom Maisonette Rentals</h3>
+                <p className="curated-card-desc">Iconic split-level multi-floor residences with Five Cowries Creek views</p>
+              </div>
+            </Link>
 
-                  <div className="clean-card-body">
-                    <div className="clean-card-loc">
-                      <MapPin size={13} />
-                      <span>{prop.address || `${prop.location}, Victoria Island`}</span>
-                    </div>
+            {/* Card 2: Top-Right 1 - 1-Bedroom Executive Apartments */}
+            <Link to="/apartments/1-bedroom" className="curated-card curated-card-small">
+              <div className="curated-card-img">
+                <img
+                  src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80"
+                  alt="1-Bedroom Executive Apartments"
+                  loading="lazy"
+                />
+              </div>
+              <div className="curated-card-caption">
+                <h3 className="curated-card-title">1-Bedroom Executive Apartments</h3>
+                <p className="curated-card-desc">Serviced suites tailored for corporate stays and young executives</p>
+              </div>
+            </Link>
 
-                    <h3 className="clean-card-title">
-                      <Link to={`/properties/${prop.id || prop.slug}`}>
-                        {prop.title}
-                      </Link>
-                    </h3>
+            {/* Card 3: Top-Right 2 - 2-Bedroom Serviced Flats */}
+            <Link to="/apartments/2-bedroom" className="curated-card curated-card-small">
+              <div className="curated-card-img">
+                <img
+                  src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80"
+                  alt="2-Bedroom Serviced Flats"
+                  loading="lazy"
+                />
+              </div>
+              <div className="curated-card-caption">
+                <h3 className="curated-card-title">2-Bedroom Serviced Flats</h3>
+                <p className="curated-card-desc">Modern urban living in serene residential clusters with pool access</p>
+              </div>
+            </Link>
 
-                    <div className="clean-card-specs">
-                      <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                        <Bed size={15} /> {prop.bedrooms} Beds
-                      </span>
-                      <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                        <Bath size={15} /> {prop.bathrooms} Baths
-                      </span>
-                      <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                        <Car size={15} /> {prop.parkingSpaces || 1} Park
-                      </span>
-                    </div>
+            {/* Card 4: Bottom-Right 1 - 3-Bedroom Family Flats */}
+            <Link to="/apartments/3-bedroom" className="curated-card curated-card-small">
+              <div className="curated-card-img">
+                <img
+                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+                  alt="3-Bedroom Family Flats"
+                  loading="lazy"
+                />
+              </div>
+              <div className="curated-card-caption">
+                <h3 className="curated-card-title">3-Bedroom Family Flats</h3>
+                <p className="curated-card-desc">Spacious flats with ensuite master bedrooms, modern kitchens, and tennis courts</p>
+              </div>
+            </Link>
 
-                    <div className="clean-card-footer">
-                      <div>
-                        <span className="clean-price-num">{formatPriceNGN(prop.price)}</span>
-                        <span className="clean-price-unit">/yr</span>
-                      </div>
+            {/* Card 5: Bottom-Right 2 - 4-Bedroom Luxury Penthouses */}
+            <Link to="/apartments/4-bedroom" className="curated-card curated-card-small">
+              <div className="curated-card-img">
+                <img
+                  src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80"
+                  alt="4-Bedroom Luxury Penthouses"
+                  loading="lazy"
+                />
+              </div>
+              <div className="curated-card-caption">
+                <h3 className="curated-card-title">4-Bedroom Luxury Penthouses</h3>
+                <p className="curated-card-desc">Panoramic lagoon vistas, expansive terraces, and 24/7 dedicated turbine electricity</p>
+              </div>
+            </Link>
+          </div>
 
-                      <div style={{ display: 'flex', gap: '8px' }}>
-                        <button
-                          onClick={() => openBookingModal(prop)}
-                          className="btn-view-pill"
-                          style={{ background: '#000000', color: '#ffffff' }}
-                        >
-                          Book Now
-                        </button>
-                        <Link to={`/properties/${prop.id || prop.slug}`} className="btn-view-pill">
-                          Details
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+          {/* Bottom Centered Explore Button (Matching Reference Image 2) */}
+          <div className="curated-btn-wrap">
+            <Link to="/properties" className="btn-curated-explore">
+              EXPLORE ALL CURATED COLLECTIONS
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* 3. 1004 ESTATE HIGHLIGHTS BAR */}
+      {/* 3. ABOUT 1004 ESTATE SECTION (Joined from About Page) */}
+      <section id="about" style={{ paddingTop: '70px', paddingBottom: '70px', background: '#fafafa', borderTop: '1px solid #f0f0f0' }}>
+        <div className="container" style={{ maxWidth: '1060px' }}>
+          <div style={{ textAlign: 'center', marginBottom: '44px' }}>
+            <span className="explore-badge" style={{ background: '#000000', color: '#ffffff', marginBottom: '14px', display: 'inline-block' }}>
+              About 1004 Estate Rentals
+            </span>
+            <h2 style={{ fontSize: '2.4rem', fontWeight: '800', letterSpacing: '-0.03em', marginBottom: '14px', color: '#111827' }}>
+              Exclusive Living in 1004 Estate, Victoria Island
+            </h2>
+            <p style={{ color: '#6b7280', fontSize: '1.1rem', maxWidth: '720px', margin: '0 auto', lineHeight: '1.6' }}>
+              Managed by <strong>Mrs. Joke Popoola</strong>, your dedicated on-site leasing hostess for verified high-rise flats, executive studios, and luxury penthouses in 1004 Estate.
+            </p>
+          </div>
+
+          {/* Story & Lifestyle Card */}
+          <div style={{ background: '#ffffff', borderRadius: '24px', border: '1px solid #e5e7eb', padding: '36px', marginBottom: '32px', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
+            <h3 style={{ fontSize: '1.45rem', fontWeight: '700', marginBottom: '14px', color: '#111827' }}>
+              Why 1004 Estate, Victoria Island?
+            </h3>
+            <p style={{ color: '#374151', fontSize: '1rem', lineHeight: '1.8', marginBottom: '18px' }}>
+              Situated right in the heart of Victoria Island along Ozumba Mbadiwe Way and Adetokunbo Ademola, <strong>1004 Estate</strong> is one of Lagos' most iconic and interconnected residential communities. Whether you are an expatriate, a financial services professional on VI, a tech leader, or a family seeking central luxury living, 1004 offers unmatched convenience without daily mainland traffic.
+            </p>
+            <p style={{ color: '#374151', fontSize: '1rem', lineHeight: '1.8', marginBottom: '28px' }}>
+              Our hostess desk ensures every apartment in our portfolio is fully serviced, verified, with guaranteed 24/7 dedicated electricity, treated water supply, high-speed fiber connectivity, and immediate physical inspection assistance.
+            </p>
+
+            {/* Key Advantages 3-Grid */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px' }}>
+              <div style={{ padding: '24px', background: '#f9fafb', borderRadius: '16px', border: '1px solid #e5e7eb' }}>
+                <Zap size={24} color="#000000" style={{ marginBottom: '12px' }} />
+                <h4 style={{ fontSize: '1.05rem', fontWeight: '700', marginBottom: '6px' }}>24/7 Dedicated Power</h4>
+                <p style={{ color: '#6b7280', fontSize: '0.88rem', lineHeight: '1.5' }}>
+                  Independent turbine generators ensuring round-the-clock uninterrupted electricity for all flats.
+                </p>
+              </div>
+
+              <div style={{ padding: '24px', background: '#f9fafb', borderRadius: '16px', border: '1px solid #e5e7eb' }}>
+                <Shield size={24} color="#000000" style={{ marginBottom: '12px' }} />
+                <h4 style={{ fontSize: '1.05rem', fontWeight: '700', marginBottom: '6px' }}>Biometric Gate Security</h4>
+                <p style={{ color: '#6b7280', fontSize: '0.88rem', lineHeight: '1.5' }}>
+                  Biometric access cards, 24/7 patrol officers, CCTV monitoring, and strict guest verification.
+                </p>
+              </div>
+
+              <div style={{ padding: '24px', background: '#f9fafb', borderRadius: '16px', border: '1px solid #e5e7eb' }}>
+                <Sparkles size={24} color="#000000" style={{ marginBottom: '12px' }} />
+                <h4 style={{ fontSize: '1.05rem', fontWeight: '700', marginBottom: '6px' }}>Direct Hostess Care</h4>
+                <p style={{ color: '#6b7280', fontSize: '0.88rem', lineHeight: '1.5' }}>
+                  Zero middleman drama. Direct landlord liaison, swift tenancy onboarding, and hassle-free renewals.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Hostess Spotlight Card */}
+          <div style={{ background: '#000000', color: '#ffffff', borderRadius: '24px', padding: '36px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '24px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '20px', flexWrap: 'wrap' }}>
+              <img
+                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
+                alt="Mrs. Joke Popoola"
+                style={{ width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover', border: '2px solid #ffffff' }}
+              />
+              <div>
+                <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#a1a1aa', fontWeight: '700' }}>
+                  1004 On-Site Concierge
+                </span>
+                <h3 style={{ fontSize: '1.45rem', fontWeight: '800', margin: '4px 0 6px 0' }}>
+                  Meet Mrs. Joke Popoola
+                </h3>
+                <p style={{ color: '#a1a1aa', fontSize: '0.92rem', maxWidth: '520px', lineHeight: '1.5', margin: 0 }}>
+                  Dedicated on-site leasing hostess in 1004 Estate to personally guide you through property tours, lease agreements, and move-in logistics.
+                </p>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+              <button
+                onClick={() => openBookingModal(null)}
+                className="btn-add-listing"
+                style={{ background: '#ffffff', color: '#000000', padding: '12px 24px', fontWeight: '700' }}
+              >
+                Schedule On-site Tour
+              </button>
+              <a
+                href="https://wa.me/2347038462284?text=Hello%20Mrs.%20Popoola,%20I%20am%20interested%20in%20inspecting%20an%20apartment%20in%201004%20Estate,%20Victoria%20Island."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-add-listing"
+                style={{ background: '#16a34a', color: '#ffffff', padding: '12px 20px', fontWeight: '700' }}
+              >
+                WhatsApp Hostess
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. 1004 ESTATE HIGHLIGHTS BAR */}
       <section style={{ background: '#ffffff', borderTop: '1px solid #f3f4f6', borderBottom: '1px solid #f3f4f6', padding: '40px 0' }}>
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '24px', textAlign: 'center' }}>

@@ -25,8 +25,8 @@ export default function Footer() {
             <h4 className="footer-heading">Navigation</h4>
             <ul className="footer-link-list">
               <li><Link to="/" className="footer-link-item">Home</Link></li>
+              <li><Link to="/#about" className="footer-link-item">About 1004 Estate</Link></li>
               <li><Link to="/properties" className="footer-link-item">1004 Apartments</Link></li>
-              <li><Link to="/about" className="footer-link-item">About 1004 Estate</Link></li>
               <li><Link to="/contact" className="footer-link-item">Contact Desk</Link></li>
               <li><Link to="/dashboard" className="footer-link-item">User Dashboard</Link></li>
             </ul>
@@ -48,7 +48,7 @@ export default function Footer() {
             <h4 className="footer-heading">Hostess Desk</h4>
             <ul className="footer-link-list">
               <li style={{ color: '#a1a1aa', fontSize: '0.9rem' }}>1004 Estate, Adetokunbo Ademola, Victoria Island, Lagos</li>
-              <li style={{ color: '#ffffff', fontSize: '0.9rem', fontWeight: '600' }}>+234 802 345 6789</li>
+              <li style={{ color: '#ffffff', fontSize: '0.9rem', fontWeight: '600' }}>+234 703 846 2284</li>
               <li style={{ color: '#a1a1aa', fontSize: '0.9rem' }}>akanbisamuel045@gmail.com</li>
             </ul>
           </div>
@@ -57,7 +57,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="footer-bottom-bar">
           <div>
-            © {new Date().getFullYear()} 1004 Rentals, Victoria Island. Hosted by Mrs. Folashade Akanbi.
+            © {new Date().getFullYear()} 1004 Rentals, Victoria Island. Hosted by Mrs. Joke Popoola.
           </div>
           <div style={{ display: 'flex', gap: '20px' }}>
             <span style={{ cursor: 'pointer' }}>Estate Guidelines</span>

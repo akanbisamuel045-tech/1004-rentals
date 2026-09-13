@@ -14,7 +14,7 @@ export default function AboutPage() {
             Exclusive Apartments in 1004 Estate, Victoria Island
           </h1>
           <p style={{ color: '#6b7280', fontSize: '1.15rem', maxWidth: '720px', margin: '0 auto' }}>
-            Managed by <strong>Mrs. Folashade Akanbi</strong>, your dedicated leasing hostess for verified high-rise flats, executive studios, and luxury penthouses in 1004 Estate.
+            Managed by <strong>Mrs. Joke Popoola</strong>, your dedicated leasing hostess for verified high-rise flats, executive studios, and luxury penthouses in 1004 Estate.
           </p>
         </div>
 
@@ -62,7 +62,7 @@ export default function AboutPage() {
           <div>
             <h3 style={{ fontSize: '1.5rem', fontWeight: '800', marginBottom: '8px' }}>Meet Your 1004 Estate Hostess</h3>
             <p style={{ color: '#a1a1aa', fontSize: '0.95rem', maxWidth: '500px' }}>
-              <strong>Mrs. Folashade Akanbi</strong> is on-site daily in 1004 Estate to guide you through property tours, lease agreements, and move-in logistics.
+              <strong>Mrs. Joke Popoola</strong> is on-site daily in 1004 Estate to guide you through property tours, lease agreements, and move-in logistics.
             </p>
           </div>
           <Link to="/contact" className="btn-add-listing" style={{ background: '#ffffff', color: '#000000', padding: '12px 24px' }}>

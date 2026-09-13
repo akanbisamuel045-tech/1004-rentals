@@ -8,7 +8,11 @@
 
 ## 1. Project Overview
 
-Lagos Rentals is a production-ready apartment rental platform focused on Lagos, Nigeria. It allows prospective tenants to browse, search, filter, and enquire about properties. A secure admin dashboard allows property managers to manage listings, images, enquiries, and viewing requests.
+**1004 Rentals (Lagos Rentals)** is a production-ready apartment rental platform exclusively focused on **1004 Estate, Victoria Island, Lagos, Nigeria**. It connects prospective tenants with verified high-rise flats, executive studios, multi-floor maisonettes, and luxury penthouses across 1004 Estate clusters (Clusters A, B, C, D, and High-Rise Towers).
+
+The platform is managed on-site by dedicated leasing hostess **Mrs. Joke Popoola** (Direct Phone / WhatsApp: `+234 703 846 2284`).
+
+Rather than overwhelming visitors with an unstructured collection of individual properties on the landing page, the user experience is purposefully architected around **database-driven apartment categories**, guiding tenants seamlessly from category exploration to dedicated listing views, apartment details, and instant inspection booking.
 
 ---
 
@@ -174,12 +178,20 @@ lagos-rentals/
 
 | Route | Purpose |
 |-------|---------|
-| `/` | Home page |
-| `/properties` | Property listing + search + filters |
-| `/properties/[id]` | Property details |
-| `/locations/[slug]` | Neighborhood property listings |
-| `/about` | About the agency |
-| `/contact` | Contact page |
+| `/` | Home page (Hero, 1004 Estate intro, Category exploration cards, Location highlights, Hostess WhatsApp CTA) |
+| `/apartments/[categorySlug]` | Dedicated category listing page (e.g., `/apartments/1-bedroom`, `/apartments/2-bedroom`) |
+| `/properties` | Full properties directory fallback + search + multi-filters |
+| `/properties/[id]` | Comprehensive apartment details view + inspection booking |
+| `/locations/[slug]` | Neighborhood & cluster property listings (e.g., Cluster A, High-Rise Towers) |
+| `/about` | Redirects to `/#about` (joined section on homepage) |
+| `/contact` | Contact page & Hostess WhatsApp desk |
+
+#### Dedicated Apartment Category Routes
+- `/apartments/1-bedroom` — 1-Bedroom Apartments
+- `/apartments/2-bedroom` — 2-Bedroom Apartments
+- `/apartments/3-bedroom` — 3-Bedroom Apartments
+- `/apartments/3-bedroom-maisonette` — 3-Bedroom Maisonettes
+- `/apartments/4-bedroom` — 4-Bedroom Apartments
 
 ### Authentication Routes
 
@@ -211,12 +223,115 @@ lagos-rentals/
 | Route | Methods | Auth Required |
 |-------|---------|--------------|
 | `/api/auth/[...nextauth]` | GET, POST | — |
+| `/api/categories` | GET | — |
+| `/api/categories/[slug]` | GET | — |
 | `/api/properties` | GET, POST | POST: admin |
 | `/api/properties/[id]` | GET, PUT, DELETE | PUT/DELETE: admin |
 | `/api/enquiries` | GET, POST | GET: admin |
 | `/api/viewing-requests` | GET, POST | GET: admin |
+| `/api/bookings` | GET, POST | GET: admin, POST: public/auth |
 | `/api/favorites` | GET, POST, DELETE | authenticated |
 | `/api/upload` | POST | admin |
+
+---
+
+## 4.1 1004 Estate Apartment Categories & Homepage Architecture
+
+### Primary User Flow
+The primary user flow is streamlined to prioritize category-based discovery over visual overload:
+
+$$\textbf{Homepage} \longrightarrow \textbf{Apartment Category} \longrightarrow \textbf{Available Apartments} \longrightarrow \textbf{Apartment Details} \longrightarrow \textbf{Book Now}$$
+
+### Apartment Categories
+The category system is based on the actual residential configurations of 1004 Estate:
+1. **1-Bedroom Apartments** (`/apartments/1-bedroom`)
+2. **2-Bedroom Apartments** (`/apartments/2-bedroom`)
+3. **3-Bedroom Apartments** (`/apartments/3-bedroom`)
+4. **3-Bedroom Maisonettes** (`/apartments/3-bedroom-maisonette`)
+5. **4-Bedroom Apartments** (`/apartments/4-bedroom`)
+
+> **Database-Driven Rule:** The category system must be **database-driven** rather than hard-coded into individual frontend components. Categories are stored with dynamic metadata (name, slug, description, image, display order) and associated with properties in the data store.
+
+### Homepage Requirements
+The homepage must focus on **apartment categories**, not individual apartment listings.
+
+The homepage displays:
+- **Hero section**: Welcoming headline, visual imagery of 1004 Estate, and primary CTA.
+- **Short introduction to apartments at 1004 Estate**: Highlighting 24/7 dedicated power, treated water, and on-site hostess management.
+- **"Explore Apartments" section**:
+  - Grid of Apartment Category Cards
+  - Category image
+  - Short description for each category
+  - "View Apartments" button (linking directly to the dedicated category listing page)
+- **Brief 1004 Estate / location section**: Overview of the Victoria Island setting, cluster amenities, and security.
+- **Contact / WhatsApp CTA**: Direct connection to lead hostess **Mrs. Joke Popoola** (`+234 703 846 2284`).
+- **Book Now CTA**: Direct inspection and tour scheduling trigger.
+- **Footer**: Global navigation, cluster shortcuts, and hostess desk details.
+
+> **Visual Constraint:** Do **NOT** display a large collection of individual apartments directly on the homepage. Keep the landing experience focused, welcoming, and uncluttered.
+
+### Category Navigation
+Each category leads to a dedicated listing page containing only apartments belonging to that category:
+- `/apartments/1-bedroom`
+- `/apartments/2-bedroom`
+- `/apartments/3-bedroom`
+- `/apartments/3-bedroom-maisonette`
+- `/apartments/4-bedroom`
+
+### Apartment Listing Cards
+Each available apartment card on category and listing pages displays:
+- **Main image**
+- **Apartment title**
+- **Bedrooms count**
+- **Bathrooms count**
+- **Price** (formatted in NGN ₦)
+- **Furnishing status** (Furnished, Semi-Furnished, Unfurnished)
+- **Cluster/block** where applicable (Cluster A, Cluster B, Cluster C & D, High-Rise Towers)
+- **Availability status** (`Available`, `Reserved`, `Rented`)
+- **"View Details" button**
+
+### Apartment Details Specification
+The apartment details page provides comprehensive property intelligence:
+- **Image gallery** (high-resolution photo carousel/mosaic)
+- **Description** (detailed property description)
+- **Bedrooms**
+- **Bathrooms**
+- **Toilets** (guest powder rooms / secondary facilities)
+- **Living/dining area**
+- **Kitchen**
+- **Family lounge** (where applicable, especially in Maisonettes and 4-Bedroom units)
+- **Balcony** (where applicable, city/lagoon view)
+- **Furnishing status**
+- **Amenities checklist** (24/7 electricity, treated water, security, pool, elevator, parking)
+- **Cluster/block**
+- **Floor level** (where applicable)
+- **Price & fee breakdown** (Rent, Caution, Service Charge, Legal/Agency)
+- **Availability**
+- **Location** (1004 Estate, Victoria Island)
+- **"Book Now" button** (triggers inspection scheduling)
+- **"Contact / WhatsApp" button** (links directly to hostess WhatsApp with prefilled message)
+
+> **Dynamic Data Rule:** Apartment information must be dynamic and retrieved from the database. Do **not** assume that every apartment has identical layouts, renovations, facilities, or amenities.
+
+### Filters Strategy
+Keep the homepage simple and uncluttered. Advanced filter features such as:
+- Furnished / unfurnished
+- Serviced / unserviced
+- Price range
+- Bedrooms
+- Bathrooms
+- Cluster / block
+- Availability
+
+must be implemented as **filters within the apartment listing pages** where appropriate, rather than making the homepage visually crowded.
+
+### Design Direction
+The category section and overall UI must strictly maintain the website's existing design direction:
+- **Simple** — clear hierarchies without cognitive friction
+- **Light & Clean** — modern whitespace and typography
+- **Spacious** — breathable card layouts and section padding
+- **Modern & Professional** — crisp outlines and elegant badges
+- **Premium but not excessive** — understated luxury tailored to 1004 Estate standards
 
 ---
 
@@ -230,29 +345,32 @@ See `prisma/schema.prisma` for full schema. Key models:
 - **Account** — OAuth provider accounts (NextAuth)
 - **Session** — user sessions
 - **VerificationToken** — email verification
-- **Property** — core listing model
+- **ApartmentCategory** — 1004 Estate category (1-Bed, 2-Bed, 3-Bed, 3-Bed Maisonette, 4-Bed) with name, slug, description, image, and sortOrder
+- **Property** — core listing model (includes dynamic layout attributes: bedrooms, bathrooms, toilets, living/dining, kitchen, family lounge, balcony, cluster, floor, furnishing status, availability, rent, fees)
 - **PropertyImage** — images linked to a property (external URL or local path)
-- **Amenity** — master list of amenities
+- **Amenity** — master list of amenities (24/7 power, treated water, security, pool, etc.)
 - **PropertyAmenity** — join table (property ↔ amenity)
-- **Location** — Lagos neighborhoods (seeded, extensible)
+- **Location** — 1004 Estate clusters & VI location metadata
 - **Inquiry** — tenant enquiry linked to property
-- **ViewingRequest** — viewing appointment request
+- **ViewingRequest / Booking** — physical inspection appointment request
 - **Favorite** — saved property per user
 
 ### Key Relationships
 
 ```
-User          1:N  Inquiry
-User          1:N  ViewingRequest
-User          1:N  Favorite
-User          1:N  Property (as agent/owner)
-Property      1:N  PropertyImage
-Property      1:N  PropertyAmenity
-Property      N:1  Location
-Amenity       1:N  PropertyAmenity
-Property      1:N  Inquiry
-Property      1:N  ViewingRequest
-Property      1:N  Favorite
+ApartmentCategory 1:N Property
+User              1:N Inquiry
+User              1:N ViewingRequest / Booking
+User              1:N Favorite
+User              1:N Property (as agent/hostess)
+Property          1:N PropertyImage
+Property          1:N PropertyAmenity
+Property          N:1 Location
+Property          N:1 ApartmentCategory
+Amenity           1:N PropertyAmenity
+Property          1:N Inquiry
+Property          1:N ViewingRequest / Booking
+Property          1:N Favorite
 ```
 
 ---

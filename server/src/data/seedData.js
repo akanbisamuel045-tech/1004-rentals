@@ -98,8 +98,8 @@ export const properties = [
       "Lagoon & City View Balconies"
     ],
     agent: {
-      name: "Mrs. Folashade Akanbi",
-      phone: "+234 802 345 6789",
+      name: "Mrs. Joke Popoola",
+      phone: "+234 703 846 2284",
       email: "akanbisamuel045@gmail.com",
       role: "Lead Property Hostess & Manager, 1004 Estate",
       avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
@@ -145,8 +145,8 @@ export const properties = [
       "Modern Fitted Kitchen (Gas Hob, Oven, Microwave)"
     ],
     agent: {
-      name: "Mrs. Folashade Akanbi",
-      phone: "+234 802 345 6789",
+      name: "Mrs. Joke Popoola",
+      phone: "+234 703 846 2284",
       email: "akanbisamuel045@gmail.com",
       role: "Lead Property Hostess & Manager, 1004 Estate",
       avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
@@ -193,8 +193,8 @@ export const properties = [
       "Access Card Gate Security & CCTV"
     ],
     agent: {
-      name: "Mrs. Folashade Akanbi",
-      phone: "+234 802 345 6789",
+      name: "Mrs. Joke Popoola",
+      phone: "+234 703 846 2284",
       email: "akanbisamuel045@gmail.com",
       role: "Lead Property Hostess & Manager, 1004 Estate",
       avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
@@ -238,8 +238,8 @@ export const properties = [
       "Passenger & Service Elevators"
     ],
     agent: {
-      name: "Mrs. Folashade Akanbi",
-      phone: "+234 802 345 6789",
+      name: "Mrs. Joke Popoola",
+      phone: "+234 703 846 2284",
       email: "akanbisamuel045@gmail.com",
       role: "Lead Property Hostess & Manager, 1004 Estate",
       avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
@@ -284,8 +284,8 @@ export const properties = [
       "Access Card Gate Security & CCTV"
     ],
     agent: {
-      name: "Mrs. Folashade Akanbi",
-      phone: "+234 802 345 6789",
+      name: "Mrs. Joke Popoola",
+      phone: "+234 703 846 2284",
       email: "akanbisamuel045@gmail.com",
       role: "Lead Property Hostess & Manager, 1004 Estate",
       avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
@@ -329,8 +329,8 @@ export const properties = [
       "High-Speed Fiber-Optic Wi-Fi"
     ],
     agent: {
-      name: "Mrs. Folashade Akanbi",
-      phone: "+234 802 345 6789",
+      name: "Mrs. Joke Popoola",
+      phone: "+234 703 846 2284",
       email: "akanbisamuel045@gmail.com",
       role: "Lead Property Hostess & Manager, 1004 Estate",
       avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"

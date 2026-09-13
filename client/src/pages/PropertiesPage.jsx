@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
-import { Search, MapPin, Bed, Bath, Car, ArrowLeft } from 'lucide-react';
+import { useSearchParams, useParams, Link } from 'react-router-dom';
+import { Search, MapPin, Bed, Bath, Car, ArrowLeft, Layers, X } from 'lucide-react';
 import { api } from '../services/api';
 import { formatPriceNGN } from '../components/PropertyCard';
 import { useAuth } from '../context/AuthContext';
@@ -8,6 +8,9 @@ import { useAuth } from '../context/AuthContext';
 export default function PropertiesPage() {
   const { openBookingModal } = useAuth();
   const [searchParams] = useSearchParams();
+  const { categorySlug } = useParams();
+  const categoryParam = searchParams.get('category') || categorySlug;
+
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
@@ -16,6 +19,16 @@ export default function PropertiesPage() {
 
   const clusters = ['All', '1004 High-Rise Towers', '1004 Cluster A', '1004 Cluster B', '1004 Cluster C & D'];
   const types = ['All', 'Apartment', 'Penthouse', 'Duplex', 'Studio'];
+
+  const categoryTitles = {
+    '1-bedroom': '1-Bedroom Executive Apartments',
+    '2-bedroom': '2-Bedroom Serviced Flats',
+    '3-bedroom': '3-Bedroom Family Flats',
+    '3-bedroom-maisonette': '3-Bedroom Maisonettes',
+    '4-bedroom': '4-Bedroom Luxury Penthouses'
+  };
+
+  const activeCategoryTitle = categoryParam ? categoryTitles[categoryParam] : null;
 
   useEffect(() => {
     async function loadProperties() {
@@ -41,7 +54,20 @@ export default function PropertiesPage() {
     const matchesType = selectedType === 'All' || p.propertyType?.toLowerCase() === selectedType.toLowerCase();
     const matchesLoc = selectedLoc === 'All' || p.location?.toLowerCase() === selectedLoc.toLowerCase();
 
-    return matchesSearch && matchesType && matchesLoc;
+    let matchesCategory = true;
+    if (categoryParam === '1-bedroom') {
+      matchesCategory = p.bedrooms === 1;
+    } else if (categoryParam === '2-bedroom') {
+      matchesCategory = p.bedrooms === 2;
+    } else if (categoryParam === '3-bedroom') {
+      matchesCategory = p.bedrooms === 3 && p.propertyType !== 'Maisonette' && !p.title.toLowerCase().includes('maisonette');
+    } else if (categoryParam === '3-bedroom-maisonette') {
+      matchesCategory = p.bedrooms === 3 && (p.propertyType === 'Maisonette' || p.propertyType === 'Duplex' || p.title.toLowerCase().includes('maisonette'));
+    } else if (categoryParam === '4-bedroom') {
+      matchesCategory = p.bedrooms >= 4;
+    }
+
+    return matchesSearch && matchesType && matchesLoc && matchesCategory;
   });
 
   return (
@@ -49,14 +75,24 @@ export default function PropertiesPage() {
       <div className="container">
         {/* Header */}
         <div style={{ marginBottom: '32px' }}>
-          <span className="explore-badge" style={{ background: '#f3f4f6', color: '#111111', marginBottom: '8px', display: 'inline-block' }}>
-            Victoria Island, Lagos
-          </span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', flexWrap: 'wrap' }}>
+            <span className="explore-badge" style={{ background: '#f3f4f6', color: '#111111', display: 'inline-block' }}>
+              Victoria Island, Lagos
+            </span>
+            {activeCategoryTitle && (
+              <span className="badge" style={{ background: '#000000', color: '#ffffff', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                <Layers size={12} /> {activeCategoryTitle}
+                <Link to="/properties" style={{ color: '#a1a1aa', display: 'flex', alignItems: 'center', marginLeft: '4px' }} title="Clear category filter">
+                  <X size={13} />
+                </Link>
+              </span>
+            )}
+          </div>
           <h1 style={{ fontSize: '2.4rem', fontWeight: '800', letterSpacing: '-0.03em', marginBottom: '8px' }}>
-            1004 Estate Apartment Listings
+            {activeCategoryTitle ? activeCategoryTitle : '1004 Estate Apartment Listings'}
           </h1>
           <p style={{ color: '#6b7280' }}>
-            Showing {filtered.length} verified apartments, flats, and penthouses in 1004 Estate
+            Showing {filtered.length} verified {activeCategoryTitle ? activeCategoryTitle.toLowerCase() : 'apartments, flats, and penthouses'} in 1004 Estate
           </p>
         </div>
 

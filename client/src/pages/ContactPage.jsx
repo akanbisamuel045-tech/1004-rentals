@@ -58,8 +58,7 @@ export default function ContactPage() {
                 <Phone size={22} color="#000000" />
                 <div>
                   <h4 style={{ fontSize: '1rem', fontWeight: '700' }}>Direct Phone / WhatsApp</h4>
-                  <p style={{ color: '#6b7280', fontSize: '0.9rem' }}>+234 802 345 6789</p>
-                  <small style={{ color: '#16a34a', fontWeight: '600' }}>Available 8:00 AM – 7:00 PM Daily</small>
+                  <p style={{ color: '#6b7280', fontSize: '0.9rem' }}>+234 703 846 2284</p>
                 </div>
               </div>
 
@@ -75,7 +74,7 @@ export default function ContactPage() {
             {/* Quick WhatsApp Action */}
             <div style={{ marginTop: '28px', paddingTop: '20px', borderTop: '1px solid #f3f4f6' }}>
               <a
-                href="https://wa.me/2348023456789?text=Hello%20Mrs.%20Akanbi,%20I%20am%20interested%20in%20inspecting%20an%20apartment%20in%201004%20Estate,%20Victoria%20Island."
+                href="https://wa.me/2347038462284?text=Hello%20Mrs.%20Popoola,%20I%20am%20interested%20in%20inspecting%20an%20apartment%20in%201004%20Estate,%20Victoria%20Island."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-add-listing"
@@ -95,7 +94,7 @@ export default function ContactPage() {
                 <CheckCircle2 size={48} color="#16a34a" style={{ margin: '0 auto 16px' }} />
                 <h4 style={{ fontSize: '1.2rem', fontWeight: '700' }}>Message Received!</h4>
                 <p style={{ color: '#6b7280', fontSize: '0.9rem', marginTop: '8px' }}>
-                  Mrs. Folashade Akanbi or the on-site leasing team will reach out to you shortly.
+                  Mrs. Joke Popoola or the on-site leasing team will reach out to you shortly.
                 </p>
               </div>
             ) : (
