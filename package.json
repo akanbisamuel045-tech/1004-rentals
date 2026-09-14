@@ -22,5 +22,8 @@
     "real-estate"
   ],
   "author": "Akanbi Samuel <akanbisamuel045@gmail.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "puppeteer-core": "^25.10.0"
+  }
 }

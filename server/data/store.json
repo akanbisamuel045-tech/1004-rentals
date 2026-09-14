@@ -376,7 +376,19 @@
     "On-site Facility Management Desk",
     "Lagoon & City View Balconies"
   ],
-  "enquiries": [],
+  "enquiries": [
+    {
+      "id": "enq-1789360371230",
+      "status": "NEW",
+      "createdAt": "2026-09-14T04:32:51.230Z",
+      "name": "QA Test Client",
+      "email": "tenant.test@example.com",
+      "phone": "+234 800 000 0000",
+      "message": "Inspection request for 1004 High-Rise Tower flat",
+      "propertyId": null,
+      "propertyTitle": "General Inquiry"
+    }
+  ],
   "viewings": [],
   "bookings": [
     {
