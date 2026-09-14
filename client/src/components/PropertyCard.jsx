@@ -85,13 +85,13 @@ export default function PropertyCard({ property }) {
         </div>
 
         <div className="clean-card-footer">
-          <div>
+          <div className="clean-card-price-wrap">
             <span className="clean-price-num">{formatPriceNGN(property.price)}</span>
             <span className="clean-price-unit">/yr</span>
           </div>
 
-          <div style={{ display: 'flex', gap: '8px' }}>
-            <button onClick={handleBookClick} className="btn-view-pill" style={{ background: '#000000', color: '#ffffff' }}>
+          <div className="clean-card-actions">
+            <button onClick={handleBookClick} className="btn-view-pill btn-book-pill">
               Book Now
             </button>
             <Link to={`/properties/${property.id || property.slug}`} className="btn-view-pill">

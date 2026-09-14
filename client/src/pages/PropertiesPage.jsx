@@ -315,16 +315,15 @@ export default function PropertiesPage() {
                   </div>
 
                   <div className="clean-card-footer">
-                    <div>
+                    <div className="clean-card-price-wrap">
                       <span className="clean-price-num">{formatPriceNGN(prop.price)}</span>
                       <span className="clean-price-unit">/yr</span>
                     </div>
 
-                    <div style={{ display: 'flex', gap: '8px' }}>
+                    <div className="clean-card-actions">
                       <button
                         onClick={() => openBookingModal(prop)}
-                        className="btn-view-pill"
-                        style={{ background: '#000000', color: '#ffffff' }}
+                        className="btn-view-pill btn-book-pill"
                       >
                         Book Now
                       </button>

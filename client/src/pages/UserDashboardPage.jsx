@@ -363,15 +363,14 @@ export default function UserDashboardPage() {
                       </div>
 
                       <div className="clean-card-footer">
-                        <div>
+                        <div className="clean-card-price-wrap">
                           <span className="clean-price-num">{formatPriceNGN(prop.price)}</span>
                           <span className="clean-price-unit">/yr</span>
                         </div>
 
                         <button
                           onClick={() => openBookingModal(prop)}
-                          className="btn-add-listing"
-                          style={{ padding: '6px 14px', fontSize: '0.82rem' }}
+                          className="btn-view-pill btn-book-pill"
                         >
                           Book Now
                         </button>
