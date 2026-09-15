@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Bed, Bath, Car, ArrowRight, Heart } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { handleImageError } from '../utils/imageUtils';
 
 export function formatPriceNGN(val) {
   if (!val) return '₦0';
@@ -31,7 +32,12 @@ export default function PropertyCard({ property }) {
   return (
     <div className="clean-card">
       <div className="clean-card-img-wrap">
-        <img src={primaryImg} alt={property.title} loading="lazy" />
+        <img
+          src={primaryImg}
+          alt={property.title}
+          loading="lazy"
+          onError={handleImageError}
+        />
         <span className="clean-card-badge">{property.propertyType}</span>
 
         {/* Floating Heart Button */}

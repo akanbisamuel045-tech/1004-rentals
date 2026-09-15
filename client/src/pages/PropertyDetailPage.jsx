@@ -4,7 +4,7 @@ import { MapPin, Bed, Bath, ArrowLeft, Heart, CheckCircle2, Shield, Phone, Mail,
 import { api } from '../services/api';
 import { formatPriceNGN } from '../components/PropertyCard';
 import { useAuth } from '../context/AuthContext';
-import EstateMap from '../components/EstateMap';
+import { handleImageError, FALLBACK_IMAGES } from '../utils/imageUtils';
 import EnquiryModal from '../components/EnquiryModal';
 import SEO from '../components/SEO';
 
@@ -79,44 +79,89 @@ export default function PropertyDetailPage() {
   const totalPhotoCount = imgs.length >= 4 ? imgs.length + 12 : 16;
   const saved = isFavorite(property.id);
 
+  const displayDescription = property.description && property.description.trim().length > 0
+    ? property.description
+    : `A tastefully finished and fully serviced ${property.bedrooms}-bedroom apartment located in ${property.location}, 1004 Estate, Victoria Island, Lagos. Features include 24/7 uninterrupted estate turbine electricity, central treated water supply, biometric gated security, high-speed fiber connectivity, dedicated parking bays, and direct access to swimming pools and lawn tennis courts. Professionally managed by JK - CUBE MULTIVENTURES LIMITED with on-site concierge care by Mrs. Joke Popoola.`;
+
   return (
     <div className="detail-page-wrapper">
       <SEO
         title={property.title}
-        description={`${property.bedrooms} Bed, ${property.bathrooms} Bath ${property.propertyType} in ${property.location}, 1004 Estate, Victoria Island. ${property.description?.slice(0, 150)}...`}
+        description={`${property.bedrooms} Bed, ${property.bathrooms} Bath ${property.propertyType} in ${property.location}, 1004 Estate, Victoria Island. ${displayDescription.slice(0, 150)}...`}
         image={imgs[0]}
         canonicalPath={`/properties/${property.id}`}
         property={property}
       />
       <div className="container">
         
-        {/* Navigation Link */}
-        <div style={{ marginBottom: '16px' }}>
-          <Link to="/properties" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.88rem', color: '#6b7280', fontWeight: '500' }}>
+        {/* Navigation & Header */}
+        <div style={{ marginBottom: '20px' }}>
+          <Link to="/properties" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.88rem', color: '#6b7280', fontWeight: '500', marginBottom: '14px' }}>
             <ArrowLeft size={16} /> Back to listing
           </Link>
+
+          {/* Prominent Apartment Name and Badges */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px', flexWrap: 'wrap' }}>
+            <span className="explore-badge" style={{ background: 'var(--brand-orange)', color: '#ffffff', fontWeight: '700' }}>
+              {property.location}
+            </span>
+            <span className="badge" style={{ background: '#f3f4f6', color: '#111827', fontWeight: '600' }}>
+              {property.propertyType || 'Apartment'}
+            </span>
+            <span className="badge" style={{ background: '#ecfdf5', color: '#047857', fontWeight: '600' }}>
+              {property.availabilityStatus || 'Available'}
+            </span>
+            <span className="badge" style={{ background: '#f8fafc', color: '#64748b', border: '1px solid #e2e8f0' }}>
+              {property.bedrooms} Bed • {property.bathrooms} Bath
+            </span>
+          </div>
+
+          <h1 style={{ fontSize: '2.4rem', fontWeight: '800', letterSpacing: '-0.03em', color: 'var(--brand-charcoal)', margin: '0 0 10px 0', lineHeight: 1.25 }}>
+            {property.title}
+          </h1>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#6b7280', fontSize: '0.95rem' }}>
+            <MapPin size={17} color="var(--brand-orange)" />
+            <span>{property.address || `${property.location}, Victoria Island, Lagos`}</span>
+          </div>
         </div>
 
-        {/* 1. ASYMMETRIC 3-COLUMN MOSAIC GALLERY (Matches Reference Image) */}
+        {/* 1. ASYMMETRIC 3-COLUMN MOSAIC GALLERY */}
         <div className="mosaic-gallery">
           {/* Main Large Photo */}
           <div className="gallery-cell">
-            <img src={imgs[0]} alt={property.title} />
+            <img
+              src={imgs[0]}
+              alt={property.title}
+              onError={(e) => handleImageError(e, FALLBACK_IMAGES[0])}
+            />
           </div>
 
           {/* Middle Column (2 Stacked Photos) */}
           <div className="gallery-col-stack">
             <div className="gallery-cell">
-              <img src={imgs[1] || imgs[0]} alt="Interior view 1" />
+              <img
+                src={imgs[1] || imgs[0]}
+                alt={`${property.title} Interior view 1`}
+                onError={(e) => handleImageError(e, FALLBACK_IMAGES[1])}
+              />
             </div>
             <div className="gallery-cell">
-              <img src={imgs[2] || imgs[0]} alt="Interior view 2" />
+              <img
+                src={imgs[2] || imgs[0]}
+                alt={`${property.title} Interior view 2`}
+                onError={(e) => handleImageError(e, FALLBACK_IMAGES[2])}
+              />
             </div>
           </div>
 
-          {/* Right Column (Tall Photo with Black Button Overlay) */}
+          {/* Right Column (Tall Photo with Button Overlay) */}
           <div className="gallery-cell">
-            <img src={imgs[3] || imgs[0]} alt="Exterior view" />
+            <img
+              src={imgs[3] || imgs[0]}
+              alt={`${property.title} Exterior view`}
+              onError={(e) => handleImageError(e, FALLBACK_IMAGES[3])}
+            />
             <button
               onClick={() => openBookingModal(property)}
               className="show-all-photos-btn"
@@ -147,17 +192,18 @@ export default function PropertyDetailPage() {
 
           <div className="detail-location-text">
             <MapPin size={16} />
-            <span>{property.address || `${property.location}, Lagos`}</span>
+            <span>{property.address || `${property.location}, Victoria Island, Lagos`}</span>
           </div>
         </div>
 
-        {/* 3. SPLIT MAIN DETAILS SECTION (Matches Reference Image) */}
+        {/* 3. SPLIT MAIN DETAILS SECTION */}
         <div className="detail-main-grid">
           
           {/* LEFT COLUMN: Price, Calculation Link, Agency Card */}
           <div>
             <div className="detail-price-huge">
               {formatPriceNGN(property.price)}
+              <small style={{ fontSize: '1rem', color: '#6b7280', fontWeight: '500', marginLeft: '6px' }}>/yr</small>
             </div>
 
             <button
@@ -170,18 +216,18 @@ export default function PropertyDetailPage() {
 
             {/* Estate Agency Pill Card & Booking CTA */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <div className="agency-card-pill">
-                <div style={{ width: '36px', height: '36px', background: '#000000', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ffffff' }}>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/>
-                    <line x1="4" y1="22" x2="4" y2="15"/>
-                  </svg>
+              <div className="agency-card-pill" style={{ border: '1px solid #fed7aa', background: '#fffaf5' }}>
+                <div style={{ width: '40px', height: '40px', background: '#ffffff', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #fed7aa' }}>
+                  <img src="/jk-cube-icon.png" alt="JK - CUBE" style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
                 </div>
 
                 <div className="agency-info">
-                  <span className="agency-label">Estate agency</span>
-                  <span className="agency-name">
-                    Realco Lagos 🛡️
+                  <span className="agency-label">Managing Agency</span>
+                  <span className="agency-name" style={{ color: '#111827', fontWeight: '700' }}>
+                    JK - CUBE MULTIVENTURES LIMITED
+                  </span>
+                  <span style={{ fontSize: '0.78rem', color: '#6b7280' }}>
+                    Lead Agent: Mrs. Joke Popoola
                   </span>
                 </div>
 
@@ -210,12 +256,12 @@ export default function PropertyDetailPage() {
             {/* Big Typography Specs */}
             <div className="detail-stats-row">
               <div className="stat-item-big">
-                <span className="stat-num-big">{property.sizesqm || 233}</span>
+                <span className="stat-num-big">{property.sizesqm || 120}</span>
                 <span className="stat-unit-big">m²</span>
               </div>
 
               <div className="stat-item-big">
-                <span className="stat-num-big">{property.totalFloors || 2}</span>
+                <span className="stat-num-big">{property.totalFloors || 7}</span>
                 <span className="stat-unit-big">floors</span>
               </div>
 
@@ -242,51 +288,68 @@ export default function PropertyDetailPage() {
             {/* Feature Tag Icons */}
             <div className="detail-amenities-row">
               <div className="amenity-inline-item">
-                <Zap size={18} color="#000000" />
-                <span>24/7 Electricity</span>
+                <Zap size={18} color="var(--brand-orange)" />
+                <span>24/7 Dedicated Turbine Electricity</span>
               </div>
               <div className="amenity-inline-item">
-                <Droplet size={18} color="#000000" />
+                <Droplet size={18} color="var(--brand-orange)" />
                 <span>Treated Water</span>
               </div>
               <div className="amenity-inline-item">
-                <Shield size={18} color="#000000" />
-                <span>Uniformed Security</span>
+                <Shield size={18} color="var(--brand-orange)" />
+                <span>Uniformed Gate Security</span>
               </div>
               <div className="amenity-inline-item">
-                <CheckCircle2 size={18} color="#000000" />
+                <CheckCircle2 size={18} color="var(--brand-orange)" />
                 <span>{property.furnishedStatus || 'Furnished'}</span>
               </div>
             </div>
 
             {/* Editorial Description Paragraph */}
-            <p className="detail-desc-paragraph">
-              {property.description}
-            </p>
+            <div style={{ marginTop: '16px' }}>
+              <h3 style={{ fontSize: '1.15rem', fontWeight: '700', marginBottom: '8px', color: '#111827' }}>
+                Apartment Overview & Features
+              </h3>
+              <p className="detail-desc-paragraph" style={{ lineHeight: '1.8', color: '#374151', fontSize: '0.98rem' }}>
+                {displayDescription}
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* Interactive Location & Estate Map Section */}
-        <div style={{ marginTop: '56px', paddingTop: '40px', borderTop: '1px solid #e5e7eb' }}>
-          <div style={{ marginBottom: '20px' }}>
-            <span className="explore-badge" style={{ background: '#f3f4f6', color: '#111827', marginBottom: '8px', display: 'inline-block' }}>
-              1004 Estate Map & Cluster Layout
-            </span>
-            <h3 style={{ fontSize: '1.6rem', fontWeight: '800', letterSpacing: '-0.02em', color: '#111827', margin: 0 }}>
-              {property.location} Pinpoint & Proximity Map
-            </h3>
-            <p style={{ color: '#6b7280', marginTop: '4px', fontSize: '0.95rem' }}>
-              Located in <strong>{property.location}</strong>, Victoria Island, Lagos. Explore walking distance to Five Cowries Creek lagoon, swimming pools, tennis courts, and security gates.
-            </p>
+        {/* 1004 Estate Community & Concierge Overview (Replaces map) */}
+        <div style={{ marginTop: '48px', paddingTop: '32px', borderTop: '1px solid #e5e7eb' }}>
+          <div style={{ background: '#ffffff', borderRadius: '20px', border: '1px solid #e5e7eb', padding: '32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '20px' }}>
+            <div>
+              <span className="explore-badge" style={{ background: 'var(--brand-orange)', color: '#ffffff', marginBottom: '8px', display: 'inline-block' }}>
+                1004 Estate, Victoria Island
+              </span>
+              <h3 style={{ fontSize: '1.35rem', fontWeight: '800', color: '#111827', margin: '4px 0' }}>
+                Ready to Tour {property.title}?
+              </h3>
+              <p style={{ color: '#6b7280', fontSize: '0.92rem', maxWidth: '620px', margin: 0 }}>
+                Mrs. Joke Popoola and the <strong>JK - CUBE MULTIVENTURES LIMITED</strong> team are on-site daily in 1004 Estate for private viewings and instant tenancy onboarding.
+              </p>
+            </div>
+            <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+              <button
+                onClick={() => openBookingModal(property)}
+                className="btn-add-listing"
+                style={{ padding: '12px 24px', fontWeight: '700' }}
+              >
+                Schedule In-Person Inspection
+              </button>
+              <a
+                href={`https://wa.me/2347038462284?text=${encodeURIComponent(`Hello Mrs. Popoola, I would like to inspect ${property.title} in 1004 Estate.`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-add-listing"
+                style={{ background: '#16a34a', color: '#ffffff', padding: '12px 20px', fontWeight: '700' }}
+              >
+                WhatsApp Agent
+              </a>
+            </div>
           </div>
-
-          <EstateMap
-            properties={[property]}
-            activeCluster={property.location}
-            selectedPropertyId={property.id}
-            height="440px"
-            showClusterControls={true}
-          />
         </div>
 
       </div>

@@ -31,18 +31,41 @@ const storage = multer.diskStorage({
   }
 });
 
-// File Filter (JPEG, PNG, WebP only)
+import convert from "heic-convert";
+
+// File Filter (JPEG, PNG, WebP, HEIC/HEIF)
 const fileFilter = (req, file, cb) => {
-  const allowedTypes = /jpeg|jpg|png|webp/;
+  const allowedTypes = /jpeg|jpg|png|webp|heic|heif/;
   const ext = path.extname(file.originalname).toLowerCase().replace(".", "");
   const mime = file.mimetype;
 
-  if (allowedTypes.test(ext) && (mime.includes("image/jpeg") || mime.includes("image/png") || mime.includes("image/webp"))) {
+  if (
+    allowedTypes.test(ext) ||
+    mime.includes("image/jpeg") ||
+    mime.includes("image/png") ||
+    mime.includes("image/webp") ||
+    mime.includes("image/heic") ||
+    mime.includes("image/heif")
+  ) {
     cb(null, true);
   } else {
-    cb(new Error("Invalid file format. Only JPG, JPEG, PNG, and WebP images are allowed."));
+    cb(new Error("Invalid file format. Only JPG, JPEG, PNG, WebP, and HEIC images are allowed."));
   }
 };
+
+async function ensureStandardFormat(filePath) {
+  try {
+    const buf = fs.readFileSync(filePath);
+    if (buf.length < 12) return;
+    const magic = buf.subarray(4, 12).toString("ascii");
+    if (magic === "ftypheic" || magic === "ftypmif1" || magic.includes("heic") || magic.includes("mif1")) {
+      const jpegBuf = await convert({ buffer: buf, format: "JPEG", quality: 0.88 });
+      fs.writeFileSync(filePath, jpegBuf);
+    }
+  } catch (err) {
+    console.error("Auto-conversion to JPEG error:", err);
+  }
+}
 
 // Multer Instance (5MB limit per ARCHITECTURE.md Section 7)
 const upload = multer({
@@ -71,12 +94,13 @@ const handleMulterError = (err, req, res, next) => {
 
 // POST /api/upload (Single file upload)
 router.post("/", (req, res, next) => {
-  upload.single("image")(req, res, (err) => {
+  upload.single("image")(req, res, async (err) => {
     if (err) return handleMulterError(err, req, res, next);
     if (!req.file) {
       return res.status(400).json({ success: false, message: "No image file provided in request." });
     }
 
+    await ensureStandardFormat(req.file.path);
     const fileUrl = `/uploads/${req.file.filename}`;
     res.status(201).json({
       success: true,
@@ -90,10 +114,14 @@ router.post("/", (req, res, next) => {
 
 // POST /api/upload/multiple (Batch upload, up to 10 files)
 router.post("/multiple", (req, res, next) => {
-  upload.array("images", 10)(req, res, (err) => {
+  upload.array("images", 10)(req, res, async (err) => {
     if (err) return handleMulterError(err, req, res, next);
     if (!req.files || req.files.length === 0) {
       return res.status(400).json({ success: false, message: "No image files provided in request." });
+    }
+
+    for (const file of req.files) {
+      await ensureStandardFormat(file.path);
     }
 
     const fileUrls = req.files.map((file) => `/uploads/${file.filename}`);

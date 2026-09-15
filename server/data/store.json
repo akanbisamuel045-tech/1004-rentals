@@ -40,6 +40,58 @@
   ],
   "properties": [
     {
+      "id": "prop-1789509328166",
+      "slug": "modern-furnished-3-bedroom-apartment",
+      "viewCount": 14,
+      "createdAt": "2026-09-15T21:55:28.166Z",
+      "title": "Modern Furnished 3-Bedroom Apartment",
+      "description": "",
+      "price": 18000000,
+      "serviceCharge": 1677000,
+      "cautionFee": 1800000,
+      "agencyFee": 1800000,
+      "rentalPeriod": "ANNUALLY",
+      "location": "1004 Cluster B",
+      "area": "Victoria Island",
+      "propertyType": "Apartment",
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "toilets": 2,
+      "sizesqm": 120,
+      "totalFloors": 7,
+      "furnishedStatus": "Furnished",
+      "availabilityStatus": "Available",
+      "address": "Block D5, Cluster D, 1004 Estate, Victoria Island, Lagos",
+      "images": [
+        "/uploads/1004-img-8275-1789509105939-190186.jpeg",
+        "/uploads/1004-img-8272-1789509106025-26390.jpeg",
+        "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
+        "/uploads/1004-img-8271-1789509056536-714237.jpeg",
+        "/uploads/1004-img-8252-1789509056625-314003.jpeg",
+        "/uploads/1004-img-8253-1789509056646-210422.jpeg",
+        "/uploads/1004-img-8255-1789509056705-267437.jpeg",
+        "/uploads/1004-img-8273-1789509056761-651619.jpeg",
+        "/uploads/1004-img-8266-1789509105916-136440.jpeg"
+      ],
+      "amenities": [
+        "24/7 Uninterrupted Electricity (Independent Power Plant)",
+        "Central Industrial Water Treatment",
+        "High-Speed Fiber-Optic Wi-Fi",
+        "Access Card Gate Security & CCTV",
+        "Modern Fitted Kitchen (Gas Hob, Oven, Microwave)",
+        "Passenger & Service Elevators"
+      ],
+      "isFeatured": true,
+      "agent": {
+        "name": "Mrs. Joke Popoola",
+        "phone": "+234 703 846 2284",
+        "email": "akanbisamuel045@gmail.com",
+        "role": "Managing Leasing Agent, JK - CUBE MULTIVENTURES LIMITED",
+        "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
+      },
+      "parkingSpaces": 0
+    },
+    {
       "id": "1004-prop-1",
       "title": "Executive 3-Bedroom High-Rise Flat with Lagoon View",
       "slug": "executive-3-bedroom-highrise-flat-lagoon-view-1004",
@@ -297,7 +349,7 @@
       "cautionFee": 400000,
       "agencyFee": 720000,
       "isFeatured": false,
-      "viewCount": 1750,
+      "viewCount": 1754,
       "images": [
         "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80",
         "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1200&q=80",
@@ -404,9 +456,10 @@
       "propertyImage": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
       "inspectionDate": "2026-09-20",
       "timeSlot": "02:00 PM - 04:00 PM",
-      "status": "PENDING",
+      "status": "CONFIRMED",
       "notes": "Please confirm gate access",
-      "createdAt": "2026-09-05T07:48:59.064Z"
+      "createdAt": "2026-09-05T07:48:59.064Z",
+      "updatedAt": "2026-09-15T21:49:35.237Z"
     }
   ],
   "favorites": {

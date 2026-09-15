@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, useParams, Link } from 'react-router-dom';
-import { Search, MapPin, Bed, Bath, Car, ArrowLeft, Layers, X, Grid, Map as MapIcon, Columns } from 'lucide-react';
+import { Search, MapPin, Bed, Bath, Car, ArrowLeft, Layers, X } from 'lucide-react';
 import { api } from '../services/api';
 import { formatPriceNGN } from '../components/PropertyCard';
 import { useAuth } from '../context/AuthContext';
-import EstateMap from '../components/EstateMap';
 import SEO from '../components/SEO';
 
 export default function PropertiesPage() {
@@ -105,73 +104,6 @@ export default function PropertiesPage() {
                 Showing {filtered.length} verified {activeCategoryTitle ? activeCategoryTitle.toLowerCase() : 'apartments, flats, and penthouses'} in 1004 Estate
               </p>
             </div>
-
-            {/* View Mode Segmented Switcher */}
-            <div style={{
-              display: 'flex',
-              background: '#f3f4f6',
-              padding: '4px',
-              borderRadius: '9999px',
-              border: '1px solid #e5e7eb'
-            }}>
-              <button
-                onClick={() => setViewMode('grid')}
-                style={{
-                  padding: '6px 14px',
-                  borderRadius: '9999px',
-                  fontSize: '0.82rem',
-                  fontWeight: '700',
-                  border: 'none',
-                  cursor: 'pointer',
-                  background: viewMode === 'grid' ? '#000000' : 'transparent',
-                  color: viewMode === 'grid' ? '#ffffff' : '#4b5563',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  transition: 'all 0.15s ease'
-                }}
-              >
-                <Grid size={14} /> Grid
-              </button>
-              <button
-                onClick={() => setViewMode('split')}
-                style={{
-                  padding: '6px 14px',
-                  borderRadius: '9999px',
-                  fontSize: '0.82rem',
-                  fontWeight: '700',
-                  border: 'none',
-                  cursor: 'pointer',
-                  background: viewMode === 'split' ? '#000000' : 'transparent',
-                  color: viewMode === 'split' ? '#ffffff' : '#4b5563',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  transition: 'all 0.15s ease'
-                }}
-              >
-                <Columns size={14} /> Split View
-              </button>
-              <button
-                onClick={() => setViewMode('map')}
-                style={{
-                  padding: '6px 14px',
-                  borderRadius: '9999px',
-                  fontSize: '0.82rem',
-                  fontWeight: '700',
-                  border: 'none',
-                  cursor: 'pointer',
-                  background: viewMode === 'map' ? '#000000' : 'transparent',
-                  color: viewMode === 'map' ? '#ffffff' : '#4b5563',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  transition: 'all 0.15s ease'
-                }}
-              >
-                <MapIcon size={14} /> Cluster Map
-              </button>
-            </div>
           </div>
         </div>
 
@@ -211,7 +143,7 @@ export default function PropertiesPage() {
           </div>
         </div>
 
-        {/* Listings Display Modes */}
+        {/* Listings Display */}
         {loading ? (
           <div style={{ textAlign: 'center', padding: '60px 0', color: '#9ca3af' }}>
             Loading 1004 apartments...
@@ -221,63 +153,7 @@ export default function PropertiesPage() {
             <h3>No apartments found in this cluster</h3>
             <p style={{ color: '#6b7280', marginTop: '6px' }}>Try selecting "All Clusters" or resetting your search</p>
           </div>
-        ) : viewMode === 'map' ? (
-          /* FULL MAP VIEW */
-          <div style={{ marginBottom: '40px' }}>
-            <EstateMap
-              properties={filtered}
-              activeCluster={selectedLoc}
-              height="620px"
-              showClusterControls={true}
-            />
-          </div>
-        ) : viewMode === 'split' ? (
-          /* SPLIT VIEW (Cards + Sticky Map) */
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '28px', marginBottom: '40px' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-              {filtered.map((prop) => (
-                <div key={prop.id} className="clean-card" style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
-                  <div className="clean-card-img-wrap" style={{ width: '200px', minWidth: '180px', flexShrink: 0 }}>
-                    <img
-                      src={prop.images?.[0] || 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80'}
-                      alt={prop.title}
-                      loading="lazy"
-                      style={{ height: '100%', objectFit: 'cover' }}
-                    />
-                    <span className="clean-card-badge">{prop.location}</span>
-                  </div>
-
-                  <div className="clean-card-body" style={{ flex: 1, padding: '16px' }}>
-                    <h3 className="clean-card-title" style={{ fontSize: '1.05rem', marginBottom: '6px' }}>
-                      <Link to={`/properties/${prop.id || prop.slug}`}>
-                        {prop.title}
-                      </Link>
-                    </h3>
-                    <div style={{ fontSize: '0.85rem', color: '#6b7280', marginBottom: '10px' }}>
-                      {prop.bedrooms} Bed • {prop.bathrooms} Bath • {prop.furnishedStatus}
-                    </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span className="clean-price-num">{formatPriceNGN(prop.price)}<small style={{ fontSize: '0.75rem', color: '#6b7280', fontWeight: '400' }}>/yr</small></span>
-                      <Link to={`/properties/${prop.id || prop.slug}`} className="btn-view-pill">
-                        Details
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div style={{ position: 'sticky', top: '90px', height: 'fit-content' }}>
-              <EstateMap
-                properties={filtered}
-                activeCluster={selectedLoc}
-                height="620px"
-                showClusterControls={true}
-              />
-            </div>
-          </div>
         ) : (
-          /* CLASSIC GRID VIEW */
           <div className="property-grid-clean">
             {filtered.map((prop) => (
               <div key={prop.id} className="clean-card">
