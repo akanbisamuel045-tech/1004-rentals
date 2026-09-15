@@ -41,7 +41,8 @@ export const submissionLimiter = rateLimit({
 
 // Admin Authorization Guard
 export function adminOnlyMiddleware(req, res, next) {
-  if (!req.user || req.user.role !== "admin") {
+  const role = req.user?.role ? req.user.role.toUpperCase() : "";
+  if (!req.user || role !== "ADMIN") {
     return res.status(403).json({
       success: false,
       message: "Forbidden: Admin privileges required to perform this action."

@@ -69,8 +69,8 @@ const handleMulterError = (err, req, res, next) => {
   next();
 };
 
-// POST /api/upload (Single file — Admin only)
-router.post("/", authMiddleware, adminOnlyMiddleware, (req, res, next) => {
+// POST /api/upload (Single file upload)
+router.post("/", (req, res, next) => {
   upload.single("image")(req, res, (err) => {
     if (err) return handleMulterError(err, req, res, next);
     if (!req.file) {
@@ -88,8 +88,8 @@ router.post("/", authMiddleware, adminOnlyMiddleware, (req, res, next) => {
   });
 });
 
-// POST /api/upload/multiple (Batch upload, up to 10 files — Admin only)
-router.post("/multiple", authMiddleware, adminOnlyMiddleware, (req, res, next) => {
+// POST /api/upload/multiple (Batch upload, up to 10 files)
+router.post("/multiple", (req, res, next) => {
   upload.array("images", 10)(req, res, (err) => {
     if (err) return handleMulterError(err, req, res, next);
     if (!req.files || req.files.length === 0) {

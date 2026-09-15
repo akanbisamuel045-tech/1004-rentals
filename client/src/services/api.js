@@ -229,13 +229,25 @@ export const api = {
     const token = localStorage.getItem('lagos_auth_token');
     if (token) headers['Authorization'] = `Bearer ${token}`;
 
-    const res = await fetch(`${API_BASE}/upload`, {
-      method: 'POST',
-      headers,
-      body: formData,
-    });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.message || 'Failed to upload image');
+    let res;
+    try {
+      res = await fetch(`${API_BASE}/upload`, {
+        method: 'POST',
+        headers,
+        body: formData,
+      });
+    } catch (networkErr) {
+      throw new Error('Network error: Unable to connect to image upload service. Please check your connection.');
+    }
+
+    let data;
+    try {
+      data = await res.json();
+    } catch {
+      throw new Error(`Upload server error (${res.status}): ${res.statusText || 'Unexpected response'}`);
+    }
+
+    if (!res.ok) throw new Error(data?.message || 'Failed to upload image');
     return data;
   },
 
@@ -248,13 +260,25 @@ export const api = {
     const token = localStorage.getItem('lagos_auth_token');
     if (token) headers['Authorization'] = `Bearer ${token}`;
 
-    const res = await fetch(`${API_BASE}/upload/multiple`, {
-      method: 'POST',
-      headers,
-      body: formData,
-    });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.message || 'Failed to upload images');
+    let res;
+    try {
+      res = await fetch(`${API_BASE}/upload/multiple`, {
+        method: 'POST',
+        headers,
+        body: formData,
+      });
+    } catch (networkErr) {
+      throw new Error('Network error: Unable to connect to image upload service. Please check your connection.');
+    }
+
+    let data;
+    try {
+      data = await res.json();
+    } catch {
+      throw new Error(`Upload server error (${res.status}): ${res.statusText || 'Unexpected response'}`);
+    }
+
+    if (!res.ok) throw new Error(data?.message || 'Failed to upload images');
     return data;
   }
 };
