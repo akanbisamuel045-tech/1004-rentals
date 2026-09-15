@@ -48,9 +48,9 @@ export default function Footer() {
           <div>
             <h4 className="footer-heading">Agent Desk</h4>
             <ul className="footer-link-list">
-              <li style={{ color: '#a1a1aa', fontSize: '0.9rem' }}>1004 Estate, Adetokunbo Ademola, Victoria Island, Lagos</li>
+              <li style={{ color: '#a1a1aa', fontSize: '0.9rem' }}>Suite 337, 3rd Floor, Ikeja Plaza, Ikeja, Lagos</li>
               <li style={{ color: '#ffffff', fontSize: '0.9rem', fontWeight: '600' }}>+234 703 846 2284</li>
-              <li style={{ color: '#a1a1aa', fontSize: '0.9rem' }}>akanbisamuel045@gmail.com</li>
+              <li style={{ color: '#a1a1aa', fontSize: '0.9rem' }}>jkcube85@gmail.com</li>
             </ul>
           </div>
         </div>

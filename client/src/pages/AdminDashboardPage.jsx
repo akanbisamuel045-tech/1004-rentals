@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ShieldCheck,
@@ -162,7 +162,7 @@ export default function AdminDashboardPage() {
   // Quick Demo Admin Login
   const handleDemoAdminLogin = async () => {
     try {
-      await login('akanbisamuel045@gmail.com', 'admin123');
+      await login('jkcube85@gmail.com', 'admin123');
       fetchData();
     } catch (err) {
       alert('Login error: ' + err.message);
@@ -318,7 +318,7 @@ export default function AdminDashboardPage() {
         agent: {
           name: 'Mrs. Joke Popoola',
           phone: '+234 703 846 2284',
-          email: 'akanbisamuel045@gmail.com',
+          email: 'jkcube85@gmail.com',
           role: 'Managing Leasing Agent, JK - CUBE MULTIVENTURES LIMITED',
           avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80'
         }

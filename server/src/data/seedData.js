@@ -1,4 +1,4 @@
-export const locations = [
+﻿export const locations = [
   {
     id: "loc-1004-highrise",
     name: "1004 High-Rise Towers",
@@ -100,7 +100,7 @@ export const properties = [
     agent: {
       name: "Mrs. Joke Popoola",
       phone: "+234 703 846 2284",
-      email: "akanbisamuel045@gmail.com",
+      email: "jkcube85@gmail.com",
       role: "Lead Property Agent & Manager, 1004 Estate",
       avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
     },
@@ -147,7 +147,7 @@ export const properties = [
     agent: {
       name: "Mrs. Joke Popoola",
       phone: "+234 703 846 2284",
-      email: "akanbisamuel045@gmail.com",
+      email: "jkcube85@gmail.com",
       role: "Lead Property Agent & Manager, 1004 Estate",
       avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
     },
@@ -195,7 +195,7 @@ export const properties = [
     agent: {
       name: "Mrs. Joke Popoola",
       phone: "+234 703 846 2284",
-      email: "akanbisamuel045@gmail.com",
+      email: "jkcube85@gmail.com",
       role: "Lead Property Agent & Manager, 1004 Estate",
       avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
     },
@@ -240,7 +240,7 @@ export const properties = [
     agent: {
       name: "Mrs. Joke Popoola",
       phone: "+234 703 846 2284",
-      email: "akanbisamuel045@gmail.com",
+      email: "jkcube85@gmail.com",
       role: "Lead Property Agent & Manager, 1004 Estate",
       avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
     },
@@ -286,7 +286,7 @@ export const properties = [
     agent: {
       name: "Mrs. Joke Popoola",
       phone: "+234 703 846 2284",
-      email: "akanbisamuel045@gmail.com",
+      email: "jkcube85@gmail.com",
       role: "Lead Property Agent & Manager, 1004 Estate",
       avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
     },
@@ -331,7 +331,7 @@ export const properties = [
     agent: {
       name: "Mrs. Joke Popoola",
       phone: "+234 703 846 2284",
-      email: "akanbisamuel045@gmail.com",
+      email: "jkcube85@gmail.com",
       role: "Lead Property Agent & Manager, 1004 Estate",
       avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
     },

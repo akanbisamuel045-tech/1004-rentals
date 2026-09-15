@@ -57,7 +57,7 @@ export default function ContactPage() {
                 <div>
                   <h4 style={{ fontSize: '1rem', fontWeight: '700' }}>Estate Location</h4>
                   <p style={{ color: '#6b7280', fontSize: '0.9rem' }}>
-                    1004 Estate, Adetokunbo Ademola / Ozumba Mbadiwe Way, Victoria Island, Lagos
+                    Suite 337, 3rd Floor, Ikeja Plaza, Ikeja, Lagos
                   </p>
                 </div>
               </div>
@@ -74,7 +74,7 @@ export default function ContactPage() {
                 <Mail size={22} color="#000000" />
                 <div>
                   <h4 style={{ fontSize: '1rem', fontWeight: '700' }}>Email Agent</h4>
-                  <p style={{ color: '#6b7280', fontSize: '0.9rem' }}>akanbisamuel045@gmail.com</p>
+                  <p style={{ color: '#6b7280', fontSize: '0.9rem' }}>jkcube85@gmail.com</p>
                 </div>
               </div>
             </div>

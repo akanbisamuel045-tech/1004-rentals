@@ -1,9 +1,9 @@
-{
+﻿{
   "users": [
     {
       "id": "user-admin",
       "name": "Akanbi Samuel",
-      "email": "akanbisamuel045@gmail.com",
+      "email": "jkcube85@gmail.com",
       "phone": "+234 802 345 6789",
       "passwordHash": "$2b$10$hEOkCavKFsqcN388dRSl.efk3moGu0uGlbcDD0zhhjebiQh.QsDby",
       "role": "ADMIN",
@@ -62,7 +62,7 @@
       "agent": {
         "name": "Samuel Akanbi",
         "phone": "+234 802 345 6789",
-        "email": "akanbisamuel045@gmail.com",
+        "email": "jkcube85@gmail.com",
         "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80"
       },
       "createdAt": "2026-08-20T10:00:00.000Z"
@@ -109,7 +109,7 @@
       "agent": {
         "name": "Samuel Akanbi",
         "phone": "+234 802 345 6789",
-        "email": "akanbisamuel045@gmail.com",
+        "email": "jkcube85@gmail.com",
         "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80"
       },
       "createdAt": "2026-08-25T14:30:00.000Z"
@@ -154,7 +154,7 @@
       "agent": {
         "name": "Samuel Akanbi",
         "phone": "+234 802 345 6789",
-        "email": "akanbisamuel045@gmail.com",
+        "email": "jkcube85@gmail.com",
         "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80"
       },
       "createdAt": "2026-08-28T09:15:00.000Z"
@@ -198,7 +198,7 @@
       "agent": {
         "name": "Samuel Akanbi",
         "phone": "+234 802 345 6789",
-        "email": "akanbisamuel045@gmail.com",
+        "email": "jkcube85@gmail.com",
         "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80"
       },
       "createdAt": "2026-08-30T11:45:00.000Z"
@@ -241,7 +241,7 @@
       "agent": {
         "name": "Samuel Akanbi",
         "phone": "+234 802 345 6789",
-        "email": "akanbisamuel045@gmail.com",
+        "email": "jkcube85@gmail.com",
         "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80"
       },
       "createdAt": "2026-09-01T16:20:00.000Z"
@@ -284,7 +284,7 @@
       "agent": {
         "name": "Samuel Akanbi",
         "phone": "+234 802 345 6789",
-        "email": "akanbisamuel045@gmail.com",
+        "email": "jkcube85@gmail.com",
         "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80"
       },
       "createdAt": "2026-09-02T08:10:00.000Z"

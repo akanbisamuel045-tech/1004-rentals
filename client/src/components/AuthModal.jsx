@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { X, Lock, Mail, User, Phone, ArrowRight, AlertCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
@@ -160,7 +160,7 @@ export default function AuthModal() {
               <input
                 type="email"
                 required
-                placeholder="akanbisamuel045@gmail.com"
+                placeholder="jkcube85@gmail.com"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 className="form-input"

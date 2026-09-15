@@ -1,9 +1,9 @@
-{
+﻿{
   "users": [
     {
       "id": "user-admin",
       "name": "Mrs. Joke Popoola",
-      "email": "akanbisamuel045@gmail.com",
+      "email": "jkcube85@gmail.com",
       "phone": "+234 802 345 6789",
       "passwordHash": "$2b$10$6r5ilsDT/Bs8lyooF2psDe6TR2w4wyVf7WM43lgopG98lWh2qqo2S",
       "role": "ADMIN",
@@ -42,7 +42,7 @@
     {
       "id": "prop-1789509328166",
       "slug": "modern-furnished-3-bedroom-apartment",
-      "viewCount": 14,
+      "viewCount": 18,
       "createdAt": "2026-09-15T21:55:28.166Z",
       "title": "Modern Furnished 3-Bedroom Apartment",
       "description": "",
@@ -63,10 +63,10 @@
       "availabilityStatus": "Available",
       "address": "Block D5, Cluster D, 1004 Estate, Victoria Island, Lagos",
       "images": [
+        "/uploads/1004-img-8271-1789509056536-714237.jpeg",
         "/uploads/1004-img-8275-1789509105939-190186.jpeg",
         "/uploads/1004-img-8272-1789509106025-26390.jpeg",
         "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
-        "/uploads/1004-img-8271-1789509056536-714237.jpeg",
         "/uploads/1004-img-8252-1789509056625-314003.jpeg",
         "/uploads/1004-img-8253-1789509056646-210422.jpeg",
         "/uploads/1004-img-8255-1789509056705-267437.jpeg",
@@ -85,11 +85,12 @@
       "agent": {
         "name": "Mrs. Joke Popoola",
         "phone": "+234 703 846 2284",
-        "email": "akanbisamuel045@gmail.com",
+        "email": "jkcube85@gmail.com",
         "role": "Managing Leasing Agent, JK - CUBE MULTIVENTURES LIMITED",
         "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
       },
-      "parkingSpaces": 0
+      "parkingSpaces": 0,
+      "updatedAt": "2026-09-15T22:18:43.359Z"
     },
     {
       "id": "1004-prop-1",
@@ -134,7 +135,7 @@
       "agent": {
         "name": "Mrs. Joke Popoola",
         "phone": "+234 703 846 2284",
-        "email": "akanbisamuel045@gmail.com",
+        "email": "jkcube85@gmail.com",
         "role": "Lead Property Agent & Manager, 1004 Estate",
         "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
       },
@@ -181,7 +182,7 @@
       "agent": {
         "name": "Mrs. Joke Popoola",
         "phone": "+234 703 846 2284",
-        "email": "akanbisamuel045@gmail.com",
+        "email": "jkcube85@gmail.com",
         "role": "Lead Property Agent & Manager, 1004 Estate",
         "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
       },
@@ -229,7 +230,7 @@
       "agent": {
         "name": "Mrs. Joke Popoola",
         "phone": "+234 703 846 2284",
-        "email": "akanbisamuel045@gmail.com",
+        "email": "jkcube85@gmail.com",
         "role": "Lead Property Agent & Manager, 1004 Estate",
         "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
       },
@@ -274,7 +275,7 @@
       "agent": {
         "name": "Mrs. Joke Popoola",
         "phone": "+234 703 846 2284",
-        "email": "akanbisamuel045@gmail.com",
+        "email": "jkcube85@gmail.com",
         "role": "Lead Property Agent & Manager, 1004 Estate",
         "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
       },
@@ -303,7 +304,7 @@
       "cautionFee": 500000,
       "agencyFee": 900000,
       "isFeatured": true,
-      "viewCount": 2200,
+      "viewCount": 2202,
       "images": [
         "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
         "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
@@ -320,7 +321,7 @@
       "agent": {
         "name": "Mrs. Joke Popoola",
         "phone": "+234 703 846 2284",
-        "email": "akanbisamuel045@gmail.com",
+        "email": "jkcube85@gmail.com",
         "role": "Lead Property Agent & Manager, 1004 Estate",
         "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
       },
@@ -365,7 +366,7 @@
       "agent": {
         "name": "Mrs. Joke Popoola",
         "phone": "+234 703 846 2284",
-        "email": "akanbisamuel045@gmail.com",
+        "email": "jkcube85@gmail.com",
         "role": "Lead Property Agent & Manager, 1004 Estate",
         "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
       },

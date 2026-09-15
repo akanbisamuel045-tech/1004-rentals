@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ArrowRight, Bed, Bath, Car, MapPin, Sparkles, Shield, Zap, Droplet } from 'lucide-react';
 import { api } from '../services/api';

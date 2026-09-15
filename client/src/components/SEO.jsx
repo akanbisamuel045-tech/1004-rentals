@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+﻿import React, { useEffect } from 'react';
 
 const DEFAULT_TITLE = 'JK - CUBE MULTIVENTURES LIMITED | 1004 Estate Serviced Rentals, Victoria Island, Lagos';
 const DEFAULT_DESC = 'Official leasing & serviced apartment rentals at 1004 Estate, Victoria Island, Lagos by JK - CUBE MULTIVENTURES LIMITED. High-rise flats, maisonettes, and executive penthouses with 24/7 power and security.';

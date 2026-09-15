@@ -1,4 +1,4 @@
-import { properties as initialProperties, locations as initialLocations, amenitiesList } from "../data/seedData.js";
+﻿import { properties as initialProperties, locations as initialLocations, amenitiesList } from "../data/seedData.js";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -16,7 +16,7 @@ class DatabaseStore {
         {
           id: "user-admin",
           name: "Akanbi Samuel",
-          email: "akanbisamuel045@gmail.com",
+          email: "jkcube85@gmail.com",
           phone: "+234 802 345 6789",
           passwordHash: bcrypt.hashSync("admin123", 10),
           role: "ADMIN",
