@@ -1,4 +1,4 @@
-﻿export const locations = [
+export const locations = [
   {
     id: "loc-1004-highrise",
     name: "1004 High-Rise Towers",
@@ -44,7 +44,7 @@
 export const amenitiesList = [
   "24/7 Uninterrupted Electricity (Independent Power Plant)",
   "Central Industrial Water Treatment",
-  "Olympic-Sized Swimming Pools (2 Pools)",
+  "Access to swimming pool",
   "Lawn Tennis & Basketball Courts",
   "High-Speed Fiber-Optic Wi-Fi",
   "Access Card Gate Security & CCTV",
@@ -90,7 +90,7 @@ export const properties = [
     amenities: [
       "24/7 Uninterrupted Electricity (Independent Power Plant)",
       "Central Industrial Water Treatment",
-      "Olympic-Sized Swimming Pools (2 Pools)",
+      "Access to swimming pool",
       "High-Speed Fiber-Optic Wi-Fi",
       "Access Card Gate Security & CCTV",
       "Passenger & Service Elevators",
@@ -185,7 +185,7 @@ export const properties = [
     ],
     amenities: [
       "24/7 Uninterrupted Electricity (Independent Power Plant)",
-      "Olympic-Sized Swimming Pools (2 Pools)",
+      "Access to swimming pool",
       "Lawn Tennis & Basketball Courts",
       "High-Speed Fiber-Optic Wi-Fi",
       "Passenger & Service Elevators",
@@ -278,7 +278,7 @@ export const properties = [
     amenities: [
       "24/7 Uninterrupted Electricity (Independent Power Plant)",
       "Central Industrial Water Treatment",
-      "Olympic-Sized Swimming Pools (2 Pools)",
+      "Access to swimming pool",
       "Children's Play Park & Green Lawn",
       "Dedicated Covered Parking Bays",
       "Access Card Gate Security & CCTV"

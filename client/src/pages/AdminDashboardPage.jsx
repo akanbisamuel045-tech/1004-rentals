@@ -32,7 +32,7 @@ import ImageUploader from '../components/ImageUploader';
 const DEFAULT_AMENITIES = [
   '24/7 Uninterrupted Electricity (Independent Power Plant)',
   'Central Industrial Water Treatment',
-  'Olympic-Sized Swimming Pools (2 Pools)',
+  'Access to swimming pool',
   'Lawn Tennis & Basketball Courts',
   'High-Speed Fiber-Optic Wi-Fi',
   'Access Card Gate Security & CCTV',
@@ -214,7 +214,7 @@ export default function AdminDashboardPage() {
       sizesqm: prop.sizesqm || 120,
       description: prop.description || '',
       images: Array.isArray(prop.images) && prop.images.length > 0 ? prop.images : ['https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80'],
-      amenities: prop.amenities || []
+      amenities: (prop.amenities || []).map(a => (a === 'Olympic-Sized Swimming Pools (2 Pools)' || a === 'Olympic Swimming Pools') ? 'Access to swimming pool' : a)
     });
   };
 

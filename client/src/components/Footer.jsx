@@ -29,7 +29,6 @@ export default function Footer() {
               <li><Link to="/properties" className="footer-link-item">1004 Apartments</Link></li>
               <li><Link to="/contact" className="footer-link-item">Contact Desk</Link></li>
               <li><Link to="/dashboard" className="footer-link-item">User Dashboard</Link></li>
-              <li><Link to="/admin" className="footer-link-item" style={{ color: 'var(--brand-orange)', fontWeight: '700' }}>Agent Admin Portal</Link></li>
             </ul>
           </div>
 

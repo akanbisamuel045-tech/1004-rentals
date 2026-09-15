@@ -72,7 +72,7 @@ export default function HomePage() {
             {/* Left Column: Iconic 1004 Estate High-Rise Architectural Image with Floating Glass Tags */}
             <div className="hero-img-container">
               <img
-                src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80"
+                src="/1004-estate-aerial.jpg"
                 alt="1004 Estate High-Rise Architecture, Victoria Island"
               />
               <div className="hero-floating-tags">
@@ -140,8 +140,8 @@ export default function HomePage() {
 
                 <div className="hero-dark-thumb">
                   <img
-                    src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80"
-                    alt="1004 Penthouse Preview"
+                    src="/1004-interior-living.jpg"
+                    alt="1004 Luxury Apartment Interior Preview"
                   />
                 </div>
               </div>

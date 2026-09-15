@@ -1,8 +1,8 @@
-﻿import React, { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 const DEFAULT_TITLE = 'JK - CUBE MULTIVENTURES LIMITED | 1004 Estate Serviced Rentals, Victoria Island, Lagos';
 const DEFAULT_DESC = 'Official leasing & serviced apartment rentals at 1004 Estate, Victoria Island, Lagos by JK - CUBE MULTIVENTURES LIMITED. High-rise flats, maisonettes, and executive penthouses with 24/7 power and security.';
-const DEFAULT_IMAGE = 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80';
+const DEFAULT_IMAGE = 'https://jkcubemultiventures.com/1004-estate-aerial.jpg';
 const DOMAIN = 'https://jkcubemultiventures.com';
 
 export default function SEO({
