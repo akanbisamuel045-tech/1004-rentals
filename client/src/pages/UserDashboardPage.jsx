@@ -91,8 +91,8 @@ export default function UserDashboardPage() {
         {/* User Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px', flexWrap: 'wrap', gap: '16px' }}>
           <div>
-            <span style={{ fontSize: '0.85rem', color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '700' }}>
-              User Dashboard
+            <span style={{ fontSize: '0.85rem', color: 'var(--brand-orange)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '700' }}>
+              JK - CUBE MULTIVENTURES LIMITED • Client Portal
             </span>
             <h1 style={{ fontSize: '2.4rem', fontWeight: '800', letterSpacing: '-0.03em', marginTop: '4px' }}>
               Welcome, {user.name}
@@ -139,8 +139,8 @@ export default function UserDashboardPage() {
               fontSize: '0.95rem',
               background: 'none',
               border: 'none',
-              borderBottom: activeTab === 'bookings' ? '2.5px solid #000000' : '2.5px solid transparent',
-              color: activeTab === 'bookings' ? '#000000' : '#6b7280',
+              borderBottom: activeTab === 'bookings' ? '2.5px solid var(--brand-orange)' : '2.5px solid transparent',
+              color: activeTab === 'bookings' ? 'var(--brand-orange)' : '#6b7280',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
@@ -158,8 +158,8 @@ export default function UserDashboardPage() {
               fontSize: '0.95rem',
               background: 'none',
               border: 'none',
-              borderBottom: activeTab === 'saved' ? '2.5px solid #000000' : '2.5px solid transparent',
-              color: activeTab === 'saved' ? '#000000' : '#6b7280',
+              borderBottom: activeTab === 'saved' ? '2.5px solid var(--brand-orange)' : '2.5px solid transparent',
+              color: activeTab === 'saved' ? 'var(--brand-orange)' : '#6b7280',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
@@ -177,8 +177,8 @@ export default function UserDashboardPage() {
               fontSize: '0.95rem',
               background: 'none',
               border: 'none',
-              borderBottom: activeTab === 'profile' ? '2.5px solid #000000' : '2.5px solid transparent',
-              color: activeTab === 'profile' ? '#000000' : '#6b7280',
+              borderBottom: activeTab === 'profile' ? '2.5px solid var(--brand-orange)' : '2.5px solid transparent',
+              color: activeTab === 'profile' ? 'var(--brand-orange)' : '#6b7280',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',

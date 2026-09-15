@@ -8,15 +8,15 @@ export default function Footer() {
         <div className="footer-top-grid">
           {/* Brand Info */}
           <div>
-            <div className="footer-brand-title">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                <polyline points="9 22 9 12 15 12 15 22"/>
-              </svg>
-              <span>1004</span>Rentals
+            <div style={{ background: '#ffffff', display: 'inline-flex', padding: '6px 14px', borderRadius: '12px', marginBottom: '16px' }}>
+              <img
+                src="/jk-cube-logo.png"
+                alt="JK - CUBE MULTIVENTURES LIMITED"
+                style={{ height: '38px', width: 'auto', objectFit: 'contain' }}
+              />
             </div>
             <p className="footer-brand-desc">
-              Curated luxury apartments, penthouses, and serviced flats exclusively in 1004 Estate, Victoria Island, Lagos.
+              <strong>JK - CUBE MULTIVENTURES LIMITED</strong> — Curated luxury apartments, penthouses, and serviced flats exclusively in 1004 Estate, Victoria Island, Lagos.
             </p>
           </div>
 
@@ -29,7 +29,7 @@ export default function Footer() {
               <li><Link to="/properties" className="footer-link-item">1004 Apartments</Link></li>
               <li><Link to="/contact" className="footer-link-item">Contact Desk</Link></li>
               <li><Link to="/dashboard" className="footer-link-item">User Dashboard</Link></li>
-              <li><Link to="/admin" className="footer-link-item" style={{ color: '#facc15', fontWeight: '600' }}>Agent Admin Portal</Link></li>
+              <li><Link to="/admin" className="footer-link-item" style={{ color: 'var(--brand-orange)', fontWeight: '700' }}>Agent Admin Portal</Link></li>
             </ul>
           </div>
 
@@ -58,7 +58,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="footer-bottom-bar">
           <div>
-            © {new Date().getFullYear()} 1004 Rentals, Victoria Island. Managed by Mrs. Joke Popoola.
+            © {new Date().getFullYear()} JK - CUBE MULTIVENTURES LIMITED. All rights reserved. Managed by Mrs. Joke Popoola.
           </div>
           <div style={{ display: 'flex', gap: '20px' }}>
             <span style={{ cursor: 'pointer' }}>Estate Guidelines</span>

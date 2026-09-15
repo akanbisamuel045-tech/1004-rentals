@@ -1,5 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-  <rect width="32" height="32" rx="8" fill="#000000"/>
-  <path d="M7 23V11L16 4L25 11V23C25 24.1 24.1 25 23 25H9C7.9 25 7 24.1 7 23Z" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M12 25V15H20V25" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="14" fill="#ffffff"/>
+  <!-- Top Charcoal Arc -->
+  <path d="M 12 36 A 22 22 0 1 1 54 28" stroke="#2d3339" stroke-width="4.5" stroke-linecap="round"/>
+  <!-- Bottom Orange Arc -->
+  <path d="M 54 36 A 22 22 0 0 1 12 40" stroke="#f0833a" stroke-width="4.5" stroke-linecap="round"/>
+  <!-- Roof and Chimney -->
+  <path d="M 16 38 L 26 27 L 38 27 L 50 36" stroke="#2d3339" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 21 32 V 25 H 24 V 29" fill="#2d3339"/>
+  <!-- Orange Eaves -->
+  <path d="M 22 41 L 44 28 L 52 33" stroke="#f0833a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Windows -->
+  <rect x="40" y="34" width="3" height="3" fill="#2d3339"/>
+  <rect x="45" y="34" width="3" height="3" fill="#2d3339"/>
+  <rect x="40" y="39" width="3" height="3" fill="#2d3339"/>
+  <rect x="45" y="39" width="3" height="3" fill="#2d3339"/>
 </svg>

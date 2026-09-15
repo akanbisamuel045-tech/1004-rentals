@@ -113,10 +113,10 @@ export default function HomePage() {
               {/* Dark Agent Highlight Banner Card */}
               <div className="hero-dark-card">
                 <div>
-                  <span className="explore-badge">1004 Agent Desk</span>
+                  <span className="explore-badge">JK-Cube Concierge Desk</span>
                   <h3 className="hero-dark-title">Direct 1004 Estate Rentals</h3>
                   <p className="hero-dark-desc">
-                    Managed by lead agent Mrs. Joke Popoola. 24/7 turbine power, treated water, swimming pools, tennis courts, and verified security.
+                    Managed by <strong>JK - CUBE MULTIVENTURES LIMITED</strong> and lead agent Mrs. Joke Popoola. 24/7 turbine power, treated water, swimming pools, tennis courts, and verified security.
                   </p>
                   <button
                     onClick={() => openBookingModal(null)}
@@ -253,14 +253,14 @@ export default function HomePage() {
       <section id="about" style={{ paddingTop: '70px', paddingBottom: '70px', background: '#fafafa', borderTop: '1px solid #f0f0f0' }}>
         <div className="container" style={{ maxWidth: '1060px' }}>
           <div style={{ textAlign: 'center', marginBottom: '44px' }}>
-            <span className="explore-badge" style={{ background: '#000000', color: '#ffffff', marginBottom: '14px', display: 'inline-block' }}>
-              About 1004 Estate Rentals
+            <span className="explore-badge" style={{ background: 'var(--brand-orange)', color: '#ffffff', marginBottom: '14px', display: 'inline-block' }}>
+              JK - CUBE MULTIVENTURES LIMITED
             </span>
             <h2 style={{ fontSize: '2.4rem', fontWeight: '800', letterSpacing: '-0.03em', marginBottom: '14px', color: '#111827' }}>
               Exclusive Living in 1004 Estate, Victoria Island
             </h2>
-            <p style={{ color: '#6b7280', fontSize: '1.1rem', maxWidth: '720px', margin: '0 auto', lineHeight: '1.6' }}>
-              Managed by <strong>Mrs. Joke Popoola</strong>, your dedicated on-site leasing agent for verified high-rise flats, executive studios, and luxury penthouses in 1004 Estate.
+            <p style={{ color: '#6b7280', fontSize: '1.1rem', maxWidth: '760px', margin: '0 auto', lineHeight: '1.6' }}>
+              Managed by <strong>JK - CUBE MULTIVENTURES LIMITED</strong> with lead agent <strong>Mrs. Joke Popoola</strong> — your premier on-site leasing agency for verified high-rise flats, executive suites, and luxury penthouses in 1004 Estate.
             </p>
           </div>
 
@@ -326,22 +326,22 @@ export default function HomePage() {
           </div>
 
           {/* Agent Spotlight Card */}
-          <div style={{ background: '#000000', color: '#ffffff', borderRadius: '24px', padding: '36px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '24px' }}>
+          <div style={{ background: 'var(--brand-charcoal)', color: '#ffffff', borderRadius: '24px', padding: '36px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '24px', border: '1px solid #3d454e' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '20px', flexWrap: 'wrap' }}>
               <img
                 src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
                 alt="Mrs. Joke Popoola"
-                style={{ width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover', border: '2px solid #ffffff' }}
+                style={{ width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover', border: '3px solid var(--brand-orange)' }}
               />
               <div>
-                <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#a1a1aa', fontWeight: '700' }}>
-                  1004 On-Site Concierge
+                <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--brand-orange)', fontWeight: '700' }}>
+                  JK - CUBE MULTIVENTURES LIMITED • 1004 Concierge Desk
                 </span>
                 <h3 style={{ fontSize: '1.45rem', fontWeight: '800', margin: '4px 0 6px 0' }}>
                   Meet Mrs. Joke Popoola
                 </h3>
-                <p style={{ color: '#a1a1aa', fontSize: '0.92rem', maxWidth: '520px', lineHeight: '1.5', margin: 0 }}>
-                  Dedicated on-site leasing agent in 1004 Estate to personally guide you through property tours, lease agreements, and move-in logistics.
+                <p style={{ color: '#cbd5e1', fontSize: '0.92rem', maxWidth: '520px', lineHeight: '1.5', margin: 0 }}>
+                  Managing agent with JK - CUBE MULTIVENTURES LIMITED. Ready to personally guide you through property tours, lease agreements, and move-in logistics in 1004 Estate.
                 </p>
               </div>
             </div>
@@ -350,7 +350,7 @@ export default function HomePage() {
               <button
                 onClick={() => openBookingModal(null)}
                 className="btn-add-listing"
-                style={{ background: '#ffffff', color: '#000000', padding: '12px 24px', fontWeight: '700' }}
+                style={{ padding: '12px 24px', fontWeight: '700' }}
               >
                 Schedule On-site Tour
               </button>

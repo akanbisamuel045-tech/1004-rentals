@@ -32,12 +32,12 @@ export default function Navbar() {
     <header className="navbar">
       <div className="container nav-container">
         {/* Brand / Logo */}
-        <Link to="/" className="nav-brand" onClick={() => setMobileMenuOpen(false)}>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '4px' }}>
-            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-            <polyline points="9 22 9 12 15 12 15 22"/>
-          </svg>
-          <span>1004</span>Rentals
+        <Link to="/" className="nav-brand" onClick={() => setMobileMenuOpen(false)} title="JK - CUBE MULTIVENTURES LIMITED">
+          <img
+            src="/jk-cube-logo.png"
+            alt="JK - CUBE MULTIVENTURES LIMITED"
+            className="nav-brand-logo"
+          />
         </Link>
 
         {/* Center Pill Menu Segmented Controls */}

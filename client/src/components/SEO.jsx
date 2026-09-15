@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 
-const DEFAULT_TITLE = '1004 Rentals | Serviced Apartments in 1004 Estate, Victoria Island, Lagos';
-const DEFAULT_DESC = 'Explore verified 1, 2, 3-bedroom flats, maisonettes, and luxury penthouses for rent in 1004 Estate, Victoria Island, Lagos. 24/7 power, treated water, and on-site agent management.';
+const DEFAULT_TITLE = 'JK - CUBE MULTIVENTURES LIMITED | 1004 Estate Serviced Rentals, Victoria Island, Lagos';
+const DEFAULT_DESC = 'Official leasing & serviced apartment rentals at 1004 Estate, Victoria Island, Lagos by JK - CUBE MULTIVENTURES LIMITED. High-rise flats, maisonettes, and executive penthouses with 24/7 power and security.';
 const DEFAULT_IMAGE = 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80';
-const DOMAIN = 'https://1004rentals.ng';
+const DOMAIN = 'https://jkcubemultiventures.com';
 
 export default function SEO({
   title,
@@ -13,7 +13,7 @@ export default function SEO({
   canonicalPath = '',
   property = null
 }) {
-  const metaTitle = title ? `${title} | 1004 Rentals Victoria Island` : DEFAULT_TITLE;
+  const metaTitle = title ? `${title} | JK - CUBE MULTIVENTURES LIMITED` : DEFAULT_TITLE;
   const metaDesc = description || DEFAULT_DESC;
   const metaImg = image || DEFAULT_IMAGE;
   const canonicalUrl = `${DOMAIN}${canonicalPath}`;
@@ -107,7 +107,11 @@ export default function SEO({
         'landlord': {
           '@type': 'Person',
           'name': 'Mrs. Joke Popoola',
-          'jobTitle': 'Lead Property Agent & Leasing Manager, 1004 Estate',
+          'jobTitle': 'Managing Director & Lead Leasing Agent',
+          'worksFor': {
+            '@type': 'RealEstateAgent',
+            'name': 'JK - CUBE MULTIVENTURES LIMITED'
+          },
           'telephone': '+2347038462284'
         }
       };

@@ -319,7 +319,7 @@ export default function AdminDashboardPage() {
           name: 'Mrs. Joke Popoola',
           phone: '+234 703 846 2284',
           email: 'akanbisamuel045@gmail.com',
-          role: 'Lead Property Agent & Manager, 1004 Estate',
+          role: 'Managing Leasing Agent, JK - CUBE MULTIVENTURES LIMITED',
           avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80'
         }
       });
@@ -365,9 +365,10 @@ export default function AdminDashboardPage() {
           borderBottom: '1px solid #e5e7eb'
         }}>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-              <span className="badge" style={{ background: '#000000', color: '#ffffff', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
-                <ShieldCheck size={14} /> 1004 Estate Agent Desk
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px', flexWrap: 'wrap' }}>
+              <img src="/jk-cube-icon.png" alt="JK - CUBE" style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
+              <span className="badge" style={{ background: 'var(--brand-orange)', color: '#ffffff', display: 'inline-flex', alignItems: 'center', gap: '5px', fontWeight: '700' }}>
+                <ShieldCheck size={14} /> JK - CUBE MULTIVENTURES LIMITED
               </span>
               <span className="explore-badge" style={{ background: '#e0f2fe', color: '#0369a1' }}>
                 Victoria Island, Lagos
@@ -377,7 +378,7 @@ export default function AdminDashboardPage() {
               Management & Leasing Console
             </h1>
             <p style={{ color: '#4b5563', marginTop: '6px', fontSize: '0.95rem' }}>
-              Agent Lead: <strong>Mrs. Joke Popoola</strong> (Direct: +234 703 846 2284) • 1004 Estate Central Administration
+              Managing Agent: <strong>Mrs. Joke Popoola</strong> (Direct: +234 703 846 2284) • Central Real Estate Portfolio
             </p>
           </div>
 

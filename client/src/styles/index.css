@@ -1,18 +1,39 @@
 :root {
+  /* =========================================
+     JK - CUBE MULTIVENTURES LIMITED BRAND SYSTEM
+     ========================================= */
+  --brand-orange: #f0833a;
+  --brand-orange-hover: #d96c21;
+  --brand-orange-light: #fff7ed;
+  --brand-orange-border: #fed7aa;
+
+  --brand-charcoal: #2d3339;
+  --brand-charcoal-dark: #1f2429;
+  --brand-charcoal-light: #3d434a;
+
+  --brand-grey-medium: #5e656e;
+  --brand-grey-light: #f4f5f8;
+  --brand-grey-subtle: #f9fafb;
+
+  --brand-border: #e2e5ea;
+  --brand-border-light: #edf0f4;
+
+  /* Semantic UI Tokens */
   --bg-page: #ffffff;
   --bg-card: #ffffff;
-  --bg-dark: #121010;
-  --text-main: #000000;
-  --text-muted: #6b7280;
-  --text-light: #9ca3af;
-  --border: #e5e7eb;
-  --border-light: #f3f4f6;
-  --pill-bg: #f3f4f6;
+  --bg-dark: var(--brand-charcoal);
+  --text-main: var(--brand-charcoal);
+  --text-muted: var(--brand-grey-medium);
+  --text-light: #8e95a0;
+  --border: var(--brand-border);
+  --border-light: var(--brand-border-light);
+  --pill-bg: #f4f5f8;
   --radius-pill: 9999px;
   --radius-card: 24px;
   --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --shadow-subtle: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
-  --shadow-hover: 0 12px 30px -4px rgba(0, 0, 0, 0.08);
+  --shadow-subtle: 0 4px 20px -2px rgba(45, 51, 57, 0.05);
+  --shadow-hover: 0 12px 30px -4px rgba(45, 51, 57, 0.1);
+  --shadow-orange: 0 6px 20px -2px rgba(240, 131, 58, 0.35);
 }
 
 * {
@@ -50,7 +71,7 @@ button, input, select, textarea {
    ========================================= */
 .navbar {
   background: #ffffff;
-  padding: 18px 0;
+  padding: 14px 0;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -66,20 +87,33 @@ button, input, select, textarea {
 .nav-brand {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 1.35rem;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  color: #000000;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.nav-brand-logo {
+  height: 44px;
+  width: auto;
+  max-width: 240px;
+  object-fit: contain;
+  display: block;
+}
+
+@media (max-width: 640px) {
+  .nav-brand-logo {
+    height: 36px;
+    max-width: 180px;
+  }
 }
 
 .nav-pill-menu {
   display: flex;
   align-items: center;
-  background: #f1f2f4;
+  background: #f4f5f8;
   padding: 4px;
   border-radius: var(--radius-pill);
   gap: 4px;
+  border: 1px solid var(--border-light);
 }
 
 .nav-pill-item {
@@ -87,7 +121,7 @@ button, input, select, textarea {
   border-radius: var(--radius-pill);
   font-size: 0.9rem;
   font-weight: 500;
-  color: #4b5563;
+  color: var(--brand-grey-medium);
   transition: all 0.2s ease;
   display: flex;
   align-items: center;
@@ -95,14 +129,14 @@ button, input, select, textarea {
 }
 
 .nav-pill-item:hover {
-  color: #111111;
+  color: var(--brand-charcoal);
 }
 
 .nav-pill-item.active {
   background: #ffffff;
-  color: #111111;
-  font-weight: 600;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  color: var(--brand-orange);
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(45, 51, 57, 0.08);
 }
 
 .nav-actions {
@@ -114,34 +148,37 @@ button, input, select, textarea {
 .nav-login-link {
   font-size: 0.9rem;
   font-weight: 600;
-  color: #374151;
+  color: var(--brand-charcoal);
   display: flex;
   align-items: center;
   gap: 6px;
+  transition: color 0.15s ease;
 }
 
 .nav-login-link:hover {
-  color: #000000;
+  color: var(--brand-orange);
 }
 
 .btn-add-listing {
-  background: #000000;
+  background: var(--brand-orange);
   color: #ffffff;
   padding: 10px 22px;
   border-radius: var(--radius-pill);
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 700;
   border: none;
   cursor: pointer;
-  transition: opacity 0.2s, transform 0.15s;
+  transition: all 0.2s ease;
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  box-shadow: 0 2px 10px rgba(240, 131, 58, 0.25);
 }
 
 .btn-add-listing:hover {
-  opacity: 0.88;
+  background: var(--brand-orange-hover);
   transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(240, 131, 58, 0.35);
 }
 
 /* =========================================
@@ -225,24 +262,25 @@ button, input, select, textarea {
   font-weight: 600;
   border: 1px solid var(--border);
   background: #ffffff;
-  color: #4b5563;
+  color: var(--brand-grey-medium);
   cursor: pointer;
   transition: all 0.15s ease;
 }
 
 .filter-pill-btn:hover {
-  border-color: #000000;
-  color: #000000;
+  border-color: var(--brand-charcoal);
+  color: var(--brand-charcoal);
 }
 
 .filter-pill-btn.active {
-  border: 1.5px solid #000000;
-  color: #000000;
-  background: #ffffff;
+  border: 1.5px solid var(--brand-orange);
+  color: var(--brand-orange);
+  background: var(--brand-orange-light);
+  font-weight: 700;
 }
 
 .hero-dark-card {
-  background: var(--bg-dark);
+  background: var(--brand-charcoal);
   color: #ffffff;
   border-radius: var(--radius-card);
   padding: 28px;
@@ -253,16 +291,18 @@ button, input, select, textarea {
   position: relative;
   overflow: hidden;
   margin-top: auto;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .explore-badge {
   display: inline-block;
   padding: 5px 14px;
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--brand-orange-light);
+  border: 1px solid var(--brand-orange-border);
   border-radius: var(--radius-pill);
   font-size: 0.78rem;
-  font-weight: 600;
-  color: #ffffff;
+  font-weight: 700;
+  color: var(--brand-orange-hover);
   margin-bottom: 12px;
 }
 
@@ -698,22 +738,24 @@ button, input, select, textarea {
 }
 
 .btn-book-pill {
-  background: #000000;
-  border-color: #000000;
+  background: var(--brand-orange);
+  border-color: var(--brand-orange);
   color: #ffffff;
+  box-shadow: 0 2px 8px rgba(240, 131, 58, 0.28);
 }
 
 .btn-book-pill:hover {
-  background: #27272a;
-  border-color: #27272a;
+  background: var(--brand-orange-hover);
+  border-color: var(--brand-orange-hover);
   color: #ffffff;
+  transform: translateY(-1px);
 }
 
 /* =========================================
    5. SLEEK MINIMALIST GLOBAL FOOTER
    ========================================= */
 .site-footer {
-  background: #000000;
+  background: var(--brand-charcoal);
   color: #ffffff;
   padding: 64px 0 32px;
   margin-top: 80px;
@@ -849,24 +891,27 @@ button, input, select, textarea {
 
 .form-input:focus, .form-select:focus, .form-textarea:focus {
   outline: none;
-  border-color: #000000;
+  border-color: var(--brand-orange);
+  box-shadow: 0 0 0 3px rgba(240, 131, 58, 0.15);
 }
 
 .btn-black-block {
   width: 100%;
   padding: 14px;
-  background: #000000;
+  background: var(--brand-orange);
   color: #ffffff;
   border-radius: 10px;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.95rem;
   border: none;
   cursor: pointer;
-  transition: opacity 0.15s;
+  transition: all 0.2s ease;
+  box-shadow: 0 3px 12px rgba(240, 131, 58, 0.25);
 }
 
 .btn-black-block:hover {
-  opacity: 0.85;
+  background: var(--brand-orange-hover);
+  transform: translateY(-1px);
 }
 
 /* Smooth scrolling */
@@ -928,11 +973,15 @@ html {
   transition: all 0.15s ease;
 }
 
-.nav-mobile-item:hover,
-.nav-mobile-item.active {
+.nav-mobile-item:hover {
   background: #f3f4f6;
-  color: #000000;
-  font-weight: 600;
+  color: #111827;
+}
+
+.nav-mobile-item.active {
+  background: var(--brand-orange-light);
+  color: var(--brand-orange);
+  font-weight: 700;
 }
 
 /* Responsive */

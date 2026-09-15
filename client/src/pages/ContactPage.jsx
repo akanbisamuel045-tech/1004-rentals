@@ -27,27 +27,29 @@ export default function ContactPage() {
   return (
     <div className="section" style={{ paddingTop: '50px' }}>
       <SEO
-        title="Contact Agent Desk | 1004 Estate Rentals"
-        description="Contact Mrs. Joke Popoola at the 1004 Estate Leasing Desk in Victoria Island, Lagos. Direct phone / WhatsApp: +234 703 846 2284."
+        title="Contact Concierge Desk | JK - CUBE MULTIVENTURES LIMITED"
+        description="Contact Mrs. Joke Popoola and the JK - CUBE MULTIVENTURES LIMITED leasing desk for 1004 Estate, Victoria Island, Lagos. Direct phone / WhatsApp: +234 703 846 2284."
         canonicalPath="/contact"
       />
       <div className="container" style={{ maxWidth: '1200px' }}>
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-          <span className="explore-badge" style={{ background: '#f3f4f6', color: '#111111', marginBottom: '8px', display: 'inline-block' }}>
-            On-Site Leasing Desk
+          <span className="explore-badge" style={{ background: 'var(--brand-orange)', color: '#ffffff', marginBottom: '8px', display: 'inline-block' }}>
+            Concierge & Leasing Desk
           </span>
-          <h1 style={{ fontSize: '2.5rem', fontWeight: '800', letterSpacing: '-0.03em', marginBottom: '12px' }}>
-            Contact 1004 Estate Agent Desk
+          <h1 style={{ fontSize: '2.5rem', fontWeight: '800', letterSpacing: '-0.03em', marginBottom: '12px', color: '#111827' }}>
+            Contact JK - CUBE MULTIVENTURES LIMITED
           </h1>
           <p style={{ color: '#6b7280', fontSize: '1.05rem' }}>
-            Looking to inspect an apartment in 1004 Estate today or have questions about estate guidelines?
+            Schedule an apartment inspection in 1004 Estate or speak with our property managers today.
           </p>
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '36px' }}>
           {/* Agent Info */}
           <div style={{ background: '#ffffff', padding: '36px', borderRadius: '24px', border: '1px solid #e5e7eb', boxShadow: 'var(--shadow-subtle)' }}>
-            <h3 style={{ fontSize: '1.3rem', fontWeight: '700', marginBottom: '20px' }}>On-Site Office & Contact</h3>
+            <h3 style={{ fontSize: '1.3rem', fontWeight: '700', marginBottom: '20px', color: '#111827' }}>
+              JK - CUBE Multiventures Desk
+            </h3>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
               <div style={{ display: 'flex', gap: '14px', alignItems: 'flex-start' }}>

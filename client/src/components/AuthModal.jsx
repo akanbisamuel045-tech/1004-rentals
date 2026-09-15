@@ -44,7 +44,16 @@ export default function AuthModal() {
   return (
     <div className="modal-backdrop" onClick={closeAuthModal}>
       <div className="modal-content" style={{ maxWidth: '440px' }} onClick={(e) => e.stopPropagation()}>
-        {/* Header */}
+        {/* Brand Logo Header */}
+        <div style={{ textAlign: 'center', marginBottom: '18px' }}>
+          <img
+            src="/jk-cube-logo.png"
+            alt="JK - CUBE MULTIVENTURES LIMITED"
+            style={{ height: '36px', width: 'auto', objectFit: 'contain' }}
+          />
+        </div>
+
+        {/* Header Tabs */}
         <div className="modal-header" style={{ marginBottom: '16px' }}>
           <div style={{ display: 'flex', gap: '8px' }}>
             <button
@@ -54,10 +63,10 @@ export default function AuthModal() {
                 border: 'none',
                 fontSize: '1.2rem',
                 fontWeight: mode === 'login' ? '800' : '500',
-                color: mode === 'login' ? '#000000' : '#9ca3af',
+                color: mode === 'login' ? 'var(--brand-charcoal)' : '#9ca3af',
                 cursor: 'pointer',
                 paddingBottom: '4px',
-                borderBottom: mode === 'login' ? '2px solid #000000' : 'none',
+                borderBottom: mode === 'login' ? '2.5px solid var(--brand-orange)' : 'none',
               }}
             >
               Sign In
@@ -69,10 +78,10 @@ export default function AuthModal() {
                 border: 'none',
                 fontSize: '1.2rem',
                 fontWeight: mode === 'register' ? '800' : '500',
-                color: mode === 'register' ? '#000000' : '#9ca3af',
+                color: mode === 'register' ? 'var(--brand-charcoal)' : '#9ca3af',
                 cursor: 'pointer',
                 paddingBottom: '4px',
-                borderBottom: mode === 'register' ? '2px solid #000000' : 'none',
+                borderBottom: mode === 'register' ? '2.5px solid var(--brand-orange)' : 'none',
                 marginLeft: '12px'
               }}
             >
@@ -199,7 +208,7 @@ export default function AuthModal() {
               <button
                 type="button"
                 onClick={() => { setMode('register'); setError(''); }}
-                style={{ background: 'none', border: 'none', fontWeight: '700', color: '#000000', cursor: 'pointer', textDecoration: 'underline' }}
+                style={{ background: 'none', border: 'none', fontWeight: '700', color: 'var(--brand-orange)', cursor: 'pointer', textDecoration: 'underline' }}
               >
                 Sign up
               </button>
@@ -210,7 +219,7 @@ export default function AuthModal() {
               <button
                 type="button"
                 onClick={() => { setMode('login'); setError(''); }}
-                style={{ background: 'none', border: 'none', fontWeight: '700', color: '#000000', cursor: 'pointer', textDecoration: 'underline' }}
+                style={{ background: 'none', border: 'none', fontWeight: '700', color: 'var(--brand-orange)', cursor: 'pointer', textDecoration: 'underline' }}
               >
                 Sign in
               </button>

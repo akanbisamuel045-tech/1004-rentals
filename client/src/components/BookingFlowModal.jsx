@@ -41,12 +41,12 @@ export default function BookingFlowModal() {
     return (
       <div className="modal-backdrop" onClick={closeBookingModal}>
         <div className="modal-content" style={{ maxWidth: '440px', textAlign: 'center', padding: '36px' }} onClick={(e) => e.stopPropagation()}>
-          <div style={{ width: '48px', height: '48px', background: '#f3f4f6', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
-            <Building2 size={24} color="#000000" />
+          <div style={{ width: '60px', height: '60px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', background: '#fff7ed', border: '1px solid #fed7aa' }}>
+            <img src="/jk-cube-icon.png" alt="JK - CUBE" style={{ width: '42px', height: '42px', objectFit: 'contain' }} />
           </div>
           <h3 style={{ fontSize: '1.35rem', fontWeight: '800', marginBottom: '8px' }}>Sign In to Book</h3>
           <p style={{ color: '#6b7280', fontSize: '0.92rem', lineHeight: '1.6', marginBottom: '24px' }}>
-            Please log in or create an account to book an apartment inspection and save your reservation history.
+            Sign in to schedule an in-person apartment inspection with a licensed <strong>JK - CUBE MULTIVENTURES LIMITED</strong> leasing agent.
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             <button
