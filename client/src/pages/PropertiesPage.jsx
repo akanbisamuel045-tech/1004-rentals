@@ -19,7 +19,7 @@ export default function PropertiesPage() {
   const [selectedLoc, setSelectedLoc] = useState(searchParams.get('location') || 'All');
   const [viewMode, setViewMode] = useState('grid'); // 'grid' | 'split' | 'map'
 
-  const clusters = ['All', '1004 High-Rise Towers', '1004 Cluster A', '1004 Cluster B', '1004 Cluster C & D'];
+  const clusters = ['All', '1004 High-Rise Towers', '1004 Cluster A', '1004 Cluster B', '1004 Cluster C', '1004 Cluster D'];
   const types = ['All', 'Apartment', 'Penthouse', 'Duplex', 'Studio'];
 
   const categoryTitles = {

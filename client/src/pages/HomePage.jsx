@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ArrowRight, Bed, Bath, Car, MapPin, Sparkles, Shield, Zap, Droplet } from 'lucide-react';
 import { api } from '../services/api';
@@ -30,7 +30,7 @@ export default function HomePage() {
   }, [location]);
 
   const heroTags = ['High-Rise', 'Serviced Flat', '1004 Victoria Island'];
-  const categoryPills = ['All 1004 Units', 'High-Rise Towers', 'Cluster A', 'Cluster B', 'Cluster C & D', 'Penthouse'];
+  const categoryPills = ['All 1004 Units', 'High-Rise Towers', 'Cluster A', 'Cluster B', 'Cluster C', 'Cluster D', 'Penthouse'];
 
   useEffect(() => {
     async function loadProperties() {

@@ -40,7 +40,8 @@ export default function Footer() {
               <li><Link to="/properties?location=1004+High-Rise+Towers" className="footer-link-item">High-Rise Towers</Link></li>
               <li><Link to="/properties?location=1004+Cluster+A" className="footer-link-item">Cluster A (Recreation)</Link></li>
               <li><Link to="/properties?location=1004+Cluster+B" className="footer-link-item">Cluster B (Executive)</Link></li>
-              <li><Link to="/properties?location=1004+Cluster+C+%26+D" className="footer-link-item">Cluster C & D (Family Wing)</Link></li>
+              <li><Link to="/properties?location=1004+Cluster+C" className="footer-link-item">Cluster C (Family Wing)</Link></li>
+              <li><Link to="/properties?location=1004+Cluster+D" className="footer-link-item">Cluster D (Family Wing)</Link></li>
             </ul>
           </div>
 

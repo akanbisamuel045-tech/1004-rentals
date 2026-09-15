@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { MapPin, Bed, Bath, Car, ArrowRight, Heart } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { handleImageError } from '../utils/imageUtils';
@@ -10,12 +10,20 @@ export function formatPriceNGN(val) {
 }
 
 export default function PropertyCard({ property }) {
+  const navigate = useNavigate();
   const { isFavorite, toggleFavorite, openBookingModal } = useAuth();
   const saved = isFavorite(property.id);
+  const detailUrl = `/properties/${property.id || property.slug}`;
 
   const primaryImg = property.images && property.images.length > 0
     ? property.images[0]
     : 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80';
+
+  const handleCardClick = (e) => {
+    // Don't navigate if a button/link inside was clicked
+    if (e.target.closest('button') || e.target.closest('a')) return;
+    navigate(detailUrl);
+  };
 
   const handleFavoriteClick = async (e) => {
     e.preventDefault();
@@ -30,7 +38,11 @@ export default function PropertyCard({ property }) {
   };
 
   return (
-    <div className="clean-card">
+    <div
+      className="clean-card clean-card-clickable"
+      onClick={handleCardClick}
+      style={{ cursor: 'pointer' }}
+    >
       <div className="clean-card-img-wrap">
         <img
           src={primaryImg}
@@ -69,13 +81,11 @@ export default function PropertyCard({ property }) {
       <div className="clean-card-body">
         <div className="clean-card-loc">
           <MapPin size={13} />
-          <span>{property.location}, Lagos</span>
+          <span>{property.address || `${property.location}, Lagos`}</span>
         </div>
 
         <h3 className="clean-card-title">
-          <Link to={`/properties/${property.id || property.slug}`}>
-            {property.title}
-          </Link>
+          {property.title}
         </h3>
 
         <div className="clean-card-specs">
@@ -100,7 +110,11 @@ export default function PropertyCard({ property }) {
             <button onClick={handleBookClick} className="btn-view-pill btn-book-pill">
               Book Now
             </button>
-            <Link to={`/properties/${property.id || property.slug}`} className="btn-view-pill">
+            <Link
+              to={detailUrl}
+              className="btn-view-pill"
+              onClick={(e) => e.stopPropagation()}
+            >
               Details
             </Link>
           </div>

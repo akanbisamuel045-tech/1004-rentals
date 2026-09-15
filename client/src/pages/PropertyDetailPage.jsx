@@ -1,12 +1,136 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { MapPin, Bed, Bath, ArrowLeft, Heart, CheckCircle2, Shield, Phone, Mail, Zap, Droplet, User, Calendar, Share2, Layers } from 'lucide-react';
+import { MapPin, Bed, Bath, ArrowLeft, Heart, CheckCircle2, Shield, Phone, Mail, Zap, Droplet, User, Calendar, Share2, Layers, X, ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react';
 import { api } from '../services/api';
 import { formatPriceNGN } from '../components/PropertyCard';
 import { useAuth } from '../context/AuthContext';
 import { handleImageError, FALLBACK_IMAGES } from '../utils/imageUtils';
 import EnquiryModal from '../components/EnquiryModal';
 import SEO from '../components/SEO';
+
+/* ─── Lightbox Component ─── */
+function Lightbox({ images, startIndex, onClose }) {
+  const [current, setCurrent] = useState(startIndex || 0);
+
+  const prev = (e) => {
+    e.stopPropagation();
+    setCurrent((c) => (c === 0 ? images.length - 1 : c - 1));
+  };
+  const next = (e) => {
+    e.stopPropagation();
+    setCurrent((c) => (c === images.length - 1 ? 0 : c + 1));
+  };
+
+  useEffect(() => {
+    const handleKey = (e) => {
+      if (e.key === 'ArrowLeft') setCurrent((c) => (c === 0 ? images.length - 1 : c - 1));
+      if (e.key === 'ArrowRight') setCurrent((c) => (c === images.length - 1 ? 0 : c + 1));
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [images.length, onClose]);
+
+  return (
+    <div
+      style={{
+        position: 'fixed', inset: 0, zIndex: 9999,
+        background: 'rgba(0,0,0,0.95)',
+        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
+      }}
+      onClick={onClose}
+    >
+      {/* Close Button */}
+      <button
+        onClick={onClose}
+        style={{
+          position: 'fixed', top: '20px', right: '20px',
+          background: 'rgba(255,255,255,0.12)', border: 'none', borderRadius: '50%',
+          width: '44px', height: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+          cursor: 'pointer', color: '#ffffff', zIndex: 10000
+        }}
+      >
+        <X size={22} />
+      </button>
+
+      {/* Counter */}
+      <div style={{ position: 'fixed', top: '22px', left: '50%', transform: 'translateX(-50%)', color: '#a1a1aa', fontSize: '0.88rem', fontWeight: '600', zIndex: 10000 }}>
+        {current + 1} / {images.length}
+      </div>
+
+      {/* Main Image */}
+      <div
+        style={{ position: 'relative', width: '100%', maxWidth: '1100px', padding: '0 72px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          onClick={prev}
+          style={{
+            position: 'absolute', left: '12px',
+            background: 'rgba(255,255,255,0.12)', border: 'none', borderRadius: '50%',
+            width: '48px', height: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+            cursor: 'pointer', color: '#ffffff'
+          }}
+        >
+          <ChevronLeft size={26} />
+        </button>
+
+        <img
+          src={images[current]}
+          alt={`Photo ${current + 1}`}
+          style={{
+            maxWidth: '100%', maxHeight: '78vh',
+            objectFit: 'contain', borderRadius: '12px',
+            boxShadow: '0 24px 80px rgba(0,0,0,0.6)'
+          }}
+          onError={(e) => handleImageError(e, FALLBACK_IMAGES[0])}
+        />
+
+        <button
+          onClick={next}
+          style={{
+            position: 'absolute', right: '12px',
+            background: 'rgba(255,255,255,0.12)', border: 'none', borderRadius: '50%',
+            width: '48px', height: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+            cursor: 'pointer', color: '#ffffff'
+          }}
+        >
+          <ChevronRight size={26} />
+        </button>
+      </div>
+
+      {/* Thumbnail Strip */}
+      <div
+        style={{
+          display: 'flex', gap: '8px', marginTop: '20px', overflowX: 'auto',
+          padding: '4px 16px', maxWidth: '100vw',
+          scrollbarWidth: 'thin'
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {images.map((src, idx) => (
+          <button
+            key={idx}
+            onClick={() => setCurrent(idx)}
+            style={{
+              flexShrink: 0, width: '72px', height: '54px', padding: 0,
+              border: idx === current ? '2.5px solid #f0833a' : '2px solid transparent',
+              borderRadius: '8px', overflow: 'hidden', cursor: 'pointer',
+              opacity: idx === current ? 1 : 0.55, transition: 'all 0.15s'
+            }}
+          >
+            <img
+              src={src}
+              alt={`Thumbnail ${idx + 1}`}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              onError={(e) => handleImageError(e, FALLBACK_IMAGES[0])}
+            />
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function PropertyDetailPage() {
   const { id } = useParams();
@@ -15,6 +139,10 @@ export default function PropertyDetailPage() {
   const [property, setProperty] = useState(null);
   const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState(false);
+
+  // Lightbox
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
 
   // Modals
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
@@ -48,6 +176,11 @@ export default function PropertyDetailPage() {
     }
   };
 
+  const openLightbox = (index = 0) => {
+    setLightboxIndex(index);
+    setLightboxOpen(true);
+  };
+
   if (loading) {
     return (
       <div className="container" style={{ padding: '100px 0', textAlign: 'center', color: '#9ca3af' }}>
@@ -76,7 +209,8 @@ export default function PropertyDetailPage() {
         'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80'
       ];
 
-  const totalPhotoCount = imgs.length >= 4 ? imgs.length + 12 : 16;
+  // ✅ Use the actual image count
+  const totalPhotoCount = imgs.length;
   const saved = isFavorite(property.id);
 
   const displayDescription = property.description && property.description.trim().length > 0
@@ -126,27 +260,38 @@ export default function PropertyDetailPage() {
           </div>
         </div>
 
-        {/* 1. ASYMMETRIC 3-COLUMN MOSAIC GALLERY */}
+        {/* 1. ASYMMETRIC 3-COLUMN MOSAIC GALLERY — Clickable */}
         <div className="mosaic-gallery">
           {/* Main Large Photo */}
-          <div className="gallery-cell">
+          <div
+            className="gallery-cell gallery-cell-clickable"
+            onClick={() => openLightbox(0)}
+            title="Click to view all photos"
+          >
             <img
               src={imgs[0]}
               alt={property.title}
               onError={(e) => handleImageError(e, FALLBACK_IMAGES[0])}
             />
+            <div className="gallery-zoom-hint"><ZoomIn size={18} /> View Photos</div>
           </div>
 
           {/* Middle Column (2 Stacked Photos) */}
           <div className="gallery-col-stack">
-            <div className="gallery-cell">
+            <div
+              className="gallery-cell gallery-cell-clickable"
+              onClick={() => openLightbox(1)}
+            >
               <img
                 src={imgs[1] || imgs[0]}
                 alt={`${property.title} Interior view 1`}
                 onError={(e) => handleImageError(e, FALLBACK_IMAGES[1])}
               />
             </div>
-            <div className="gallery-cell">
+            <div
+              className="gallery-cell gallery-cell-clickable"
+              onClick={() => openLightbox(2)}
+            >
               <img
                 src={imgs[2] || imgs[0]}
                 alt={`${property.title} Interior view 2`}
@@ -156,18 +301,21 @@ export default function PropertyDetailPage() {
           </div>
 
           {/* Right Column (Tall Photo with Button Overlay) */}
-          <div className="gallery-cell">
+          <div
+            className="gallery-cell gallery-cell-clickable"
+            onClick={() => openLightbox(3)}
+          >
             <img
               src={imgs[3] || imgs[0]}
               alt={`${property.title} Exterior view`}
               onError={(e) => handleImageError(e, FALLBACK_IMAGES[3])}
             />
             <button
-              onClick={() => openBookingModal(property)}
+              onClick={(e) => { e.stopPropagation(); openLightbox(0); }}
               className="show-all-photos-btn"
             >
-              <span>Book Inspection Now</span>
-              <span>{totalPhotoCount} photos</span>
+              <span>View All Photos</span>
+              <span>{totalPhotoCount} {totalPhotoCount === 1 ? 'photo' : 'photos'}</span>
             </button>
           </div>
         </div>
@@ -187,6 +335,11 @@ export default function PropertyDetailPage() {
             <button onClick={handleShare} className="action-link-btn">
               <Share2 size={18} />
               <span>{copied ? 'Link Copied!' : 'Share'}</span>
+            </button>
+
+            <button onClick={() => openLightbox(0)} className="action-link-btn">
+              <ZoomIn size={18} />
+              <span>All {totalPhotoCount} Photos</span>
             </button>
           </div>
 
@@ -353,6 +506,15 @@ export default function PropertyDetailPage() {
         </div>
 
       </div>
+
+      {/* LIGHTBOX */}
+      {lightboxOpen && (
+        <Lightbox
+          images={imgs}
+          startIndex={lightboxIndex}
+          onClose={() => setLightboxOpen(false)}
+        />
+      )}
 
       {/* MODAL: RENTAL BREAKDOWN CALCULATOR */}
       {showFeeModal && (

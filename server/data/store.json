@@ -1,57 +1,29 @@
-﻿{
+{
   "users": [
     {
       "id": "user-admin",
-      "name": "Mrs. Joke Popoola",
+      "name": "Akanbi Samuel",
       "email": "jkcube85@gmail.com",
       "phone": "+234 802 345 6789",
-      "passwordHash": "$2b$10$6r5ilsDT/Bs8lyooF2psDe6TR2w4wyVf7WM43lgopG98lWh2qqo2S",
+      "passwordHash": "$2b$10$YQddqEUEpy9BoMXXkbDG9.crwHfFNdaQdOgW5pgdgR2xOfi.AbQqm",
       "role": "ADMIN",
-      "createdAt": "2026-09-05T07:48:16.606Z"
-    },
-    {
-      "id": "user-1788594538897",
-      "name": "Tunde O. Bakare",
-      "email": "tunde1788594538660@example.com",
-      "phone": "+234 809 999 8888",
-      "passwordHash": "$2b$10$FtjW0I5suBrbOiVinWi2LuEKnzaqaX12LTwqAwTtfu21zV.XyK1Cm",
-      "role": "USER",
-      "createdAt": "2026-09-05T07:48:58.897Z",
-      "updatedAt": "2026-09-05T07:48:59.076Z"
-    },
-    {
-      "id": "user-1788595418076",
-      "name": "samuel Akanbi",
-      "email": "akanbisamue908@gmail.com",
-      "phone": "09160575724",
-      "passwordHash": "$2b$10$rh8.NH7nqP.kwC4Tc7gkouHMVaWAUiNNlgOBsa942PK1aKCXZ5bLu",
-      "role": "USER",
-      "createdAt": "2026-09-05T08:03:38.076Z"
-    },
-    {
-      "id": "user-1789326038107",
-      "name": "samuel akanbi",
-      "email": "akanbisamuel908@gmail.com",
-      "phone": "09160575724",
-      "passwordHash": "$2b$10$1bRsqDLQUEgT5MM8fo65A.rRi2njIUOCJDENQvRJgAYmc6vAZKbAO",
-      "role": "USER",
-      "createdAt": "2026-09-13T19:00:38.107Z"
+      "createdAt": "2026-09-15T22:28:20.086Z"
     }
   ],
   "properties": [
     {
-      "id": "prop-1789509328166",
+      "id": "prop-1789511681720",
       "slug": "modern-furnished-3-bedroom-apartment",
-      "viewCount": 18,
-      "createdAt": "2026-09-15T21:55:28.166Z",
+      "viewCount": 2,
+      "createdAt": "2026-09-15T22:34:41.720Z",
       "title": "Modern Furnished 3-Bedroom Apartment",
       "description": "",
       "price": 18000000,
       "serviceCharge": 1677000,
-      "cautionFee": 1800000,
+      "cautionFee": 1000000,
       "agencyFee": 1800000,
       "rentalPeriod": "ANNUALLY",
-      "location": "1004 Cluster B",
+      "location": "1004 Cluster C &amp;amp; D",
       "area": "Victoria Island",
       "propertyType": "Apartment",
       "bedrooms": 3,
@@ -63,15 +35,16 @@
       "availabilityStatus": "Available",
       "address": "Block D5, Cluster D, 1004 Estate, Victoria Island, Lagos",
       "images": [
-        "/uploads/1004-img-8271-1789509056536-714237.jpeg",
-        "/uploads/1004-img-8275-1789509105939-190186.jpeg",
-        "/uploads/1004-img-8272-1789509106025-26390.jpeg",
-        "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
-        "/uploads/1004-img-8252-1789509056625-314003.jpeg",
-        "/uploads/1004-img-8253-1789509056646-210422.jpeg",
-        "/uploads/1004-img-8255-1789509056705-267437.jpeg",
-        "/uploads/1004-img-8273-1789509056761-651619.jpeg",
-        "/uploads/1004-img-8266-1789509105916-136440.jpeg"
+        "/uploads/1004-img-8271-1789511624242-262052.jpeg",
+        "/uploads/1004-img-8268-1789511624195-237036.jpeg",
+        "/uploads/1004-img-8255-1789511604458-571448.jpeg",
+        "/uploads/1004-img-8273-1789511604502-193221.jpeg",
+        "/uploads/1004-img-8251-1789511604515-475461.jpeg",
+        "/uploads/1004-img-8252-1789511604537-378886.jpeg",
+        "/uploads/1004-img-8253-1789511604550-852118.jpeg",
+        "/uploads/1004-img-8266-1789511624165-312334.jpeg",
+        "/uploads/1004-img-8275-1789511624185-619079.jpeg",
+        "/uploads/1004-img-8272-1789511624251-101129.jpeg"
       ],
       "amenities": [
         "24/7 Uninterrupted Electricity (Independent Power Plant)",
@@ -90,7 +63,7 @@
         "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
       },
       "parkingSpaces": 0,
-      "updatedAt": "2026-09-15T22:18:43.359Z"
+      "updatedAt": "2026-09-15T22:35:27.957Z"
     },
     {
       "id": "1004-prop-1",
@@ -259,7 +232,7 @@
       "cautionFee": 300000,
       "agencyFee": 480000,
       "isFeatured": false,
-      "viewCount": 1684,
+      "viewCount": 1680,
       "images": [
         "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80",
         "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80",
@@ -304,7 +277,7 @@
       "cautionFee": 500000,
       "agencyFee": 900000,
       "isFeatured": true,
-      "viewCount": 2202,
+      "viewCount": 2200,
       "images": [
         "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
         "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
@@ -350,7 +323,7 @@
       "cautionFee": 400000,
       "agencyFee": 720000,
       "isFeatured": false,
-      "viewCount": 1754,
+      "viewCount": 1750,
       "images": [
         "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80",
         "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1200&q=80",
@@ -429,46 +402,8 @@
     "On-site Facility Management Desk",
     "Lagoon & City View Balconies"
   ],
-  "enquiries": [
-    {
-      "id": "enq-1789360371230",
-      "status": "NEW",
-      "createdAt": "2026-09-14T04:32:51.230Z",
-      "name": "QA Test Client",
-      "email": "tenant.test@example.com",
-      "phone": "+234 800 000 0000",
-      "message": "Inspection request for 1004 High-Rise Tower flat",
-      "propertyId": null,
-      "propertyTitle": "General Inquiry"
-    }
-  ],
+  "enquiries": [],
   "viewings": [],
-  "bookings": [
-    {
-      "id": "bk-1788594539064",
-      "userId": "user-1788594538897",
-      "userName": "Tunde Bakare",
-      "userEmail": "tunde1788594538660@example.com",
-      "userPhone": "+234 809 111 2222",
-      "propertyId": "prop-1",
-      "propertyTitle": "Luxury 3-Bedroom Serviced Apartment with Pool",
-      "propertyLocation": "Lekki Phase 1",
-      "propertyPrice": 9500000,
-      "propertyImage": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
-      "inspectionDate": "2026-09-20",
-      "timeSlot": "02:00 PM - 04:00 PM",
-      "status": "CONFIRMED",
-      "notes": "Please confirm gate access",
-      "createdAt": "2026-09-05T07:48:59.064Z",
-      "updatedAt": "2026-09-15T21:49:35.237Z"
-    }
-  ],
-  "favorites": {
-    "user-1788594538897": [
-      "prop-1"
-    ],
-    "user-1788595418076": [
-      "prop-6"
-    ]
-  }
+  "bookings": [],
+  "favorites": {}
 }

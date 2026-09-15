@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ShieldCheck,
@@ -47,13 +47,16 @@ const CLUSTERS = [
   '1004 High-Rise Towers',
   '1004 Cluster A',
   '1004 Cluster B',
-  '1004 Cluster C & D'
+  '1004 Cluster C',
+  '1004 Cluster D'
 ];
 
 const CATEGORIES = [
   { slug: '1-bedroom', label: '1-Bedroom Apartment' },
   { slug: '2-bedroom', label: '2-Bedroom Apartment' },
+  { slug: '2-bedroom-flat', label: '2-Bedroom Flat' },
   { slug: '3-bedroom', label: '3-Bedroom Apartment' },
+  { slug: '3-bedroom-flat', label: '3-Bedroom Flat' },
   { slug: '3-bedroom-maisonette', label: '3-Bedroom Maisonette' },
   { slug: '4-bedroom', label: '4-Bedroom Luxury Penthouse' }
 ];
