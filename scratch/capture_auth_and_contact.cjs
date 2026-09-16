@@ -17,12 +17,16 @@ const ARTIFACT_DIR = path.resolve('C:/Users/USER/.gemini/antigravity-ide/brain/0
   // 1. Check Contact page
   console.log('Visiting contact page...');
   await page.goto('http://localhost:3000/contact', { waitUntil: 'networkidle2' });
-  await page.screenshot({ path: path.join(ARTIFACT_DIR, 'contact_page_agent_desk.png') });
+  await page.screenshot({ path: path.join(ARTIFACT_DIR, 'contact_page_generic.png') });
 
-  const hasAgentDesk = await page.evaluate(() => {
-    return document.body.innerText.includes('Agent Desk') && !document.body.innerText.includes('Estate Location');
+  const contactInputs = await page.evaluate(() => {
+    const inputs = Array.from(document.querySelectorAll('form input, form textarea'));
+    return inputs.map(i => ({
+      type: i.type || i.tagName.toLowerCase(),
+      placeholder: i.placeholder
+    }));
   });
-  console.log('Contact page has Agent Desk and no Estate Location:', hasAgentDesk);
+  console.log('Contact form inputs:', JSON.stringify(contactInputs, null, 2));
 
   // 2. Clear localStorage so user is logged out
   await page.evaluate(() => {
@@ -39,9 +43,9 @@ const ARTIFACT_DIR = path.resolve('C:/Users/USER/.gemini/antigravity-ide/brain/0
 
   await page.waitForSelector('.modal-content', { timeout: 5000 });
   await new Promise(r => setTimeout(r, 600));
-  await page.screenshot({ path: path.join(ARTIFACT_DIR, 'auth_modal_signin_blank.png') });
+  await page.screenshot({ path: path.join(ARTIFACT_DIR, 'auth_modal_signin_generic.png') });
 
-  // Check inputs for sign in are blank
+  // Check inputs for sign in
   const signInInputsState = await page.evaluate(() => {
     const modal = document.querySelector('.modal-content');
     if (!modal) return { modalFound: false };
@@ -50,7 +54,6 @@ const ARTIFACT_DIR = path.resolve('C:/Users/USER/.gemini/antigravity-ide/brain/0
       modalFound: true,
       inputs: inputs.map(i => ({
         type: i.type,
-        value: i.value,
         placeholder: i.placeholder
       }))
     };
@@ -66,9 +69,9 @@ const ARTIFACT_DIR = path.resolve('C:/Users/USER/.gemini/antigravity-ide/brain/0
   });
 
   await new Promise(r => setTimeout(r, 600));
-  await page.screenshot({ path: path.join(ARTIFACT_DIR, 'auth_modal_create_account_blank.png') });
+  await page.screenshot({ path: path.join(ARTIFACT_DIR, 'auth_modal_create_account_generic.png') });
 
-  // Check inputs for create account are blank
+  // Check inputs for create account
   const createAccountInputsState = await page.evaluate(() => {
     const modal = document.querySelector('.modal-content');
     if (!modal) return { modalFound: false };
@@ -77,7 +80,6 @@ const ARTIFACT_DIR = path.resolve('C:/Users/USER/.gemini/antigravity-ide/brain/0
       modalFound: true,
       inputs: inputs.map(i => ({
         type: i.type,
-        value: i.value,
         placeholder: i.placeholder
       }))
     };

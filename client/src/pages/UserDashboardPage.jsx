@@ -429,6 +429,7 @@ export default function UserDashboardPage() {
                 <label className="form-label">Phone Number</label>
                 <input
                   type="tel"
+                  placeholder="+234 9876543210"
                   value={profileForm.phone}
                   onChange={(e) => setProfileForm({ ...profileForm, phone: e.target.value })}
                   className="form-input"

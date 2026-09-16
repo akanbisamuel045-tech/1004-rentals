@@ -112,7 +112,7 @@ export default function ContactPage() {
                   <input
                     type="text"
                     required
-                    placeholder="Full Name"
+                    placeholder="John Doe"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className="form-input"
@@ -124,7 +124,7 @@ export default function ContactPage() {
                   <input
                     type="email"
                     required
-                    placeholder="email@example.com"
+                    placeholder="john.doe@example.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className="form-input"
@@ -135,6 +135,7 @@ export default function ContactPage() {
                   <label className="form-label">Phone Number (WhatsApp)</label>
                   <input
                     type="tel"
+                    placeholder="+234 9876543210"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     className="form-input"

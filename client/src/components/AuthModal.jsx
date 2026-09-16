@@ -127,6 +127,7 @@ export default function AuthModal() {
                   <input
                     type="text"
                     required
+                    placeholder="John Doe"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className="form-input"
@@ -141,6 +142,7 @@ export default function AuthModal() {
                 <div style={{ position: 'relative' }}>
                   <input
                     type="tel"
+                    placeholder="+234 9876543210"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     className="form-input"
@@ -158,6 +160,7 @@ export default function AuthModal() {
               <input
                 type="email"
                 required
+                placeholder="john.doe@example.com"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 className="form-input"
@@ -173,6 +176,7 @@ export default function AuthModal() {
               <input
                 type="password"
                 required
+                placeholder="••••••••"
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 className="form-input"

@@ -78,7 +78,7 @@ export default function ViewingModal({ isOpen, onClose, property }) {
               <input
                 type="text"
                 required
-                placeholder="Full Name"
+                placeholder="John Doe"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 className="form-input"
@@ -91,7 +91,7 @@ export default function ViewingModal({ isOpen, onClose, property }) {
                 <input
                   type="email"
                   required
-                  placeholder="name@email.com"
+                  placeholder="john.doe@example.com"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   className="form-input"
@@ -102,6 +102,7 @@ export default function ViewingModal({ isOpen, onClose, property }) {
                 <input
                   type="tel"
                   required
+                  placeholder="+234 9876543210"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   className="form-input"
