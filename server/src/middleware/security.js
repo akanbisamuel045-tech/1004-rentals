@@ -26,7 +26,7 @@ export const authLimiter = rateLimit({
   }
 });
 
-// Rate Limiter: Public Form submissions (50 requests / 15 mins per IP to protect Mrs. Joke Popoola from spam)
+// Rate Limiter: Public Form submissions (50 requests / 15 mins per IP to protect from spam)
 export const submissionLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 50,

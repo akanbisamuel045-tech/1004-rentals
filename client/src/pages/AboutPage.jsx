@@ -18,7 +18,7 @@ export default function AboutPage() {
             JK - CUBE MULTIVENTURES LIMITED
           </h1>
           <p style={{ color: '#6b7280', fontSize: '1.15rem', maxWidth: '760px', margin: '0 auto', lineHeight: '1.6' }}>
-            Premier real estate agency managing executive residential rentals, high-rise flats, maisonettes, and luxury penthouses in <strong>1004 Estate, Victoria Island, Lagos</strong>.
+            Premier real estate agency managing executive residential rentals, high-rise flats, and serviced maisonettes in <strong>1004 Estate, Victoria Island, Lagos</strong>.
           </p>
         </div>
 
@@ -30,7 +30,7 @@ export default function AboutPage() {
           </p>
 
           <p style={{ color: '#374151', fontSize: '1.05rem', lineHeight: '1.8', marginBottom: '32px' }}>
-            Under the experienced leadership of <strong>Mrs. Joke Popoola</strong>, our on-site team ensures that every residence in our portfolio is meticulously vetted, fully serviced, and backed by guaranteed 24/7 turbine electricity, treated water, and dedicated concierge care.
+            Our experienced on-site team ensures that every residence in our portfolio is meticulously vetted, fully serviced, and backed by guaranteed 24/7 turbine electricity, treated water, and dedicated concierge care.
           </p>
 
           {/* Key Advantages */}
@@ -61,17 +61,17 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* Agent Card */}
+        {/* Corporate Concierge Card */}
         <div style={{ background: 'var(--brand-charcoal)', color: '#ffffff', borderRadius: '24px', padding: '40px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '24px', border: '1px solid #3d454e' }}>
           <div>
             <span style={{ fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--brand-orange)', fontWeight: '700' }}>
               On-Site Concierge & Management
             </span>
             <h3 style={{ fontSize: '1.5rem', fontWeight: '800', margin: '4px 0 8px 0' }}>
-              Meet Mrs. Joke Popoola
+              JK - CUBE MULTIVENTURES LIMITED
             </h3>
             <p style={{ color: '#cbd5e1', fontSize: '0.95rem', maxWidth: '520px', lineHeight: '1.6' }}>
-              Lead leasing consultant at <strong>JK - CUBE MULTIVENTURES LIMITED</strong>. Available on-site daily in 1004 Estate for private apartment viewings, lease inquiries, and tenancy arrangements.
+              Corporate leasing and property management desk for <strong>1004 Estate</strong>. Available on-site daily in 1004 Estate for private apartment viewings, lease inquiries, and tenancy arrangements.
             </p>
           </div>
           <Link to="/contact" className="btn-add-listing" style={{ padding: '14px 28px', fontSize: '0.95rem' }}>

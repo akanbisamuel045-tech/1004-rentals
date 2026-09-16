@@ -20,14 +20,14 @@ export default function PropertiesPage() {
   const [viewMode, setViewMode] = useState('grid'); // 'grid' | 'split' | 'map'
 
   const clusters = ['All', '1004 High-Rise Towers', '1004 Cluster A', '1004 Cluster B', '1004 Cluster C', '1004 Cluster D'];
-  const types = ['All', 'Apartment', 'Penthouse', 'Duplex', 'Studio'];
+  const types = ['All', 'Apartment', 'Duplex', 'Studio'];
 
   const categoryTitles = {
     '1-bedroom': '1-Bedroom Executive Apartments',
     '2-bedroom': '2-Bedroom Serviced Flats',
     '3-bedroom': '3-Bedroom Family Flats',
     '3-bedroom-maisonette': '3-Bedroom Maisonettes',
-    '4-bedroom': '4-Bedroom Luxury Penthouses'
+    'studio': 'Studio & Executive Suites'
   };
 
   const activeCategoryTitle = categoryParam ? categoryTitles[categoryParam] : null;
@@ -65,8 +65,8 @@ export default function PropertiesPage() {
       matchesCategory = p.bedrooms === 3 && p.propertyType !== 'Maisonette' && !p.title.toLowerCase().includes('maisonette');
     } else if (categoryParam === '3-bedroom-maisonette') {
       matchesCategory = p.bedrooms === 3 && (p.propertyType === 'Maisonette' || p.propertyType === 'Duplex' || p.title.toLowerCase().includes('maisonette'));
-    } else if (categoryParam === '4-bedroom') {
-      matchesCategory = p.bedrooms >= 4;
+    } else if (categoryParam === 'studio') {
+      matchesCategory = p.propertyType?.toLowerCase() === 'studio' || p.title.toLowerCase().includes('studio');
     }
 
     return matchesSearch && matchesType && matchesLoc && matchesCategory;
@@ -76,7 +76,7 @@ export default function PropertiesPage() {
     <div className="section" style={{ paddingTop: '24px' }}>
       <SEO
         title={activeCategoryTitle || '1004 Estate Apartment Listings'}
-        description={`Browse ${filtered.length} verified ${activeCategoryTitle ? activeCategoryTitle.toLowerCase() : 'apartments and flats'} for rent in 1004 Estate, Victoria Island, Lagos. 24/7 power, treated water, and on-site agent management.`}
+        description={`Browse ${filtered.length} verified ${activeCategoryTitle ? activeCategoryTitle.toLowerCase() : 'apartments and flats'} for rent in 1004 Estate, Victoria Island, Lagos. 24/7 power, treated water, and on-site corporate management by JK - CUBE MULTIVENTURES LIMITED.`}
         canonicalPath={categoryParam ? `/apartments/${categoryParam}` : '/properties'}
       />
       <div className="container">
@@ -101,7 +101,7 @@ export default function PropertiesPage() {
                 {activeCategoryTitle ? activeCategoryTitle : '1004 Estate Apartment Listings'}
               </h1>
               <p style={{ color: '#6b7280', margin: 0 }}>
-                Showing {filtered.length} verified {activeCategoryTitle ? activeCategoryTitle.toLowerCase() : 'apartments, flats, and penthouses'} in 1004 Estate
+                Showing {filtered.length} verified {activeCategoryTitle ? activeCategoryTitle.toLowerCase() : 'apartments, flats, and maisonettes'} in 1004 Estate
               </p>
             </div>
           </div>
@@ -113,7 +113,7 @@ export default function PropertiesPage() {
             <div style={{ position: 'relative', width: '100%' }}>
               <input
                 type="text"
-                placeholder="Search High-Rise, Studio, Penthouse..."
+                placeholder="Search High-Rise, Studio, Maisonette..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 style={{

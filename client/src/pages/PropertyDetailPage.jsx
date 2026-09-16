@@ -215,7 +215,7 @@ export default function PropertyDetailPage() {
 
   const displayDescription = property.description && property.description.trim().length > 0
     ? property.description
-    : `A tastefully finished and fully serviced ${property.bedrooms}-bedroom apartment located in ${property.location}, 1004 Estate, Victoria Island, Lagos. Features include 24/7 uninterrupted estate turbine electricity, central treated water supply, biometric gated security, high-speed fiber connectivity, dedicated parking bays, and direct access to swimming pools and lawn tennis courts. Professionally managed by JK - CUBE MULTIVENTURES LIMITED with on-site concierge care by Mrs. Joke Popoola.`;
+    : `A tastefully finished and fully serviced ${property.bedrooms}-bedroom apartment located in ${property.location}, 1004 Estate, Victoria Island, Lagos. Features include 24/7 uninterrupted estate turbine electricity, central treated water supply, biometric gated security, high-speed fiber connectivity, dedicated parking bays, and direct access to swimming pools and lawn tennis courts. Professionally managed by JK - CUBE MULTIVENTURES LIMITED with dedicated on-site concierge care.`;
 
   return (
     <div className="detail-page-wrapper">
@@ -379,9 +379,6 @@ export default function PropertyDetailPage() {
                   <span className="agency-name" style={{ color: '#111827', fontWeight: '700' }}>
                     JK - CUBE MULTIVENTURES LIMITED
                   </span>
-                  <span style={{ fontSize: '0.78rem', color: '#6b7280' }}>
-                    Lead Agent: Mrs. Joke Popoola
-                  </span>
                 </div>
 
                 <button
@@ -481,7 +478,7 @@ export default function PropertyDetailPage() {
                 Ready to Tour {property.title}?
               </h3>
               <p style={{ color: '#6b7280', fontSize: '0.92rem', maxWidth: '620px', margin: 0 }}>
-                Mrs. Joke Popoola and the <strong>JK - CUBE MULTIVENTURES LIMITED</strong> team are on-site daily in 1004 Estate for private viewings and instant tenancy onboarding.
+                The <strong>JK - CUBE MULTIVENTURES LIMITED</strong> team is on-site daily in 1004 Estate for private viewings and instant tenancy onboarding.
               </p>
             </div>
             <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
@@ -493,13 +490,13 @@ export default function PropertyDetailPage() {
                 Schedule In-Person Inspection
               </button>
               <a
-                href={`https://wa.me/2347038462284?text=${encodeURIComponent(`Hello Mrs. Popoola, I would like to inspect ${property.title} in 1004 Estate.`)}`}
+                href={`https://wa.me/2347038462284?text=${encodeURIComponent(`Hello JK-Cube Leasing Desk, I would like to inspect ${property.title} in 1004 Estate.`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-add-listing"
                 style={{ background: '#16a34a', color: '#ffffff', padding: '12px 20px', fontWeight: '700' }}
               >
-                WhatsApp Agent
+                WhatsApp Desk
               </a>
             </div>
           </div>

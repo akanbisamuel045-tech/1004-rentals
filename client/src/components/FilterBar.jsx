@@ -15,7 +15,7 @@ export default function FilterBar({ filters, setFilters, onReset, locations = []
             <input
               type="text"
               name="search"
-              placeholder="Search Lekki, Penthouse, etc..."
+              placeholder="Search High-Rise, Studio, Flat..."
               value={filters.search || ''}
               onChange={handleChange}
               className="form-input"
@@ -43,7 +43,6 @@ export default function FilterBar({ filters, setFilters, onReset, locations = []
           <select name="propertyType" value={filters.propertyType || 'all'} onChange={handleChange} className="form-select">
             <option value="all">Property Type</option>
             <option value="Apartment">Apartment</option>
-            <option value="Penthouse">Penthouse</option>
             <option value="Duplex">Duplex</option>
             <option value="Flat">Flat</option>
             <option value="Studio">Studio</option>

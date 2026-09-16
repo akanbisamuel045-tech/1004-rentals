@@ -98,11 +98,11 @@ export const properties = [
       "Lagoon & City View Balconies"
     ],
     agent: {
-      name: "Mrs. Joke Popoola",
+      name: "JK - CUBE MULTIVENTURES LIMITED",
       phone: "+234 703 846 2284",
       email: "jkcube85@gmail.com",
-      role: "Lead Property Agent & Manager, 1004 Estate",
-      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
+      role: "Corporate Leasing & Property Management, 1004 Estate",
+      avatar: "/jk-cube-icon.png"
     },
     createdAt: "2026-09-01T10:00:00.000Z"
   },
@@ -145,61 +145,13 @@ export const properties = [
       "Modern Fitted Kitchen (Gas Hob, Oven, Microwave)"
     ],
     agent: {
-      name: "Mrs. Joke Popoola",
+      name: "JK - CUBE MULTIVENTURES LIMITED",
       phone: "+234 703 846 2284",
       email: "jkcube85@gmail.com",
-      role: "Lead Property Agent & Manager, 1004 Estate",
-      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
+      role: "Corporate Leasing & Property Management, 1004 Estate",
+      avatar: "/jk-cube-icon.png"
     },
     createdAt: "2026-09-02T14:30:00.000Z"
-  },
-  {
-    id: "1004-prop-3",
-    title: "Luxury 4-Bedroom Penthouse Maisonette in 1004",
-    slug: "luxury-4-bedroom-penthouse-maisonette-1004",
-    description: "The crown jewel of 1004 Estate. An expansive 4-bedroom duplex penthouse spanning the top two floors of Tower D. Enjoy 360-degree vistas across Victoria Island, Ikoyi bridge, and the Atlantic Ocean. Complete with private expansive terrace, master Jacuzzi suite, maid's room, and 3 reserved parking spaces.",
-    price: 16500000,
-    rentalPeriod: "ANNUALLY",
-    propertyType: "Penthouse",
-    bedrooms: 4,
-    bathrooms: 4,
-    toilets: 5,
-    sizesqm: 340,
-    totalFloors: 14,
-    address: "Tower D Penthouse Suite, 1004 Estate, Victoria Island, Lagos",
-    location: "1004 High-Rise Towers",
-    area: "Victoria Island",
-    furnishedStatus: "Furnished",
-    availabilityStatus: "Available",
-    parkingSpaces: 3,
-    serviceCharge: 1800000,
-    cautionFee: 1000000,
-    agencyFee: 1650000,
-    isFeatured: true,
-    viewCount: 4120,
-    images: [
-      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80"
-    ],
-    amenities: [
-      "24/7 Uninterrupted Electricity (Independent Power Plant)",
-      "Access to swimming pool",
-      "Lawn Tennis & Basketball Courts",
-      "High-Speed Fiber-Optic Wi-Fi",
-      "Passenger & Service Elevators",
-      "Lagoon & City View Balconies",
-      "Access Card Gate Security & CCTV"
-    ],
-    agent: {
-      name: "Mrs. Joke Popoola",
-      phone: "+234 703 846 2284",
-      email: "jkcube85@gmail.com",
-      role: "Lead Property Agent & Manager, 1004 Estate",
-      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
-    },
-    createdAt: "2026-09-03T09:15:00.000Z"
   },
   {
     id: "1004-prop-4",
@@ -238,11 +190,11 @@ export const properties = [
       "Passenger & Service Elevators"
     ],
     agent: {
-      name: "Mrs. Joke Popoola",
+      name: "JK - CUBE MULTIVENTURES LIMITED",
       phone: "+234 703 846 2284",
       email: "jkcube85@gmail.com",
-      role: "Lead Property Agent & Manager, 1004 Estate",
-      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
+      role: "Corporate Leasing & Property Management, 1004 Estate",
+      avatar: "/jk-cube-icon.png"
     },
     createdAt: "2026-09-04T11:45:00.000Z"
   },
@@ -284,11 +236,11 @@ export const properties = [
       "Access Card Gate Security & CCTV"
     ],
     agent: {
-      name: "Mrs. Joke Popoola",
+      name: "JK - CUBE MULTIVENTURES LIMITED",
       phone: "+234 703 846 2284",
       email: "jkcube85@gmail.com",
-      role: "Lead Property Agent & Manager, 1004 Estate",
-      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
+      role: "Corporate Leasing & Property Management, 1004 Estate",
+      avatar: "/jk-cube-icon.png"
     },
     createdAt: "2026-09-04T16:20:00.000Z"
   },
@@ -329,11 +281,11 @@ export const properties = [
       "High-Speed Fiber-Optic Wi-Fi"
     ],
     agent: {
-      name: "Mrs. Joke Popoola",
+      name: "JK - CUBE MULTIVENTURES LIMITED",
       phone: "+234 703 846 2284",
       email: "jkcube85@gmail.com",
-      role: "Lead Property Agent & Manager, 1004 Estate",
-      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
+      role: "Corporate Leasing & Property Management, 1004 Estate",
+      avatar: "/jk-cube-icon.png"
     },
     createdAt: "2026-09-05T08:10:00.000Z"
   }

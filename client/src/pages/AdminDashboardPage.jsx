@@ -58,7 +58,7 @@ const CATEGORIES = [
   { slug: '3-bedroom', label: '3-Bedroom Apartment' },
   { slug: '3-bedroom-flat', label: '3-Bedroom Flat' },
   { slug: '3-bedroom-maisonette', label: '3-Bedroom Maisonette' },
-  { slug: '4-bedroom', label: '4-Bedroom Luxury Penthouse' }
+  { slug: 'studio', label: 'Studio Apartment' }
 ];
 
 export default function AdminDashboardPage() {
@@ -319,11 +319,11 @@ export default function AdminDashboardPage() {
         amenities: newProp.amenities,
         isFeatured: newProp.isFeatured,
         agent: {
-          name: 'Mrs. Joke Popoola',
+          name: 'JK - CUBE MULTIVENTURES LIMITED',
           phone: '+234 703 846 2284',
           email: 'jkcube85@gmail.com',
-          role: 'Managing Leasing Agent, JK - CUBE MULTIVENTURES LIMITED',
-          avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80'
+          role: 'Corporate Leasing & Property Management',
+          avatar: '/jk-cube-icon.png'
         }
       });
 
@@ -381,7 +381,7 @@ export default function AdminDashboardPage() {
               Management & Leasing Console
             </h1>
             <p style={{ color: '#4b5563', marginTop: '6px', fontSize: '0.95rem' }}>
-              Managing Agent: <strong>Mrs. Joke Popoola</strong> (Direct: +234 703 846 2284) • Central Real Estate Portfolio
+              Managing Agency: <strong>JK - CUBE MULTIVENTURES LIMITED</strong> (Direct: +234 703 846 2284) • Central Real Estate Portfolio
             </p>
           </div>
 
@@ -793,7 +793,7 @@ export default function AdminDashboardPage() {
                       const cleanPhone = (bk.userPhone || '').replace(/[^0-9]/g, '');
                       const whatsappUrl = cleanPhone
                         ? `https://wa.me/${cleanPhone.startsWith('234') ? cleanPhone : '234' + cleanPhone.replace(/^0/, '')}?text=${encodeURIComponent(
-                            `Hello ${bk.userName}, I am Mrs. Joke Popoola from 1004 Estate Management. Regarding your inspection appointment for "${bk.propertyTitle}" on ${bk.inspectionDate} (${bk.timeSlot})...`
+                            `Hello ${bk.userName}, this is JK - CUBE MULTIVENTURES LIMITED regarding your inspection appointment for "${bk.propertyTitle}" on ${bk.inspectionDate} (${bk.timeSlot})...`
                           )}`
                         : null;
 
@@ -1050,7 +1050,7 @@ export default function AdminDashboardPage() {
                 Publish New 1004 Estate Apartment
               </h2>
               <p style={{ color: '#6b7280', fontSize: '0.9rem', marginTop: '4px' }}>
-                All listings will automatically be attributed to <strong>Mrs. Joke Popoola</strong> with direct WhatsApp inquiry routing.
+                All listings will automatically be attributed to <strong>JK - CUBE MULTIVENTURES LIMITED</strong> with direct WhatsApp inquiry routing.
               </p>
             </div>
 
@@ -1077,10 +1077,10 @@ export default function AdminDashboardPage() {
                       let beds = '2';
                       let type = 'Apartment';
                       if (cat === '1-bedroom') beds = '1';
-                      if (cat === '2-bedroom') beds = '2';
-                      if (cat === '3-bedroom') beds = '3';
-                      if (cat === '3-bedroom-maisonette') { beds = '3'; type = 'Duplex'; }
-                      if (cat === '4-bedroom') { beds = '4'; type = 'Penthouse'; }
+                      if (cat === '2-bedroom' || cat === '2-bedroom-flat') beds = '2';
+                      if (cat === '3-bedroom' || cat === '3-bedroom-flat') beds = '3';
+                      if (cat === '3-bedroom-maisonette') { beds = '3'; type = 'Maisonette'; }
+                      if (cat === 'studio') { beds = '1'; type = 'Studio'; }
                       setNewProp({ ...newProp, categorySlug: cat, bedrooms: beds, propertyType: type });
                     }}
                     className="form-select"

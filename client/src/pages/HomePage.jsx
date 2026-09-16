@@ -30,7 +30,7 @@ export default function HomePage() {
   }, [location]);
 
   const heroTags = ['High-Rise', 'Serviced Flat', '1004 Victoria Island'];
-  const categoryPills = ['All 1004 Units', 'High-Rise Towers', 'Cluster A', 'Cluster B', 'Cluster C', 'Cluster D', 'Penthouse'];
+  const categoryPills = ['All 1004 Units', 'High-Rise Towers', 'Cluster A', 'Cluster B', 'Cluster C', 'Cluster D'];
 
   useEffect(() => {
     async function loadProperties() {
@@ -60,8 +60,8 @@ export default function HomePage() {
   return (
     <div>
       <SEO
-        title="Serviced Apartments & Penthouses in 1004 Estate, Victoria Island"
-        description="Explore verified 1, 2, 3-bedroom flats, maisonettes, and luxury penthouses for rent in 1004 Estate, Victoria Island, Lagos. 24/7 dedicated power, treated water, and on-site agent management by Mrs. Joke Popoola."
+        title="Serviced Apartments & Flats in 1004 Estate, Victoria Island"
+        description="Explore verified 1, 2, and 3-bedroom flats, serviced apartments, and maisonettes for rent in 1004 Estate, Victoria Island, Lagos. 24/7 dedicated power, treated water, and on-site corporate management by JK - CUBE MULTIVENTURES LIMITED."
         canonicalPath="/"
       />
       {/* 1. HERO SECTION (Minimalist Realco Layout for 1004 Estate, Victoria Island) */}
@@ -99,7 +99,6 @@ export default function HomePage() {
                       onClick={() => {
                         setActiveCategory(pill);
                         if (pill === 'All 1004 Units') navigate('/properties');
-                        else if (pill === 'Penthouse') navigate('/apartments/4-bedroom');
                         else navigate(`/properties?location=${encodeURIComponent('1004 ' + pill.replace('1004 ', ''))}`);
                       }}
                       className={`filter-pill-btn ${activeCategory === pill ? 'active' : ''}`}
@@ -116,7 +115,7 @@ export default function HomePage() {
                   <span className="explore-badge">JK-Cube Concierge Desk</span>
                   <h3 className="hero-dark-title">Direct 1004 Estate Rentals</h3>
                   <p className="hero-dark-desc">
-                    Managed by <strong>JK - CUBE MULTIVENTURES LIMITED</strong> and lead agent Mrs. Joke Popoola. 24/7 turbine power, treated water, swimming pools, tennis courts, and verified security.
+                    Managed by <strong>JK - CUBE MULTIVENTURES LIMITED</strong>. 24/7 turbine power, treated water, swimming pools, tennis courts, and verified security.
                   </p>
                   <button
                     onClick={() => openBookingModal(null)}
@@ -224,18 +223,18 @@ export default function HomePage() {
               </div>
             </Link>
 
-            {/* Card 5: Bottom-Right 2 - 4-Bedroom Luxury Penthouses */}
-            <Link to="/apartments/4-bedroom" className="curated-card curated-card-small">
+            {/* Card 5: Bottom-Right 2 - Studio & Executive Suites */}
+            <Link to="/apartments/studio" className="curated-card curated-card-small">
               <div className="curated-card-img">
                 <img
                   src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80"
-                  alt="4-Bedroom Luxury Penthouses"
+                  alt="Studio & Executive Suites"
                   loading="lazy"
                 />
               </div>
               <div className="curated-card-caption">
-                <h3 className="curated-card-title">4-Bedroom Luxury Penthouses</h3>
-                <p className="curated-card-desc">Panoramic lagoon vistas, expansive terraces, and 24/7 dedicated turbine electricity</p>
+                <h3 className="curated-card-title">Studio & Executive Suites</h3>
+                <p className="curated-card-desc">Efficient, fully serviced private units in 1004 Estate tailored for corporate professionals</p>
               </div>
             </Link>
           </div>
@@ -260,7 +259,7 @@ export default function HomePage() {
               Exclusive Living in 1004 Estate, Victoria Island
             </h2>
             <p style={{ color: '#6b7280', fontSize: '1.1rem', maxWidth: '760px', margin: '0 auto', lineHeight: '1.6' }}>
-              Managed by <strong>JK - CUBE MULTIVENTURES LIMITED</strong> with lead agent <strong>Mrs. Joke Popoola</strong> — your premier on-site leasing agency for verified high-rise flats, executive suites, and luxury penthouses in 1004 Estate.
+              Managed by <strong>JK - CUBE MULTIVENTURES LIMITED</strong> — your premier on-site leasing agency for verified high-rise flats, executive suites, and serviced apartments in 1004 Estate.
             </p>
           </div>
 
@@ -325,23 +324,23 @@ export default function HomePage() {
             />
           </div>
 
-          {/* Agent Spotlight Card */}
+          {/* Corporate Concierge Card */}
           <div style={{ background: 'var(--brand-charcoal)', color: '#ffffff', borderRadius: '24px', padding: '36px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '24px', border: '1px solid #3d454e' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '20px', flexWrap: 'wrap' }}>
               <img
-                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
-                alt="Mrs. Joke Popoola"
-                style={{ width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover', border: '3px solid var(--brand-orange)' }}
+                src="/jk-cube-icon.png"
+                alt="JK - CUBE MULTIVENTURES LIMITED"
+                style={{ width: '80px', height: '80px', borderRadius: '18px', objectFit: 'contain', background: '#ffffff', padding: '8px', border: '3px solid var(--brand-orange)' }}
               />
               <div>
                 <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--brand-orange)', fontWeight: '700' }}>
                   JK - CUBE MULTIVENTURES LIMITED • 1004 Concierge Desk
                 </span>
                 <h3 style={{ fontSize: '1.45rem', fontWeight: '800', margin: '4px 0 6px 0' }}>
-                  Meet Mrs. Joke Popoola
+                  Corporate Leasing & Management
                 </h3>
                 <p style={{ color: '#cbd5e1', fontSize: '0.92rem', maxWidth: '520px', lineHeight: '1.5', margin: 0 }}>
-                  Managing agent with JK - CUBE MULTIVENTURES LIMITED. Ready to personally guide you through property tours, lease agreements, and move-in logistics in 1004 Estate.
+                  Official corporate leasing desk for 1004 Estate, Victoria Island. Our on-site management team is ready to guide you through property viewings, vetted lease agreements, and move-in logistics.
                 </p>
               </div>
             </div>
@@ -355,13 +354,13 @@ export default function HomePage() {
                 Schedule On-site Tour
               </button>
               <a
-                href="https://wa.me/2347038462284?text=Hello%20Mrs.%20Popoola,%20I%20am%20interested%20in%20inspecting%20an%20apartment%20in%201004%20Estate,%20Victoria%20Island."
+                href="https://wa.me/2347038462284?text=Hello%20JK-Cube%20Leasing%20Desk,%20I%20am%20interested%20in%20inspecting%20an%20apartment%20in%201004%20Estate,%20Victoria%20Island."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-add-listing"
                 style={{ background: '#16a34a', color: '#ffffff', padding: '12px 20px', fontWeight: '700' }}
               >
-                WhatsApp Agent
+                WhatsApp Desk
               </a>
             </div>
           </div>

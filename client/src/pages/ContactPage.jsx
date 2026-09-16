@@ -28,7 +28,7 @@ export default function ContactPage() {
     <div className="section" style={{ paddingTop: '50px' }}>
       <SEO
         title="Contact Concierge Desk | JK - CUBE MULTIVENTURES LIMITED"
-        description="Contact Mrs. Joke Popoola and the JK - CUBE MULTIVENTURES LIMITED leasing desk for 1004 Estate, Victoria Island, Lagos. Direct phone / WhatsApp: +234 703 846 2284."
+        description="Contact the JK - CUBE MULTIVENTURES LIMITED leasing desk for 1004 Estate, Victoria Island, Lagos. Direct phone / WhatsApp: +234 703 846 2284."
         canonicalPath="/contact"
       />
       <div className="container" style={{ maxWidth: '1200px' }}>
@@ -82,13 +82,13 @@ export default function ContactPage() {
             {/* Quick WhatsApp Action */}
             <div style={{ marginTop: '28px', paddingTop: '20px', borderTop: '1px solid #f3f4f6' }}>
               <a
-                href="https://wa.me/2347038462284?text=Hello%20Mrs.%20Popoola,%20I%20am%20interested%20in%20inspecting%20an%20apartment%20in%201004%20Estate,%20Victoria%20Island."
+                href="https://wa.me/2347038462284?text=Hello%20JK-Cube%20Leasing%20Desk,%20I%20am%20interested%20in%20inspecting%20an%20apartment%20in%201004%20Estate,%20Victoria%20Island."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-add-listing"
                 style={{ width: '100%', justifyContent: 'center', background: '#16a34a' }}
               >
-                Chat with 1004 Agent on WhatsApp
+                Chat with 1004 Concierge on WhatsApp
               </a>
             </div>
           </div>
@@ -102,7 +102,7 @@ export default function ContactPage() {
                 <CheckCircle2 size={48} color="#16a34a" style={{ margin: '0 auto 16px' }} />
                 <h4 style={{ fontSize: '1.2rem', fontWeight: '700' }}>Message Received!</h4>
                 <p style={{ color: '#6b7280', fontSize: '0.9rem', marginTop: '8px' }}>
-                  Mrs. Joke Popoola or the on-site leasing team will reach out to you shortly.
+                  The JK - CUBE MULTIVENTURES on-site leasing team will reach out to you shortly.
                 </p>
               </div>
             ) : (

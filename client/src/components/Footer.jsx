@@ -16,7 +16,7 @@ export default function Footer() {
               />
             </div>
             <p className="footer-brand-desc">
-              <strong>JK - CUBE MULTIVENTURES LIMITED</strong> — Curated luxury apartments, penthouses, and serviced flats exclusively in 1004 Estate, Victoria Island, Lagos.
+              <strong>JK - CUBE MULTIVENTURES LIMITED</strong> — Curated luxury apartments, maisonettes, and serviced flats exclusively in 1004 Estate, Victoria Island, Lagos.
             </p>
           </div>
 
@@ -58,7 +58,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="footer-bottom-bar">
           <div>
-            © {new Date().getFullYear()} JK - CUBE MULTIVENTURES LIMITED. All rights reserved. Managed by Mrs. Joke Popoola.
+            © {new Date().getFullYear()} JK - CUBE MULTIVENTURES LIMITED. All rights reserved.
           </div>
           <div style={{ display: 'flex', gap: '20px' }}>
             <span style={{ cursor: 'pointer' }}>Estate Guidelines</span>
