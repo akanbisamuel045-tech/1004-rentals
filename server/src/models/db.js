@@ -1,4 +1,4 @@
-﻿import { properties as initialProperties, locations as initialLocations, amenitiesList } from "../data/seedData.js";
+import { properties as initialProperties, locations as initialLocations, amenitiesList } from "../data/seedData.js";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -206,6 +206,7 @@ class DatabaseStore {
   // Properties Queries
   // ===================================
   getProperties(filters = {}) {
+    this.loadFromDisk();
     let result = [...this.data.properties];
 
     if (filters.search) {
@@ -262,6 +263,7 @@ class DatabaseStore {
   }
 
   getPropertyById(id) {
+    this.loadFromDisk();
     const prop = this.data.properties.find((p) => p.id === id || p.slug === id);
     if (prop) {
       prop.viewCount = (prop.viewCount || 0) + 1;
