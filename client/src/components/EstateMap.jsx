@@ -31,12 +31,19 @@ const CLUSTER_DATA = {
     zoom: 18,
     desc: 'Executive wing with fast gate access and dedicated elevators'
   },
-  '1004 Cluster C & D': {
-    label: 'Cluster C & D',
+  '1004 Cluster C': {
+    label: 'Cluster C',
     query: '1004 Estate Cluster C, Victoria Island, Lagos',
     coords: '6.4370° N, 3.4160° E',
     zoom: 18,
     desc: 'Family wing featuring spacious multi-level maisonettes'
+  },
+  '1004 Cluster D': {
+    label: 'Cluster D',
+    query: '1004 Estate Cluster D, Victoria Island, Lagos',
+    coords: '6.4375° N, 3.4165° E',
+    zoom: 18,
+    desc: 'Serene residential cluster with immediate proximity to swimming pools'
   }
 };
 
@@ -91,6 +98,7 @@ export default function EstateMap({
           top: '14px',
           left: '14px',
           right: '14px',
+          maxWidth: 'calc(100% - 28px)',
           zIndex: 10,
           display: 'flex',
           justifyContent: 'space-between',
@@ -104,6 +112,8 @@ export default function EstateMap({
             display: 'flex',
             gap: '6px',
             overflowX: 'auto',
+            WebkitOverflowScrolling: 'touch',
+            maxWidth: '100%',
             padding: '6px',
             background: 'rgba(255, 255, 255, 0.94)',
             backdropFilter: 'blur(10px)',
@@ -279,7 +289,8 @@ export default function EstateMap({
           <span style={{ color: '#0284c7' }}>● High-Rise Towers</span>
           <span style={{ color: '#16a34a' }}>● Cluster A</span>
           <span style={{ color: '#9333ea' }}>● Cluster B</span>
-          <span style={{ color: '#d97706' }}>● Cluster C & D</span>
+          <span style={{ color: '#d97706' }}>● Cluster C</span>
+          <span style={{ color: '#ea580c' }}>● Cluster D</span>
         </div>
       </div>
     </div>

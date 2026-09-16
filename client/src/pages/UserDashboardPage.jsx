@@ -94,7 +94,7 @@ export default function UserDashboardPage() {
             <span style={{ fontSize: '0.85rem', color: 'var(--brand-orange)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '700' }}>
               JK - CUBE MULTIVENTURES LIMITED • Client Portal
             </span>
-            <h1 style={{ fontSize: '2.4rem', fontWeight: '800', letterSpacing: '-0.03em', marginTop: '4px' }}>
+            <h1 style={{ fontSize: 'clamp(1.6rem, 5vw, 2.4rem)', fontWeight: '800', letterSpacing: '-0.03em', marginTop: '4px' }}>
               Welcome, {user.name}
             </h1>
             <p style={{ color: '#6b7280', fontSize: '0.95rem' }}>
@@ -130,7 +130,7 @@ export default function UserDashboardPage() {
         </div>
 
         {/* Dashboard Tabs */}
-        <div style={{ display: 'flex', gap: '10px', borderBottom: '1px solid #e5e7eb', marginBottom: '32px' }}>
+        <div className="user-dashboard-tabs">
           <button
             onClick={() => setActiveTab('bookings')}
             style={{
@@ -212,16 +212,7 @@ export default function UserDashboardPage() {
                 {bookings.map((booking) => (
                   <div
                     key={booking.id}
-                    style={{
-                      background: '#ffffff',
-                      border: '1px solid #e5e7eb',
-                      borderRadius: '18px',
-                      padding: '24px',
-                      display: 'grid',
-                      gridTemplateColumns: '120px 1fr auto',
-                      gap: '24px',
-                      alignItems: 'center'
-                    }}
+                    className="user-booking-card"
                   >
                     <img
                       src={booking.propertyImage}

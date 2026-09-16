@@ -36,7 +36,7 @@ export default function ContactPage() {
           <span className="explore-badge" style={{ background: 'var(--brand-orange)', color: '#ffffff', marginBottom: '8px', display: 'inline-block' }}>
             Concierge & Leasing Desk
           </span>
-          <h1 style={{ fontSize: '2.5rem', fontWeight: '800', letterSpacing: '-0.03em', marginBottom: '12px', color: '#111827' }}>
+          <h1 style={{ fontSize: 'clamp(1.5rem, 5.5vw, 2.5rem)', fontWeight: '800', letterSpacing: '-0.03em', marginBottom: '12px', color: '#111827', overflowWrap: 'break-word' }}>
             Contact JK - CUBE MULTIVENTURES LIMITED
           </h1>
           <p style={{ color: '#6b7280', fontSize: '1.05rem' }}>
@@ -44,9 +44,9 @@ export default function ContactPage() {
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '36px' }}>
+        <div className="contact-grid">
           {/* Agent Info */}
-          <div style={{ background: '#ffffff', padding: '36px', borderRadius: '24px', border: '1px solid #e5e7eb', boxShadow: 'var(--shadow-subtle)' }}>
+          <div className="contact-card">
             <h3 style={{ fontSize: '1.3rem', fontWeight: '700', marginBottom: '20px', color: '#111827' }}>
               JK - CUBE Multiventures Desk
             </h3>
@@ -94,7 +94,7 @@ export default function ContactPage() {
           </div>
 
           {/* Form */}
-          <div style={{ background: '#ffffff', padding: '36px', borderRadius: '24px', border: '1px solid #e5e7eb', boxShadow: 'var(--shadow-subtle)' }}>
+          <div className="contact-card">
             <h3 style={{ fontSize: '1.3rem', fontWeight: '700', marginBottom: '20px' }}>Send Inspection Message</h3>
 
             {submitted ? (

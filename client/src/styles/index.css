@@ -42,6 +42,12 @@
   padding: 0;
 }
 
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+}
+
 body {
   font-family: var(--font-family);
   background-color: var(--bg-page);
@@ -64,6 +70,13 @@ button, input, select, textarea {
   width: 95%;
   margin: 0 auto;
   padding: 0 20px;
+}
+
+@media (max-width: 640px) {
+  .container {
+    width: 100%;
+    padding: 0 14px;
+  }
 }
 
 /* =========================================
@@ -1031,7 +1044,87 @@ html {
   font-weight: 700;
 }
 
-/* Responsive */
+/* Responsive & Mobile Optimization System */
+.admin-table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  max-width: 100%;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+.modal-two-col-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.advantages-3grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: 16px;
+}
+
+.user-dashboard-tabs {
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 28px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 4px;
+}
+
+.user-booking-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 120px 1fr auto;
+  gap: 24px;
+  align-items: center;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 32px;
+}
+
+.contact-card {
+  background: #ffffff;
+  padding: 36px;
+  border-radius: 24px;
+  border: 1px solid #e5e7eb;
+  box-shadow: var(--shadow-subtle);
+}
+
+.story-lifestyle-card {
+  background: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #e5e7eb;
+  padding: 36px;
+  margin-bottom: 32px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+}
+
+.corporate-concierge-card {
+  background: var(--brand-charcoal);
+  color: #ffffff;
+  border-radius: 24px;
+  padding: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+  border: 1px solid #3d454e;
+}
+
+/* 960px Tablet Breakpoint */
 @media (max-width: 960px) {
   .hero-grid { grid-template-columns: 1fr; }
   .mosaic-gallery { grid-template-columns: 1fr; height: auto; }
@@ -1042,10 +1135,178 @@ html {
   .nav-mobile-toggle { display: flex; }
 }
 
+/* 768px Tablet / Phablet Breakpoint */
+@media (max-width: 768px) {
+  .property-grid-clean {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .hero-main-title {
+    font-size: 2.4rem;
+  }
+  .hero-img-container {
+    height: 380px;
+  }
+  .user-booking-card {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 18px 16px;
+  }
+  .user-booking-card > img {
+    width: 100% !important;
+    height: 180px !important;
+  }
+}
+
+/* 640px Standard Mobile Breakpoint */
 @media (max-width: 640px) {
-  .footer-top-grid { grid-template-columns: 1fr; }
+  .footer-top-grid { grid-template-columns: 1fr; gap: 32px; }
   .btn-desktop-only { display: none; }
   .nav-login-link span { display: none; }
+  
+  .hero-dark-card {
+    grid-template-columns: 1fr;
+    padding: 20px 16px;
+    border-radius: 18px;
+    gap: 14px;
+  }
+  .hero-dark-thumb {
+    height: 130px;
+  }
+  .hero-img-container {
+    height: 300px;
+    border-radius: 18px;
+  }
+  
+  .mosaic-gallery {
+    height: 250px;
+    max-height: 250px;
+    margin-bottom: 16px;
+  }
+  .detail-actions-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 12px 0 20px;
+    margin-bottom: 24px;
+  }
+  .detail-price-huge {
+    font-size: 2.35rem;
+  }
+  
+  .modal-backdrop {
+    padding: 12px 10px;
+  }
+  .modal-content {
+    padding: 22px 16px;
+    border-radius: 16px;
+    max-height: 94vh;
+  }
+  
+  .story-lifestyle-card,
+  .corporate-concierge-card,
+  .contact-card {
+    padding: 20px 16px;
+    border-radius: 18px;
+  }
+  .contact-grid {
+    gap: 20px;
+  }
+}
+
+/* 480px and under: Compact Mobile Devices */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 10px 0;
+  }
+  .nav-brand-logo {
+    height: 30px;
+    max-width: 145px;
+  }
+  .nav-actions {
+    gap: 8px;
+  }
+  .nav-mobile-drawer {
+    padding: 12px 14px 20px;
+    margin-top: 10px;
+  }
+  
+  .hero-main-title {
+    font-size: 1.85rem;
+    line-height: 1.18;
+    margin-bottom: 14px;
+  }
+  .hero-img-container {
+    height: 240px;
+    border-radius: 16px;
+  }
+  .hero-floating-tags {
+    top: 10px;
+    left: 10px;
+    gap: 4px;
+  }
+  .tag-pill-glass {
+    padding: 5px 10px;
+    font-size: 0.72rem;
+  }
+  .hero-filter-pills {
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+  .filter-pill-btn {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+  
+  .property-grid-clean {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .clean-card-img-wrap {
+    height: 200px;
+  }
+  .clean-card-body {
+    padding: 14px;
+  }
+  .clean-card-footer {
+    gap: 8px;
+  }
+  
+  .modal-two-col-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .agency-card-pill {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 14px;
+    width: 100%;
+  }
+  .agency-card-pill .btn-contact-black {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+  
+  .detail-stats-row {
+    gap: 14px;
+  }
+  .stat-num-big {
+    font-size: 1.8rem;
+  }
+  .detail-amenities-row {
+    gap: 10px;
+    padding: 12px 0;
+  }
+  
+  .user-dashboard-tabs button {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
 }
 
 /* =========================================================

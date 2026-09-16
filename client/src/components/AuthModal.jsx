@@ -54,14 +54,14 @@ export default function AuthModal() {
         </div>
 
         {/* Header Tabs */}
-        <div className="modal-header" style={{ marginBottom: '16px' }}>
-          <div style={{ display: 'flex', gap: '8px' }}>
+        <div className="modal-header" style={{ marginBottom: '16px', alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
             <button
               onClick={() => { setMode('login'); setError(''); }}
               style={{
                 background: 'none',
                 border: 'none',
-                fontSize: '1.2rem',
+                fontSize: '1.05rem',
                 fontWeight: mode === 'login' ? '800' : '500',
                 color: mode === 'login' ? 'var(--brand-charcoal)' : '#9ca3af',
                 cursor: 'pointer',
@@ -76,13 +76,12 @@ export default function AuthModal() {
               style={{
                 background: 'none',
                 border: 'none',
-                fontSize: '1.2rem',
+                fontSize: '1.05rem',
                 fontWeight: mode === 'register' ? '800' : '500',
                 color: mode === 'register' ? 'var(--brand-charcoal)' : '#9ca3af',
                 cursor: 'pointer',
                 paddingBottom: '4px',
                 borderBottom: mode === 'register' ? '2.5px solid var(--brand-orange)' : 'none',
-                marginLeft: '12px'
               }}
             >
               Create Account

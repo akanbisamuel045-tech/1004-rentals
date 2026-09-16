@@ -174,7 +174,7 @@ export default function BookingFlowModal() {
             )}
 
             {/* Applicant Details (Auto-filled from user profile) */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+            <div className="modal-two-col-grid">
               <div className="form-group">
                 <label className="form-label">Applicant Name</label>
                 <input
@@ -199,7 +199,7 @@ export default function BookingFlowModal() {
             </div>
 
             {/* Date & Time Slot */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+            <div className="modal-two-col-grid">
               <div className="form-group">
                 <label className="form-label">Inspection Date *</label>
                 <input

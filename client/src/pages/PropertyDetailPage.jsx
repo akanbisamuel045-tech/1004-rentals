@@ -250,7 +250,7 @@ export default function PropertyDetailPage() {
             </span>
           </div>
 
-          <h1 style={{ fontSize: '2.4rem', fontWeight: '800', letterSpacing: '-0.03em', color: 'var(--brand-charcoal)', margin: '0 0 10px 0', lineHeight: 1.25 }}>
+          <h1 style={{ fontSize: 'clamp(1.6rem, 5vw, 2.4rem)', fontWeight: '800', letterSpacing: '-0.03em', color: 'var(--brand-charcoal)', margin: '0 0 10px 0', lineHeight: 1.25 }}>
             {property.title}
           </h1>
 
@@ -322,7 +322,7 @@ export default function PropertyDetailPage() {
 
         {/* 2. SUB-ACTION BAR (Save, Share, Location) */}
         <div className="detail-actions-bar">
-          <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
             <button
               onClick={handleFavoriteClick}
               className="action-link-btn"

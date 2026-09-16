@@ -85,7 +85,7 @@ export default function ViewingModal({ isOpen, onClose, property }) {
               />
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+            <div className="modal-two-col-grid">
               <div className="form-group">
                 <label className="form-label">Email *</label>
                 <input

@@ -377,7 +377,7 @@ export default function AdminDashboardPage() {
                 Victoria Island, Lagos
               </span>
             </div>
-            <h1 style={{ fontSize: '2.2rem', fontWeight: '800', letterSpacing: '-0.03em', color: '#111827', margin: 0 }}>
+            <h1 style={{ fontSize: 'clamp(1.4rem, 5vw, 2.2rem)', fontWeight: '800', letterSpacing: '-0.03em', color: '#111827', margin: 0 }}>
               Management & Leasing Console
             </h1>
             <p style={{ color: '#4b5563', marginTop: '6px', fontSize: '0.95rem' }}>
@@ -486,6 +486,9 @@ export default function AdminDashboardPage() {
           borderBottom: '2px solid #e5e7eb',
           marginBottom: '24px',
           overflowX: 'auto',
+          WebkitOverflowScrolling: 'touch',
+          width: '100%',
+          maxWidth: '100%',
           paddingBottom: '4px'
         }}>
           <button
@@ -493,6 +496,7 @@ export default function AdminDashboardPage() {
             style={{
               padding: '10px 18px',
               fontSize: '0.95rem',
+              whiteSpace: 'nowrap',
               fontWeight: activeTab === 'properties' ? '700' : '500',
               color: activeTab === 'properties' ? '#000000' : '#6b7280',
               borderBottom: activeTab === 'properties' ? '3px solid #000000' : '3px solid transparent',
@@ -631,7 +635,7 @@ export default function AdminDashboardPage() {
             </div>
 
             {/* Listings Table */}
-            <div className="admin-table-wrapper" style={{ background: '#ffffff', borderRadius: '12px', border: '1px solid #e5e7eb', overflow: 'hidden' }}>
+            <div className="admin-table-wrapper">
               <table className="admin-table" style={{ width: '100%', borderCollapse: 'collapse' }}>
                 <thead style={{ background: '#f9fafb', borderBottom: '1px solid #e5e7eb' }}>
                   <tr>
@@ -758,7 +762,7 @@ export default function AdminDashboardPage() {
 
         {/* TAB 2: INSPECTION BOOKINGS */}
         {activeTab === 'bookings' && (
-          <div style={{ background: '#ffffff', borderRadius: '12px', border: '1px solid #e5e7eb', overflow: 'hidden' }}>
+          <div style={{ background: '#ffffff', borderRadius: '12px', border: '1px solid #e5e7eb' }}>
             <div style={{ padding: '20px', borderBottom: '1px solid #e5e7eb', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
                 <h3 style={{ fontSize: '1.2rem', fontWeight: '700', color: '#111827', margin: 0 }}>
@@ -911,7 +915,7 @@ export default function AdminDashboardPage() {
 
         {/* TAB 3: TENANT INQUIRIES */}
         {activeTab === 'enquiries' && (
-          <div style={{ background: '#ffffff', borderRadius: '12px', border: '1px solid #e5e7eb', overflow: 'hidden' }}>
+          <div style={{ background: '#ffffff', borderRadius: '12px', border: '1px solid #e5e7eb' }}>
             <div style={{ padding: '20px', borderBottom: '1px solid #e5e7eb', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
                 <h3 style={{ fontSize: '1.2rem', fontWeight: '700', color: '#111827', margin: 0 }}>

@@ -97,7 +97,7 @@ export default function PropertiesPage() {
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '16px' }}>
             <div>
-              <h1 style={{ fontSize: '2.4rem', fontWeight: '800', letterSpacing: '-0.03em', marginBottom: '8px' }}>
+              <h1 style={{ fontSize: 'clamp(1.6rem, 5vw, 2.4rem)', fontWeight: '800', letterSpacing: '-0.03em', marginBottom: '8px' }}>
                 {activeCategoryTitle ? activeCategoryTitle : '1004 Estate Apartment Listings'}
               </h1>
               <p style={{ color: '#6b7280', margin: 0 }}>
@@ -108,8 +108,8 @@ export default function PropertiesPage() {
         </div>
 
         {/* Search & Cluster Filter Bar */}
-        <div style={{ background: '#ffffff', padding: '20px', borderRadius: '20px', border: '1px solid #e5e7eb', marginBottom: '32px', display: 'flex', flexWrap: 'wrap', gap: '16px', alignItems: 'center', justifyContent: 'space-between' }}>
-          <div style={{ display: 'flex', gap: '12px', flex: 1, minWidth: '260px' }}>
+        <div style={{ background: '#ffffff', padding: '16px', borderRadius: '18px', border: '1px solid #e5e7eb', marginBottom: '28px', display: 'flex', flexWrap: 'wrap', gap: '14px', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex', gap: '10px', flex: 1, minWidth: 'min(100%, 220px)' }}>
             <div style={{ position: 'relative', width: '100%' }}>
               <input
                 type="text"
@@ -121,7 +121,7 @@ export default function PropertiesPage() {
                   padding: '10px 16px 10px 38px',
                   borderRadius: '9999px',
                   border: '1px solid #e5e7eb',
-                  fontSize: '0.9rem',
+                  fontSize: '0.88rem',
                   outline: 'none'
                 }}
               />
@@ -129,7 +129,7 @@ export default function PropertiesPage() {
             </div>
           </div>
 
-          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
             {clusters.map((c) => (
               <button
                 key={c}

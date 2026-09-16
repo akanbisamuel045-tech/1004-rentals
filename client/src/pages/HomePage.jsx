@@ -255,7 +255,7 @@ export default function HomePage() {
             <span className="explore-badge" style={{ background: 'var(--brand-orange)', color: '#ffffff', marginBottom: '14px', display: 'inline-block' }}>
               JK - CUBE MULTIVENTURES LIMITED
             </span>
-            <h2 style={{ fontSize: '2.4rem', fontWeight: '800', letterSpacing: '-0.03em', marginBottom: '14px', color: '#111827' }}>
+            <h2 style={{ fontSize: 'clamp(1.5rem, 5vw, 2.4rem)', fontWeight: '800', letterSpacing: '-0.03em', marginBottom: '14px', color: '#111827' }}>
               Exclusive Living in 1004 Estate, Victoria Island
             </h2>
             <p style={{ color: '#6b7280', fontSize: '1.1rem', maxWidth: '760px', margin: '0 auto', lineHeight: '1.6' }}>
@@ -264,7 +264,7 @@ export default function HomePage() {
           </div>
 
           {/* Story & Lifestyle Card */}
-          <div style={{ background: '#ffffff', borderRadius: '24px', border: '1px solid #e5e7eb', padding: '36px', marginBottom: '32px', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
+          <div className="story-lifestyle-card">
             <h3 style={{ fontSize: '1.45rem', fontWeight: '700', marginBottom: '14px', color: '#111827' }}>
               Why 1004 Estate, Victoria Island?
             </h3>
@@ -276,8 +276,8 @@ export default function HomePage() {
             </p>
 
             {/* Key Advantages 3-Grid */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px' }}>
-              <div style={{ padding: '24px', background: '#f9fafb', borderRadius: '16px', border: '1px solid #e5e7eb' }}>
+            <div className="advantages-3grid">
+              <div style={{ padding: '20px', background: '#f9fafb', borderRadius: '16px', border: '1px solid #e5e7eb' }}>
                 <Zap size={24} color="#000000" style={{ marginBottom: '12px' }} />
                 <h4 style={{ fontSize: '1.05rem', fontWeight: '700', marginBottom: '6px' }}>24/7 Dedicated Power</h4>
                 <p style={{ color: '#6b7280', fontSize: '0.88rem', lineHeight: '1.5' }}>
@@ -285,7 +285,7 @@ export default function HomePage() {
                 </p>
               </div>
 
-              <div style={{ padding: '24px', background: '#f9fafb', borderRadius: '16px', border: '1px solid #e5e7eb' }}>
+              <div style={{ padding: '20px', background: '#f9fafb', borderRadius: '16px', border: '1px solid #e5e7eb' }}>
                 <Shield size={24} color="#000000" style={{ marginBottom: '12px' }} />
                 <h4 style={{ fontSize: '1.05rem', fontWeight: '700', marginBottom: '6px' }}>Biometric Gate Security</h4>
                 <p style={{ color: '#6b7280', fontSize: '0.88rem', lineHeight: '1.5' }}>
@@ -293,7 +293,7 @@ export default function HomePage() {
                 </p>
               </div>
 
-              <div style={{ padding: '24px', background: '#f9fafb', borderRadius: '16px', border: '1px solid #e5e7eb' }}>
+              <div style={{ padding: '20px', background: '#f9fafb', borderRadius: '16px', border: '1px solid #e5e7eb' }}>
                 <Sparkles size={24} color="#000000" style={{ marginBottom: '12px' }} />
                 <h4 style={{ fontSize: '1.05rem', fontWeight: '700', marginBottom: '6px' }}>Direct Agent Care</h4>
                 <p style={{ color: '#6b7280', fontSize: '0.88rem', lineHeight: '1.5' }}>
@@ -319,13 +319,13 @@ export default function HomePage() {
 
             <EstateMap
               properties={properties}
-              height="480px"
+              height="440px"
               showClusterControls={true}
             />
           </div>
 
           {/* Corporate Concierge Card */}
-          <div style={{ background: 'var(--brand-charcoal)', color: '#ffffff', borderRadius: '24px', padding: '36px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '24px', border: '1px solid #3d454e' }}>
+          <div className="corporate-concierge-card">
             <div style={{ display: 'flex', alignItems: 'center', gap: '20px', flexWrap: 'wrap' }}>
               <img
                 src="/jk-cube-icon.png"
