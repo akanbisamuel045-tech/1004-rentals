@@ -102,7 +102,6 @@ export default function ViewingModal({ isOpen, onClose, property }) {
                 <input
                   type="tel"
                   required
-                  placeholder="+234 802 345 6789"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   className="form-input"

@@ -55,7 +55,7 @@ export default function ContactPage() {
               <div style={{ display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
                 <MapPin size={22} color="#000000" />
                 <div>
-                  <h4 style={{ fontSize: '1rem', fontWeight: '700' }}>Estate Location</h4>
+                  <h4 style={{ fontSize: '1rem', fontWeight: '700' }}>Agent Desk</h4>
                   <p style={{ color: '#6b7280', fontSize: '0.9rem' }}>
                     Suite 337, 3rd Floor, Ikeja Plaza, Ikeja, Lagos
                   </p>
@@ -135,7 +135,6 @@ export default function ContactPage() {
                   <label className="form-label">Phone Number (WhatsApp)</label>
                   <input
                     type="tel"
-                    placeholder="+234 802 345 6789"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     className="form-input"

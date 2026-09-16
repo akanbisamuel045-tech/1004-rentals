@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { X, Send, CheckCircle2, AlertCircle } from 'lucide-react';
 import { api } from '../services/api';
 
@@ -78,7 +78,6 @@ export default function EnquiryModal({ isOpen, onClose, property }) {
               <input
                 type="text"
                 required
-                placeholder="e.g. Samuel Akanbi"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 className="form-input"
@@ -90,7 +89,6 @@ export default function EnquiryModal({ isOpen, onClose, property }) {
               <input
                 type="email"
                 required
-                placeholder="jkcube85@gmail.com"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 className="form-input"
@@ -101,7 +99,6 @@ export default function EnquiryModal({ isOpen, onClose, property }) {
               <label className="form-label">Phone Number (WhatsApp preferred)</label>
               <input
                 type="tel"
-                placeholder="+234 802 345 6789"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                 className="form-input"
