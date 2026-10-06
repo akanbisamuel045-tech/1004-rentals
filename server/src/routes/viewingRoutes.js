@@ -1,9 +1,23 @@
 import express from "express";
 import { db } from "../models/db.js";
-import { authMiddleware } from "../middleware/auth.js";
+import { authMiddleware, optionalAuthMiddleware } from "../middleware/auth.js";
 import { submissionLimiter, adminOnlyMiddleware, sanitizeBodyMiddleware } from "../middleware/security.js";
 
 const router = express.Router();
+
+// GET /api/viewings/my (User: list their own viewing appointments)
+router.get("/my", authMiddleware, (req, res) => {
+  try {
+    const userEmail = req.user?.email?.toLowerCase();
+    const userId = req.user?.id;
+    const userViewings = db.getViewings().filter(
+      (v) => (userId && v.userId === userId) || (userEmail && v.email?.toLowerCase() === userEmail)
+    );
+    res.json({ success: true, count: userViewings.length, data: userViewings });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
 
 // GET /api/viewings (Admin: list all viewing appointments)
 router.get("/", authMiddleware, adminOnlyMiddleware, (req, res) => {
@@ -16,7 +30,7 @@ router.get("/", authMiddleware, adminOnlyMiddleware, (req, res) => {
 });
 
 // POST /api/viewings (Tenant schedules an inspection/viewing)
-router.post("/", submissionLimiter, sanitizeBodyMiddleware, (req, res) => {
+router.post("/", submissionLimiter, optionalAuthMiddleware, sanitizeBodyMiddleware, (req, res) => {
   try {
     const { name, email, phone, preferredDate, preferredTime, propertyId, propertyTitle, notes } = req.body;
     if (!name || !email || !phone || !preferredDate || !preferredTime) {
@@ -27,6 +41,7 @@ router.post("/", submissionLimiter, sanitizeBodyMiddleware, (req, res) => {
     }
 
     const viewing = db.createViewing({
+      userId: req.user?.id || null,
       name,
       email,
       phone,

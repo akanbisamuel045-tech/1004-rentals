@@ -46,16 +46,15 @@ export default function Navbar() {
             <Home size={15} />
             <span>Home</span>
           </Link>
-          <a
-            href="/#about"
-            onClick={handleAboutClick}
-            className={`nav-pill-item ${isAboutActive ? 'active' : ''}`}
-            style={{ textDecoration: 'none', cursor: 'pointer' }}
-          >
-            About 1004
-          </a>
-          <Link to="/properties" className={`nav-pill-item ${isActive('/properties') ? 'active' : ''}`}>
+          <Link to="/apartments" className={`nav-pill-item ${location.pathname.startsWith('/apartments') || location.pathname.startsWith('/properties') ? 'active' : ''}`}>
             Apartments
+          </Link>
+          <Link to="/apartments/available-now" className={`nav-pill-item ${location.pathname === '/apartments/available-now' ? 'active' : ''}`} style={{ color: '#16a34a' }}>
+            <span style={{ display: 'inline-block', width: '6px', height: '6px', borderRadius: '50%', background: '#16a34a', marginRight: '4px' }}></span>
+            Available Now
+          </Link>
+          <Link to="/1004-estate" className={`nav-pill-item ${location.pathname.startsWith('/1004-estate') ? 'active' : ''}`}>
+            1004 Estate Guide
           </Link>
           <Link to="/contact" className={`nav-pill-item ${isActive('/contact') ? 'active' : ''}`}>
             Contact
@@ -239,22 +238,32 @@ export default function Navbar() {
             <span>Home</span>
           </Link>
 
-          <a
-            href="/#about"
-            onClick={handleAboutClick}
-            className={`nav-mobile-item ${isAboutActive ? 'active' : ''}`}
-          >
-            <Info size={18} />
-            <span>About 1004</span>
-          </a>
-
           <Link
-            to="/properties"
-            className={`nav-mobile-item ${isActive('/properties') ? 'active' : ''}`}
+            to="/apartments"
+            className={`nav-mobile-item ${location.pathname.startsWith('/apartments') ? 'active' : ''}`}
             onClick={() => setMobileMenuOpen(false)}
           >
             <Building2 size={18} />
             <span>1004 Apartments</span>
+          </Link>
+
+          <Link
+            to="/apartments/available-now"
+            className={`nav-mobile-item ${location.pathname === '/apartments/available-now' ? 'active' : ''}`}
+            onClick={() => setMobileMenuOpen(false)}
+            style={{ color: '#16a34a' }}
+          >
+            <span style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '50%', background: '#16a34a', marginRight: '6px' }}></span>
+            <span>Available Now</span>
+          </Link>
+
+          <Link
+            to="/1004-estate"
+            className={`nav-mobile-item ${location.pathname.startsWith('/1004-estate') ? 'active' : ''}`}
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            <Info size={18} />
+            <span>1004 Estate Guide</span>
           </Link>
 
           <Link

@@ -22,7 +22,11 @@ import {
   Filter,
   SlidersHorizontal,
   Home,
-  UserCheck
+  UserCheck,
+  BarChart3,
+  TrendingUp,
+  Zap,
+  MousePointerClick
 } from 'lucide-react';
 import { api } from '../services/api';
 import { formatPriceNGN } from '../components/PropertyCard';
@@ -63,12 +67,13 @@ const CATEGORIES = [
 
 export default function AdminDashboardPage() {
   const { user, login } = useAuth();
-  const [activeTab, setActiveTab] = useState('properties'); // 'properties' | 'bookings' | 'enquiries' | 'new-property'
+  const [activeTab, setActiveTab] = useState('properties'); // 'properties' | 'bookings' | 'enquiries' | 'analytics' | 'new-property'
   
   const [properties, setProperties] = useState([]);
   const [enquiries, setEnquiries] = useState([]);
   const [bookings, setBookings] = useState([]);
   const [locations, setLocations] = useState([]);
+  const [analyticsSummary, setAnalyticsSummary] = useState(null);
   const [loading, setLoading] = useState(false);
 
   // Filter & Search in listings table
@@ -98,6 +103,7 @@ export default function AdminDashboardPage() {
     totalFloors: '7',
     furnishedStatus: 'Furnished',
     availabilityStatus: 'Available',
+    last_verified_at: new Date().toISOString().split('T')[0],
     address: 'Block A3, Cluster A, 1004 Estate, Victoria Island, Lagos',
     images: ['https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80'],
     amenities: [
@@ -112,16 +118,18 @@ export default function AdminDashboardPage() {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const [pRes, eRes, bRes, lRes, vRes] = await Promise.allSettled([
+      const [pRes, eRes, bRes, lRes, vRes, aRes] = await Promise.allSettled([
         api.getProperties(),
         api.getEnquiries(),
         api.getAllBookings(),
         api.getLocations(),
-        api.getViewings()
+        api.getViewings(),
+        api.getAnalyticsSummary()
       ]);
 
       if (pRes.status === 'fulfilled') setProperties(pRes.value.data || []);
       if (eRes.status === 'fulfilled') setEnquiries(eRes.value.data || []);
+      if (aRes.status === 'fulfilled') setAnalyticsSummary(aRes.value?.data || aRes.value || null);
       
       // Combine user bookings and general viewing appointments
       let combinedBookings = [];
@@ -206,6 +214,8 @@ export default function AdminDashboardPage() {
       cautionFee: prop.cautionFee || '',
       agencyFee: prop.agencyFee || '',
       availabilityStatus: prop.availabilityStatus || 'Available',
+      last_verified_at: prop.last_verified_at || new Date().toISOString().split('T')[0],
+      cluster: prop.cluster || prop.location || '1004 High-Rise Towers',
       furnishedStatus: prop.furnishedStatus || 'Furnished',
       location: prop.location || '1004 High-Rise Towers',
       propertyType: prop.propertyType || 'Apartment',
@@ -554,6 +564,25 @@ export default function AdminDashboardPage() {
                 {newEnquiries}
               </span>
             )}
+          </button>
+
+          <button
+            onClick={() => setActiveTab('analytics')}
+            style={{
+              padding: '10px 18px',
+              fontSize: '0.95rem',
+              fontWeight: activeTab === 'analytics' ? '700' : '500',
+              color: activeTab === 'analytics' ? '#000000' : '#6b7280',
+              borderBottom: activeTab === 'analytics' ? '3px solid #000000' : '3px solid transparent',
+              background: 'none',
+              cursor: 'pointer',
+              marginBottom: '-6px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px'
+            }}
+          >
+            <BarChart3 size={16} /> Analytics & Funnel
           </button>
 
           <button
@@ -970,15 +999,49 @@ export default function AdminDashboardPage() {
                             {enq.message}
                           </td>
                           <td style={{ padding: '14px 16px' }}>
-                            <span
-                              className="badge"
+                            <select
+                              value={enq.status}
+                              onChange={(e) => handleUpdateEnquiry(enq.id, e.target.value)}
                               style={{
-                                background: enq.status === 'NEW' ? '#fee2e2' : '#dcfce7',
-                                color: enq.status === 'NEW' ? '#b91c1c' : '#15803d'
+                                padding: '5px 10px',
+                                borderRadius: '8px',
+                                fontSize: '0.8rem',
+                                fontWeight: '700',
+                                border: '1px solid #d1d5db',
+                                cursor: 'pointer',
+                                background:
+                                  enq.status === 'NEW'
+                                    ? '#fef3c7'
+                                    : enq.status === 'CONTACTED'
+                                    ? '#dbeafe'
+                                    : enq.status === 'VIEWING_SCHEDULED'
+                                    ? '#f3e8ff'
+                                    : enq.status === 'NEGOTIATING'
+                                    ? '#fef9c3'
+                                    : enq.status === 'BOOKED'
+                                    ? '#dcfce7'
+                                    : '#f3f4f6',
+                                color:
+                                  enq.status === 'NEW'
+                                    ? '#b45309'
+                                    : enq.status === 'CONTACTED'
+                                    ? '#1d4ed8'
+                                    : enq.status === 'VIEWING_SCHEDULED'
+                                    ? '#7e22ce'
+                                    : enq.status === 'NEGOTIATING'
+                                    ? '#a16207'
+                                    : enq.status === 'BOOKED'
+                                    ? '#15803d'
+                                    : '#4b5563'
                               }}
                             >
-                              {enq.status}
-                            </span>
+                              <option value="NEW">NEW LEAD</option>
+                              <option value="CONTACTED">CONTACTED</option>
+                              <option value="VIEWING_SCHEDULED">VIEWING SCHEDULED</option>
+                              <option value="NEGOTIATING">NEGOTIATING</option>
+                              <option value="BOOKED">BOOKED</option>
+                              <option value="CLOSED">CLOSED</option>
+                            </select>
                           </td>
                           <td style={{ padding: '14px 16px', textAlign: 'right' }}>
                             <div style={{ display: 'flex', gap: '6px', justifyContent: 'flex-end' }}>
@@ -1013,24 +1076,6 @@ export default function AdminDashboardPage() {
                                   <Mail size={13} />
                                 </a>
                               )}
-                              {enq.status === 'NEW' ? (
-                                <button
-                                  onClick={() => handleUpdateEnquiry(enq.id, 'RESPONDED')}
-                                  className="btn btn-primary btn-sm"
-                                  style={{ padding: '5px 10px', fontSize: '0.8rem' }}
-                                >
-                                  Mark Done
-                                </button>
-                              ) : (
-                                <button
-                                  onClick={() => handleUpdateEnquiry(enq.id, 'NEW')}
-                                  className="btn btn-secondary btn-sm"
-                                  style={{ padding: '5px 8px', fontSize: '0.8rem' }}
-                                  title="Reopen enquiry"
-                                >
-                                  Reopen
-                                </button>
-                              )}
                             </div>
                           </td>
                         </tr>
@@ -1040,6 +1085,255 @@ export default function AdminDashboardPage() {
                 </table>
               </div>
             )}
+          </div>
+        )}
+
+        {/* TAB: ANALYTICS & CONVERSION FUNNEL */}
+        {activeTab === 'analytics' && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+            {/* Header */}
+            <div style={{ background: '#ffffff', padding: '24px', borderRadius: '12px', border: '1px solid #e5e7eb', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+              <div>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: '800', color: '#111827', margin: 0 }}>
+                  Client Engagement & Conversion Funnel
+                </h3>
+                <p style={{ color: '#6b7280', fontSize: '0.88rem', marginTop: '4px' }}>
+                  Live interaction tracking across 1004 Estate listings, direct WhatsApp enquiries, phone clicks, and inspection bookings.
+                </p>
+              </div>
+              <button
+                onClick={fetchData}
+                className="btn btn-secondary btn-sm"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+              >
+                <RefreshCw size={14} /> Refresh Analytics
+              </button>
+            </div>
+
+            {/* KPI Summary Cards */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
+              <div style={{ background: '#ffffff', padding: '20px', borderRadius: '12px', border: '1px solid #e5e7eb' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#6b7280', fontSize: '0.82rem', fontWeight: '700' }}>
+                  <span>TOTAL INTERACTIONS</span>
+                  <BarChart3 size={18} style={{ color: 'var(--brand-orange)' }} />
+                </div>
+                <div style={{ fontSize: '1.9rem', fontWeight: '800', color: '#111827', marginTop: '8px' }}>
+                  {analyticsSummary?.totalEvents || 0}
+                </div>
+                <div style={{ fontSize: '0.78rem', color: '#10b981', marginTop: '4px', fontWeight: '600' }}>
+                  Live client actions recorded
+                </div>
+              </div>
+
+              <div style={{ background: '#ffffff', padding: '20px', borderRadius: '12px', border: '1px solid #e5e7eb' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#6b7280', fontSize: '0.82rem', fontWeight: '700' }}>
+                  <span>WHATSAPP INQUIRIES</span>
+                  <Phone size={18} style={{ color: '#25D366' }} />
+                </div>
+                <div style={{ fontSize: '1.9rem', fontWeight: '800', color: '#111827', marginTop: '8px' }}>
+                  {analyticsSummary?.whatsappClicks || 0}
+                </div>
+                <div style={{ fontSize: '0.78rem', color: '#6b7280', marginTop: '4px' }}>
+                  High-intent direct chats
+                </div>
+              </div>
+
+              <div style={{ background: '#ffffff', padding: '20px', borderRadius: '12px', border: '1px solid #e5e7eb' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#6b7280', fontSize: '0.82rem', fontWeight: '700' }}>
+                  <span>PHONE CALL CLICKS</span>
+                  <Phone size={18} style={{ color: '#0284c7' }} />
+                </div>
+                <div style={{ fontSize: '1.9rem', fontWeight: '800', color: '#111827', marginTop: '8px' }}>
+                  {analyticsSummary?.callClicks || 0}
+                </div>
+                <div style={{ fontSize: '0.78rem', color: '#6b7280', marginTop: '4px' }}>
+                  Direct voice agent taps
+                </div>
+              </div>
+
+              <div style={{ background: '#ffffff', padding: '20px', borderRadius: '12px', border: '1px solid #e5e7eb' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#6b7280', fontSize: '0.82rem', fontWeight: '700' }}>
+                  <span>APARTMENT DETAIL VIEWS</span>
+                  <Eye size={18} style={{ color: '#6366f1' }} />
+                </div>
+                <div style={{ fontSize: '1.9rem', fontWeight: '800', color: '#111827', marginTop: '8px' }}>
+                  {analyticsSummary?.apartmentViews || 0}
+                </div>
+                <div style={{ fontSize: '0.78rem', color: '#6b7280', marginTop: '4px' }}>
+                  Property page views
+                </div>
+              </div>
+
+              <div style={{ background: '#ffffff', padding: '20px', borderRadius: '12px', border: '1px solid #e5e7eb' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#6b7280', fontSize: '0.82rem', fontWeight: '700' }}>
+                  <span>CATEGORY HUB VIEWS</span>
+                  <Layers size={18} style={{ color: '#d97706' }} />
+                </div>
+                <div style={{ fontSize: '1.9rem', fontWeight: '800', color: '#111827', marginTop: '8px' }}>
+                  {analyticsSummary?.categoryViews || 0}
+                </div>
+                <div style={{ fontSize: '0.78rem', color: '#6b7280', marginTop: '4px' }}>
+                  1-bed, 2-bed, maisonette hubs
+                </div>
+              </div>
+
+              <div style={{ background: '#ffffff', padding: '20px', borderRadius: '12px', border: '1px solid #e5e7eb' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#6b7280', fontSize: '0.82rem', fontWeight: '700' }}>
+                  <span>BOOKING STARTS</span>
+                  <Calendar size={18} style={{ color: '#ec4899' }} />
+                </div>
+                <div style={{ fontSize: '1.9rem', fontWeight: '800', color: '#111827', marginTop: '8px' }}>
+                  {analyticsSummary?.bookingStarts || 0}
+                </div>
+                <div style={{ fontSize: '0.78rem', color: '#6b7280', marginTop: '4px' }}>
+                  Inspection modal launches
+                </div>
+              </div>
+            </div>
+
+            {/* Funnel Efficiency Highlights */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '16px' }}>
+              <div style={{ background: '#ffffff', padding: '24px', borderRadius: '12px', border: '1px solid #e5e7eb' }}>
+                <h4 style={{ fontSize: '1.05rem', fontWeight: '700', color: '#111827', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <TrendingUp size={18} style={{ color: 'var(--brand-orange)' }} /> Conversion Funnel Rates
+                </h4>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                  <div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.88rem', fontWeight: '600', marginBottom: '4px' }}>
+                      <span>Views to WhatsApp Inquiries</span>
+                      <span>
+                        {analyticsSummary?.apartmentViews
+                          ? ((analyticsSummary.whatsappClicks / analyticsSummary.apartmentViews) * 100).toFixed(1)
+                          : '0.0'}%
+                      </span>
+                    </div>
+                    <div style={{ width: '100%', height: '8px', background: '#f3f4f6', borderRadius: '4px', overflow: 'hidden' }}>
+                      <div
+                        style={{
+                          width: `${Math.min(
+                            analyticsSummary?.apartmentViews
+                              ? (analyticsSummary.whatsappClicks / analyticsSummary.apartmentViews) * 100
+                              : 0,
+                            100
+                          )}%`,
+                          height: '100%',
+                          background: '#25D366'
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.88rem', fontWeight: '600', marginBottom: '4px' }}>
+                      <span>Views to Inspection Bookings</span>
+                      <span>
+                        {analyticsSummary?.apartmentViews
+                          ? ((analyticsSummary.bookingsCompleted / analyticsSummary.apartmentViews) * 100).toFixed(1)
+                          : '0.0'}%
+                      </span>
+                    </div>
+                    <div style={{ width: '100%', height: '8px', background: '#f3f4f6', borderRadius: '4px', overflow: 'hidden' }}>
+                      <div
+                        style={{
+                          width: `${Math.min(
+                            analyticsSummary?.apartmentViews
+                              ? (analyticsSummary.bookingsCompleted / analyticsSummary.apartmentViews) * 100
+                              : 0,
+                            100
+                          )}%`,
+                          height: '100%',
+                          background: 'var(--brand-orange)'
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ background: '#ffffff', padding: '24px', borderRadius: '12px', border: '1px solid #e5e7eb' }}>
+                <h4 style={{ fontSize: '1.05rem', fontWeight: '700', color: '#111827', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <ShieldCheck size={18} style={{ color: '#10b981' }} /> Agency Pipeline Performance
+                </h4>
+                <div style={{ fontSize: '0.88rem', color: '#4b5563', lineHeight: 1.6 }}>
+                  Direct WhatsApp engagement delivers instant lead response for 1004 Estate executive tenants. Every user tap from property detail pages is tagged with the listing title, cluster, and price for zero-friction agent handling.
+                </div>
+              </div>
+            </div>
+
+            {/* Live Activity Stream Table */}
+            <div style={{ background: '#ffffff', borderRadius: '12px', border: '1px solid #e5e7eb' }}>
+              <div style={{ padding: '18px 20px', borderBottom: '1px solid #e5e7eb' }}>
+                <h4 style={{ fontSize: '1.05rem', fontWeight: '700', color: '#111827', margin: 0 }}>
+                  Recent Event Activity Stream
+                </h4>
+                <p style={{ color: '#6b7280', fontSize: '0.82rem', marginTop: '2px' }}>
+                  Last 30 user actions captured across the 1004 Estate portal
+                </p>
+              </div>
+
+              {!analyticsSummary?.recentEvents || analyticsSummary.recentEvents.length === 0 ? (
+                <div style={{ padding: '40px 20px', textAlign: 'center', color: '#9ca3af' }}>
+                  No interaction events recorded yet. Browse listings to populate activity.
+                </div>
+              ) : (
+                <div className="admin-table-wrapper">
+                  <table className="admin-table" style={{ width: '100%', borderCollapse: 'collapse' }}>
+                    <thead style={{ background: '#f9fafb', borderBottom: '1px solid #e5e7eb' }}>
+                      <tr>
+                        <th style={{ textAlign: 'left', padding: '12px 16px', fontSize: '0.8rem', fontWeight: '700', color: '#4b5563' }}>TIME</th>
+                        <th style={{ textAlign: 'left', padding: '12px 16px', fontSize: '0.8rem', fontWeight: '700', color: '#4b5563' }}>EVENT TYPE</th>
+                        <th style={{ textAlign: 'left', padding: '12px 16px', fontSize: '0.8rem', fontWeight: '700', color: '#4b5563' }}>PROPERTY / CONTEXT</th>
+                        <th style={{ textAlign: 'left', padding: '12px 16px', fontSize: '0.8rem', fontWeight: '700', color: '#4b5563' }}>DETAILS</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {analyticsSummary.recentEvents.map((evt, idx) => (
+                        <tr key={evt.id || idx} style={{ borderBottom: '1px solid #f3f4f6' }}>
+                          <td style={{ padding: '12px 16px', fontSize: '0.82rem', color: '#6b7280', whiteSpace: 'nowrap' }}>
+                            {evt.timestamp ? new Date(evt.timestamp).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : 'Just now'}
+                          </td>
+                          <td style={{ padding: '12px 16px' }}>
+                            <span
+                              style={{
+                                display: 'inline-block',
+                                padding: '3px 8px',
+                                borderRadius: '6px',
+                                fontSize: '0.78rem',
+                                fontWeight: '700',
+                                background:
+                                  evt.name === 'whatsapp_clicked'
+                                    ? '#dcfce7'
+                                    : evt.name === 'apartment_view'
+                                    ? '#e0e7ff'
+                                    : evt.name === 'booking_completed'
+                                    ? '#fef3c7'
+                                    : '#f3f4f6',
+                                color:
+                                  evt.name === 'whatsapp_clicked'
+                                    ? '#15803d'
+                                    : evt.name === 'apartment_view'
+                                    ? '#4338ca'
+                                    : evt.name === 'booking_completed'
+                                    ? '#b45309'
+                                    : '#374151'
+                              }}
+                            >
+                              {evt.name}
+                            </span>
+                          </td>
+                          <td style={{ padding: '12px 16px', fontSize: '0.85rem', fontWeight: '600', color: '#111827' }}>
+                            {evt.payload?.propertyTitle || evt.payload?.category || evt.payload?.title || '1004 Estate'}
+                          </td>
+                          <td style={{ padding: '12px 16px', fontSize: '0.8rem', color: '#6b7280' }}>
+                            {evt.payload?.price ? `Rent: ${formatPriceNGN(evt.payload.price)}` : evt.payload?.source || 'Portal'}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
           </div>
         )}
 
@@ -1197,8 +1491,19 @@ export default function AdminDashboardPage() {
                   >
                     <option value="Available">Available</option>
                     <option value="Reserved">Reserved</option>
-                    <option value="Rented">Rented</option>
+                    <option value="Unavailable">Unavailable</option>
+                    <option value="Maintenance">Maintenance</option>
                   </select>
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">Verification Date</label>
+                  <input
+                    type="date"
+                    value={newProp.last_verified_at || ''}
+                    onChange={(e) => setNewProp({ ...newProp, last_verified_at: e.target.value })}
+                    className="form-input"
+                  />
                 </div>
               </div>
 
@@ -1375,15 +1680,26 @@ export default function AdminDashboardPage() {
                     >
                       <option value="Available">Available</option>
                       <option value="Reserved">Reserved</option>
-                      <option value="Rented">Rented</option>
+                      <option value="Unavailable">Unavailable</option>
+                      <option value="Maintenance">Maintenance</option>
                     </select>
+                  </div>
+
+                  <div className="form-group">
+                    <label className="form-label">Last Verified Date</label>
+                    <input
+                      type="date"
+                      value={editForm.last_verified_at || ''}
+                      onChange={(e) => setEditForm({ ...editForm, last_verified_at: e.target.value })}
+                      className="form-input"
+                    />
                   </div>
 
                   <div className="form-group">
                     <label className="form-label">Cluster Location</label>
                     <select
                       value={editForm.location}
-                      onChange={(e) => setEditForm({ ...editForm, location: e.target.value })}
+                      onChange={(e) => setEditForm({ ...editForm, location: e.target.value, cluster: e.target.value })}
                       className="form-select"
                     >
                       {CLUSTERS.map((loc) => (

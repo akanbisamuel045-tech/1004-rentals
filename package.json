@@ -2,28 +2,40 @@
   "name": "lagos-rentals",
   "version": "1.0.0",
   "private": true,
-  "description": "Lagos Rentals — Verified luxury apartment rentals in Lagos, Nigeria",
+  "type": "module",
+  "description": "JK - CUBE MULTIVENTURES LIMITED — 1004 Estate Apartment Rentals",
   "scripts": {
     "start": "node server/src/server.js",
     "server": "node --watch server/src/server.js",
     "client": "npm --prefix client run dev",
     "dev:server": "npm --prefix server run dev",
     "dev:client": "npm --prefix client run dev",
-    "dev": "node -e \"const { spawn } = require('child_process'); spawn('npm', ['run', 'dev:server'], { stdio: 'inherit', shell: true }); spawn('npm', ['run', 'dev:client'], { stdio: 'inherit', shell: true });\"",
-    "build": "npm --prefix client run build",
-    "install:all": "npm --prefix server install && npm --prefix client install"
+    "dev": "node -e \"import('child_process').then(({ spawn }) => { spawn('npm', ['run', 'dev:server'], { stdio: 'inherit', shell: true }); spawn('npm', ['run', 'dev:client'], { stdio: 'inherit', shell: true }); });\"",
+    "build": "npm --prefix client install && npm --prefix client run build",
+    "install:all": "npm install && npm --prefix server install && npm --prefix client install"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^8.7.0",
+    "heic-convert": "^2.1.0",
+    "helmet": "^8.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.3.0"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^25.10.0"
   },
   "keywords": [
     "react",
     "nodejs",
     "express",
-    "lagos",
+    "1004-estate",
     "rentals",
     "real-estate"
   ],
-  "author": "Akanbi Samuel <akanbisamuel045@gmail.com>",
-  "license": "ISC",
-  "devDependencies": {
-    "puppeteer-core": "^25.10.0"
-  }
+  "author": "JK - CUBE MULTIVENTURES LIMITED",
+  "license": "ISC"
 }

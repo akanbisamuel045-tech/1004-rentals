@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   Calendar, Heart, User, LogOut, Clock, MapPin,
-  CheckCircle2, AlertCircle, ArrowRight, Bed, Bath, Trash2, Edit2
+  CheckCircle2, AlertCircle, ArrowRight, Bed, Bath, Trash2, Edit2,
+  MessageSquare, Phone, ExternalLink
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { api } from '../services/api';
@@ -12,9 +13,11 @@ export default function UserDashboardPage() {
   const { user, logout, updateProfile, openBookingModal } = useAuth();
   const navigate = useNavigate();
 
-  const [activeTab, setActiveTab] = useState('bookings'); // 'bookings' | 'saved' | 'profile'
+  const [activeTab, setActiveTab] = useState('bookings'); // 'bookings' | 'saved' | 'enquiries' | 'profile'
   const [bookings, setBookings] = useState([]);
   const [favorites, setFavorites] = useState([]);
+  const [enquiries, setEnquiries] = useState([]);
+  const [viewings, setViewings] = useState([]);
   const [loading, setLoading] = useState(true);
 
   // Profile form state
@@ -36,12 +39,16 @@ export default function UserDashboardPage() {
   const loadUserData = async () => {
     setLoading(true);
     try {
-      const [bRes, fRes] = await Promise.all([
+      const [bRes, fRes, eRes, vRes] = await Promise.allSettled([
         api.getMyBookings(),
         api.getMyFavorites(),
+        api.getMyEnquiries(),
+        api.getMyViewings()
       ]);
-      setBookings(bRes.data || []);
-      setFavorites(fRes.data || []);
+      if (bRes.status === 'fulfilled') setBookings(bRes.value?.data || []);
+      if (fRes.status === 'fulfilled') setFavorites(fRes.value?.data || []);
+      if (eRes.status === 'fulfilled') setEnquiries(eRes.value?.data || []);
+      if (vRes.status === 'fulfilled') setViewings(vRes.value?.data || []);
     } catch (err) {
       console.error('Error fetching dashboard data:', err);
     } finally {
@@ -167,6 +174,25 @@ export default function UserDashboardPage() {
             }}
           >
             <Heart size={18} /> Saved Apartments ({favorites.length})
+          </button>
+
+          <button
+            onClick={() => setActiveTab('enquiries')}
+            style={{
+              padding: '12px 20px',
+              fontWeight: '600',
+              fontSize: '0.95rem',
+              background: 'none',
+              border: 'none',
+              borderBottom: activeTab === 'enquiries' ? '2.5px solid var(--brand-orange)' : '2.5px solid transparent',
+              color: activeTab === 'enquiries' ? 'var(--brand-orange)' : '#6b7280',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px'
+            }}
+          >
+            <MessageSquare size={18} /> Inquiries & Viewings ({enquiries.length + viewings.length})
           </button>
 
           <button
@@ -367,6 +393,207 @@ export default function UserDashboardPage() {
                         </button>
                       </div>
                     </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* TAB: INQUIRIES & VIEWINGS */}
+        {activeTab === 'enquiries' && (
+          <div>
+            {loading ? (
+              <div style={{ textAlign: 'center', padding: '60px 0', color: '#9ca3af' }}>
+                Loading your enquiries and viewing requests...
+              </div>
+            ) : enquiries.length === 0 && viewings.length === 0 ? (
+              <div style={{ textAlign: 'center', padding: '60px 20px', background: '#ffffff', borderRadius: '24px', border: '1px solid #e5e7eb' }}>
+                <MessageSquare size={48} style={{ color: '#d1d5db', margin: '0 auto 16px' }} />
+                <h3 style={{ fontSize: '1.25rem', fontWeight: '700', marginBottom: '8px' }}>No Active Inquiries Yet</h3>
+                <p style={{ color: '#6b7280', maxWidth: '420px', margin: '0 auto 20px', fontSize: '0.92rem' }}>
+                  Have questions about an apartment in 1004 Estate? Enquire on any property page or schedule an inspection to see your requests tracked here.
+                </p>
+                <Link to="/apartments" className="btn-add-listing" style={{ display: 'inline-flex' }}>
+                  Browse 1004 Estate Apartments
+                </Link>
+              </div>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                {/* Enquiries List */}
+                {enquiries.map((enq) => {
+                  const statusColors = {
+                    NEW: { bg: '#fef3c7', text: '#b45309', label: 'New Request' },
+                    CONTACTED: { bg: '#dbeafe', text: '#1d4ed8', label: 'Agent Contacted' },
+                    VIEWING_SCHEDULED: { bg: '#f3e8ff', text: '#7e22ce', label: 'Viewing Scheduled' },
+                    NEGOTIATING: { bg: '#fef9c3', text: '#a16207', label: 'In Negotiation' },
+                    BOOKED: { bg: '#dcfce7', text: '#15803d', label: 'Successfully Booked' },
+                    CLOSED: { bg: '#f3f4f6', text: '#4b5563', label: 'Closed' }
+                  };
+                  const cfg = statusColors[enq.status] || { bg: '#f3f4f6', text: '#4b5563', label: enq.status };
+                  const agentPhone = '2348023139377';
+                  const waText = encodeURIComponent(
+                    `Hello JK - CUBE MULTIVENTURES desk, I am following up on my enquiry #${enq.id} regarding "${enq.propertyTitle || '1004 Estate Apartment'}".`
+                  );
+
+                  return (
+                    <div
+                      key={enq.id}
+                      style={{
+                        background: '#ffffff',
+                        borderRadius: '20px',
+                        border: '1px solid #e5e7eb',
+                        padding: '24px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '14px',
+                        boxShadow: '0 2px 8px rgba(0,0,0,0.03)'
+                      }}
+                    >
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '10px' }}>
+                        <div>
+                          <span style={{ fontSize: '0.78rem', color: '#9ca3af', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                            Enquiry #{enq.id} • {new Date(enq.createdAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+                          </span>
+                          <h4 style={{ fontSize: '1.15rem', fontWeight: '800', color: '#111827', margin: '4px 0 0 0' }}>
+                            {enq.propertyTitle || 'General 1004 Estate Enquiry'}
+                          </h4>
+                        </div>
+                        <span
+                          style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            padding: '4px 12px',
+                            borderRadius: '9999px',
+                            fontSize: '0.78rem',
+                            fontWeight: '700',
+                            background: cfg.bg,
+                            color: cfg.text
+                          }}
+                        >
+                          {cfg.label}
+                        </span>
+                      </div>
+
+                      {enq.message && (
+                        <div
+                          style={{
+                            background: '#f9fafb',
+                            padding: '14px 16px',
+                            borderRadius: '12px',
+                            fontSize: '0.88rem',
+                            color: '#4b5563',
+                            borderLeft: '3px solid var(--brand-orange)'
+                          }}
+                        >
+                          "{enq.message}"
+                        </div>
+                      )}
+
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px', paddingTop: '8px', borderTop: '1px solid #f3f4f6' }}>
+                        <div style={{ fontSize: '0.82rem', color: '#6b7280' }}>
+                          Assigned to: <strong style={{ color: '#111827' }}>JK - CUBE Dedicated 1004 Desk</strong>
+                        </div>
+
+                        <div style={{ display: 'flex', gap: '10px' }}>
+                          <a
+                            href={`https://wa.me/${agentPhone}?text=${waText}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '6px',
+                              background: '#25D366',
+                              color: '#ffffff',
+                              padding: '8px 14px',
+                              borderRadius: '8px',
+                              fontSize: '0.85rem',
+                              fontWeight: '700',
+                              textDecoration: 'none'
+                            }}
+                          >
+                            <Phone size={14} /> WhatsApp Desk
+                          </a>
+                          {enq.propertyId && (
+                            <Link
+                              to={`/properties/${enq.propertyId}`}
+                              style={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '4px',
+                                background: '#f3f4f6',
+                                color: '#374151',
+                                padding: '8px 14px',
+                                borderRadius: '8px',
+                                fontSize: '0.85rem',
+                                fontWeight: '600',
+                                textDecoration: 'none'
+                              }}
+                            >
+                              <ExternalLink size={14} /> View Apartment
+                            </Link>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+
+                {/* Viewings List */}
+                {viewings.map((vw) => (
+                  <div
+                    key={vw.id}
+                    style={{
+                      background: '#ffffff',
+                      borderRadius: '20px',
+                      border: '1px solid #e5e7eb',
+                      padding: '24px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '14px',
+                      boxShadow: '0 2px 8px rgba(0,0,0,0.03)'
+                    }}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '10px' }}>
+                      <div>
+                        <span style={{ fontSize: '0.78rem', color: '#9ca3af', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                          Viewing Appointment #{vw.id}
+                        </span>
+                        <h4 style={{ fontSize: '1.15rem', fontWeight: '800', color: '#111827', margin: '4px 0 0 0' }}>
+                          {vw.propertyTitle || '1004 Estate Physical Inspection'}
+                        </h4>
+                      </div>
+                      <span
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          padding: '4px 12px',
+                          borderRadius: '9999px',
+                          fontSize: '0.78rem',
+                          fontWeight: '700',
+                          background: vw.status === 'CONFIRMED' ? '#dcfce7' : '#fef3c7',
+                          color: vw.status === 'CONFIRMED' ? '#15803d' : '#b45309'
+                        }}
+                      >
+                        {vw.status || 'PENDING'}
+                      </span>
+                    </div>
+
+                    <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', fontSize: '0.88rem', color: '#4b5563' }}>
+                      <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <Calendar size={16} style={{ color: 'var(--brand-orange)' }} /> {vw.preferredDate || 'TBD'}
+                      </span>
+                      <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <Clock size={16} style={{ color: 'var(--brand-orange)' }} /> {vw.preferredTime || 'Morning (10:00 AM - 1:00 PM)'}
+                      </span>
+                    </div>
+
+                    {vw.notes && (
+                      <div style={{ background: '#f9fafb', padding: '10px 14px', borderRadius: '10px', fontSize: '0.85rem', color: '#6b7280' }}>
+                        Note: {vw.notes}
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>

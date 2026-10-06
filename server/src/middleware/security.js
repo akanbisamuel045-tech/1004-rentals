@@ -68,7 +68,7 @@ export function sanitizeString(val) {
 export function sanitizeBodyMiddleware(req, res, next) {
   if (req.body && typeof req.body === "object") {
     for (const key in req.body) {
-      if (typeof req.body[key] === "string") {
+      if (typeof req.body[key] === "string" && key !== "password" && key !== "newPassword") {
         req.body[key] = sanitizeString(req.body[key]);
       }
     }

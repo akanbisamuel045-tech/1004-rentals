@@ -280,5 +280,47 @@ export const api = {
 
     if (!res.ok) throw new Error(data?.message || 'Failed to upload images');
     return data;
+  },
+
+  // Pricing Stats
+  async getPricingStats() {
+    const res = await fetch(`${API_BASE}/properties/stats/pricing`);
+    if (!res.ok) throw new Error('Failed to fetch rental pricing statistics');
+    return res.json();
+  },
+
+  // User Enquiries & Viewings
+  async getMyEnquiries() {
+    const res = await fetch(`${API_BASE}/enquiries/my`, {
+      headers: getAuthHeaders(),
+    });
+    if (!res.ok) throw new Error('Failed to fetch your enquiries');
+    return res.json();
+  },
+
+  async getMyViewings() {
+    const res = await fetch(`${API_BASE}/viewings/my`, {
+      headers: getAuthHeaders(),
+    });
+    if (!res.ok) throw new Error('Failed to fetch your viewing appointments');
+    return res.json();
+  },
+
+  // Analytics Engine
+  async trackAnalyticsEvent(eventData) {
+    const res = await fetch(`${API_BASE}/analytics/event`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(eventData),
+    });
+    return res.json();
+  },
+
+  async getAnalyticsSummary() {
+    const res = await fetch(`${API_BASE}/analytics/summary`, {
+      headers: getAuthHeaders(),
+    });
+    if (!res.ok) throw new Error('Failed to fetch analytics summary');
+    return res.json();
   }
 };

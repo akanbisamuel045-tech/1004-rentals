@@ -16,6 +16,16 @@ router.get("/", (req, res) => {
   }
 });
 
+// GET /api/properties/stats/pricing (Dynamic Rental Pricing Stats for 1004 Estate)
+router.get("/stats/pricing", (req, res) => {
+  try {
+    const stats = db.getRentalPriceStats();
+    res.json({ success: true, data: stats });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
 // GET /api/properties/:id (by ID or Slug)
 router.get("/:id", (req, res) => {
   try {

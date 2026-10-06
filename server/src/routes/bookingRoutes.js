@@ -68,19 +68,49 @@ router.post("/", submissionLimiter, optionalAuthMiddleware, sanitizeBodyMiddlewa
       data: booking
     });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    const isClientError =
+      error.message.includes("marked as") ||
+      error.message.includes("cannot be booked") ||
+      error.message.includes("already have") ||
+      error.message.includes("does not exist") ||
+      error.message.includes("Invalid");
+    res.status(isClientError ? 400 : 500).json({ success: false, message: error.message });
   }
 });
 
-// PATCH /api/bookings/:id/status (Admin: update status, or cancel)
-router.patch("/:id/status", authMiddleware, adminOnlyMiddleware, sanitizeBodyMiddleware, (req, res) => {
+// PATCH /api/bookings/:id/status (User can cancel own booking, Admin can update any status)
+router.patch("/:id/status", authMiddleware, sanitizeBodyMiddleware, (req, res) => {
   try {
     const { status } = req.body;
-    const booking = db.updateBookingStatus(req.params.id, status);
+    const validStatuses = ["PENDING", "CONFIRMED", "CANCELLED", "COMPLETED", "REJECTED"];
+    const upperStatus = status ? status.toUpperCase() : "PENDING";
+    
+    if (!validStatuses.includes(upperStatus)) {
+      return res.status(400).json({
+        success: false,
+        message: `Invalid status. Must be one of: ${validStatuses.join(", ")}`
+      });
+    }
+
+    const booking = db.data.bookings.find((b) => b.id === req.params.id);
     if (!booking) {
       return res.status(404).json({ success: false, message: "Booking not found" });
     }
-    res.json({ success: true, data: booking });
+
+    const isAdmin = req.user?.role === "ADMIN";
+    const isOwner = (req.user?.id && booking.userId === req.user.id) ||
+      (req.user?.email && booking.userEmail?.toLowerCase() === req.user.email.toLowerCase());
+
+    if (!isAdmin && !isOwner) {
+      return res.status(403).json({ success: false, message: "Not authorized to update this booking." });
+    }
+
+    if (!isAdmin && upperStatus !== "CANCELLED") {
+      return res.status(403).json({ success: false, message: "Clients can only cancel their bookings." });
+    }
+
+    const updated = db.updateBookingStatus(req.params.id, upperStatus);
+    res.json({ success: true, data: updated });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }

@@ -7,7 +7,10 @@ import bcrypt from "bcryptjs";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 // Save outside of src to avoid triggering node --watch restarts
-const DATA_FILE = path.join(__dirname, "../../data/store.json");
+const BUNDLED_DATA_FILE = path.join(__dirname, "../../data/store.json");
+const DATA_FILE = process.env.VERCEL
+  ? path.join("/tmp", "store.json")
+  : BUNDLED_DATA_FILE;
 
 class DatabaseStore {
   constructor() {
@@ -29,22 +32,39 @@ class DatabaseStore {
       enquiries: [],
       viewings: [],
       bookings: [],
-      favorites: {} // userId -> array of propertyIds
+      favorites: {}, // userId -> array of propertyIds
+      analyticsEvents: []
     };
     this.loadFromDisk();
   }
 
   loadFromDisk() {
     try {
-      if (fs.existsSync(DATA_FILE)) {
-        const raw = fs.readFileSync(DATA_FILE, "utf-8");
+      if (process.env.VERCEL && !fs.existsSync(DATA_FILE) && fs.existsSync(BUNDLED_DATA_FILE)) {
+        try {
+          fs.writeFileSync(DATA_FILE, fs.readFileSync(BUNDLED_DATA_FILE, "utf-8"), "utf-8");
+        } catch (e) {
+          // ignore error if copy fails
+        }
+      }
+      const fileToRead = fs.existsSync(DATA_FILE) ? DATA_FILE : (fs.existsSync(BUNDLED_DATA_FILE) ? BUNDLED_DATA_FILE : null);
+      if (fileToRead) {
+        const raw = fs.readFileSync(fileToRead, "utf-8");
         const parsed = JSON.parse(raw);
         this.data = {
           ...this.data,
           ...parsed,
           users: parsed.users && parsed.users.length > 0 ? parsed.users : this.data.users,
+          properties: (parsed.properties || this.data.properties).map((p) => ({
+            ...p,
+            cluster: p.cluster || p.location || "1004 High-Rise Towers",
+            availabilityStatus: p.availabilityStatus || "Available",
+            last_verified_at: p.last_verified_at || "2026-09-15T12:00:00.000Z",
+            available_from: p.available_from || "2026-09-16T00:00:00.000Z"
+          })),
           bookings: parsed.bookings || [],
-          favorites: parsed.favorites || {}
+          favorites: parsed.favorites || {},
+          analyticsEvents: parsed.analyticsEvents || []
         };
       }
     } catch (err) {
@@ -127,6 +147,23 @@ class DatabaseStore {
   // ===================================
   createBooking(bookingData) {
     const property = this.data.properties.find((p) => p.id === bookingData.propertyId);
+    if (!property) {
+      throw new Error("Invalid property ID. This apartment does not exist.");
+    }
+    const propStatus = (property.availabilityStatus || property.availability || "Available").toLowerCase();
+    if (propStatus !== "available") {
+      throw new Error(`This apartment is currently marked as ${property.availabilityStatus || 'Unavailable'} and cannot be booked for inspection at this time.`);
+    }
+    
+    // Optional double booking check for the same user/property/date
+    const existingBooking = this.data.bookings.find(b => 
+      b.propertyId === bookingData.propertyId && 
+      b.inspectionDate === bookingData.inspectionDate && 
+      (b.userId === bookingData.userId || b.userEmail === bookingData.userEmail)
+    );
+    if (existingBooking) {
+      throw new Error("You already have an inspection scheduled for this apartment on this date.");
+    }
     
     const booking = {
       id: `bk-${Date.now()}`,
@@ -134,11 +171,11 @@ class DatabaseStore {
       userName: bookingData.userName,
       userEmail: bookingData.userEmail,
       userPhone: bookingData.userPhone,
-      propertyId: bookingData.propertyId,
-      propertyTitle: property ? property.title : bookingData.propertyTitle || "Apartment Inspection",
-      propertyLocation: property ? property.location : "Lagos",
-      propertyPrice: property ? property.price : 0,
-      propertyImage: property?.images?.[0] || "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80",
+      propertyId: property.id,
+      propertyTitle: property.title,
+      propertyLocation: property.location,
+      propertyPrice: property.price,
+      propertyImage: property.images?.[0] || "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80",
       inspectionDate: bookingData.inspectionDate,
       timeSlot: bookingData.timeSlot || "10:00 AM - 12:00 PM",
       status: "PENDING",
@@ -249,6 +286,43 @@ class DatabaseStore {
       result = result.filter((p) => p.isFeatured);
     }
 
+    if (filters.cluster && filters.cluster !== "all") {
+      const c = filters.cluster.toLowerCase();
+      result = result.filter((p) =>
+        (p.cluster && p.cluster.toLowerCase().includes(c)) ||
+        (p.location && p.location.toLowerCase().includes(c))
+      );
+    }
+
+    if (filters.availabilityStatus && filters.availabilityStatus !== "all") {
+      result = result.filter((p) =>
+        (p.availabilityStatus || "Available").toLowerCase() === filters.availabilityStatus.toLowerCase()
+      );
+    }
+
+    if (filters.category && filters.category !== "all") {
+      const cat = filters.category.toLowerCase();
+      if (cat === "1-bedroom") {
+        result = result.filter((p) => p.bedrooms === 1);
+      } else if (cat === "2-bedroom") {
+        result = result.filter((p) => p.bedrooms === 2);
+      } else if (cat === "3-bedroom") {
+        result = result.filter((p) => p.bedrooms === 3 && p.propertyType !== "Duplex" && p.propertyType !== "Maisonette" && !p.title.toLowerCase().includes("maisonette"));
+      } else if (cat === "3-bedroom-maisonette") {
+        result = result.filter((p) => p.bedrooms === 3 && (p.propertyType === "Duplex" || p.propertyType === "Maisonette" || p.title.toLowerCase().includes("maisonette")));
+      } else if (cat === "4-bedroom") {
+        result = result.filter((p) => p.bedrooms >= 4);
+      } else if (cat === "available-now") {
+        result = result.filter((p) => (p.availabilityStatus || "Available").toLowerCase() === "available");
+      } else if (cat === "furnished") {
+        result = result.filter((p) => (p.furnishedStatus || "").toLowerCase() === "furnished");
+      } else if (cat === "unfurnished") {
+        result = result.filter((p) => (p.furnishedStatus || "").toLowerCase() === "unfurnished");
+      } else if (cat === "serviced") {
+        result = result.filter((p) => (p.furnishedStatus || "").toLowerCase() === "furnished" || (p.serviceCharge && p.serviceCharge > 0) || (p.amenities && p.amenities.some(a => a.toLowerCase().includes("electricity"))));
+      }
+    }
+
     if (filters.sort === "price-asc") {
       result.sort((a, b) => a.price - b.price);
     } else if (filters.sort === "price-desc") {
@@ -273,10 +347,17 @@ class DatabaseStore {
   }
 
   createProperty(propertyData) {
+    const slugBase = propertyData.slug || propertyData.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
     const newProperty = {
       id: `prop-${Date.now()}`,
-      slug: propertyData.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""),
+      slug: slugBase,
       viewCount: 0,
+      cluster: propertyData.cluster || propertyData.location || "1004 High-Rise Towers",
+      availabilityStatus: propertyData.availabilityStatus || "Available",
+      last_verified_at: propertyData.last_verified_at || new Date().toISOString(),
+      available_from: propertyData.available_from || new Date().toISOString(),
+      seoTitle: propertyData.seoTitle || "",
+      seoDescription: propertyData.seoDescription || "",
       createdAt: new Date().toISOString(),
       ...propertyData
     };
@@ -360,6 +441,128 @@ class DatabaseStore {
     viewing.status = status;
     this.saveToDisk();
     return viewing;
+  }
+
+  // ===================================
+  // Dynamic Rental Price Statistics
+  // ===================================
+  getRentalPriceStats() {
+    this.loadFromDisk();
+    const categories = [
+      {
+        slug: "1-bedroom",
+        label: "1 Bedroom Executive Apartment",
+        description: "Ideal for single executives, consultants, and young corporate professionals.",
+        filter: (p) => p.bedrooms === 1
+      },
+      {
+        slug: "2-bedroom",
+        label: "2 Bedroom Serviced Flat",
+        description: "Popular with couples and executives seeking dedicated home office space.",
+        filter: (p) => p.bedrooms === 2
+      },
+      {
+        slug: "3-bedroom",
+        label: "3 Bedroom Standard Flat",
+        description: "Single-level family flats in 1004 High-Rise Towers & Clusters A through D.",
+        filter: (p) => p.bedrooms === 3 && p.propertyType !== "Duplex" && p.propertyType !== "Maisonette" && !p.title.toLowerCase().includes("maisonette")
+      },
+      {
+        slug: "3-bedroom-maisonette",
+        label: "3 Bedroom Split-Level Maisonette",
+        description: "Two-floor duplex units with high ceilings, large living areas, and internal staircases.",
+        filter: (p) => p.bedrooms === 3 && (p.propertyType === "Duplex" || p.propertyType === "Maisonette" || p.title.toLowerCase().includes("maisonette"))
+      },
+      {
+        slug: "4-bedroom",
+        label: "4 Bedroom Executive Corner Flat",
+        description: "Spacious combined and corner residential units suitable for larger families.",
+        filter: (p) => p.bedrooms >= 4
+      }
+    ];
+
+    const categoryStats = categories.map((cat) => {
+      const matching = this.data.properties.filter(cat.filter);
+      const prices = matching.map((p) => p.price).filter(Boolean);
+      const minPrice = prices.length > 0 ? Math.min(...prices) : null;
+      const maxPrice = prices.length > 0 ? Math.max(...prices) : null;
+      const avgPrice = prices.length > 0 ? Math.round(prices.reduce((a, b) => a + b, 0) / prices.length) : null;
+      const availableCount = matching.filter(
+        (p) => (p.availabilityStatus || "Available").toLowerCase() === "available"
+      ).length;
+
+      return {
+        slug: cat.slug,
+        label: cat.label,
+        description: cat.description,
+        totalInventory: matching.length,
+        availableCount,
+        minPrice,
+        maxPrice,
+        avgPrice
+      };
+    });
+
+    const allPrices = this.data.properties.map((p) => p.price).filter(Boolean);
+    const serviceCharges = this.data.properties.map((p) => p.serviceCharge).filter(Boolean);
+    const cautionFees = this.data.properties.map((p) => p.cautionFee).filter(Boolean);
+
+    return {
+      lastUpdated: new Date().toISOString(),
+      estateName: "1004 Estate, Victoria Island, Lagos",
+      managingAgency: "JK - CUBE MULTIVENTURES LIMITED",
+      totalUnitsTracked: this.data.properties.length,
+      availableUnitsCount: this.data.properties.filter(
+        (p) => (p.availabilityStatus || "Available").toLowerCase() === "available"
+      ).length,
+      categories: categoryStats,
+      marketOverview: {
+        lowestEntryRent: allPrices.length > 0 ? Math.min(...allPrices) : 4800000,
+        highestRent: allPrices.length > 0 ? Math.max(...allPrices) : 22000000,
+        typicalServiceCharge: serviceCharges.length > 0 ? Math.round(serviceCharges.reduce((a, b) => a + b, 0) / serviceCharges.length) : 1000000,
+        typicalCautionDeposit: cautionFees.length > 0 ? Math.round(cautionFees.reduce((a, b) => a + b, 0) / cautionFees.length) : 500000
+      }
+    };
+  }
+
+  // ===================================
+  // Analytics & Event Tracking System
+  // ===================================
+  recordAnalyticsEvent(eventData) {
+    if (!this.data.analyticsEvents) this.data.analyticsEvents = [];
+    const event = {
+      id: `evt-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+      name: eventData.name || "generic_event",
+      category: eventData.category || "user_action",
+      propertyId: eventData.propertyId || null,
+      propertyTitle: eventData.propertyTitle || null,
+      page: eventData.page || null,
+      source: eventData.source || "web",
+      metadata: eventData.metadata || {},
+      timestamp: new Date().toISOString()
+    };
+    this.data.analyticsEvents.unshift(event);
+    if (this.data.analyticsEvents.length > 2000) {
+      this.data.analyticsEvents = this.data.analyticsEvents.slice(0, 2000);
+    }
+    this.saveToDisk();
+    return event;
+  }
+
+  getAnalyticsSummary() {
+    this.loadFromDisk();
+    const events = this.data.analyticsEvents || [];
+    return {
+      totalEvents: events.length,
+      whatsappClicks: events.filter((e) => e.name === "whatsapp_clicked").length,
+      callClicks: events.filter((e) => e.name === "call_clicked").length,
+      apartmentViews: events.filter((e) => e.name === "apartment_view").length,
+      categoryViews: events.filter((e) => e.name === "apartment_category_view").length,
+      bookingStarts: events.filter((e) => e.name === "booking_started" || e.name === "book_now_clicked").length,
+      bookingsCompleted: events.filter((e) => e.name === "booking_completed").length,
+      viewingRequests: events.filter((e) => e.name === "viewing_request_completed").length,
+      recentEvents: events.slice(0, 30)
+    };
   }
 }
 

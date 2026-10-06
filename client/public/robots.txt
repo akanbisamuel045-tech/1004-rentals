@@ -2,8 +2,10 @@
 User-agent: *
 Allow: /
 Allow: /apartments/
+Allow: /apartments
+Allow: /1004-estate/
+Allow: /1004-estate
 Allow: /properties/
-Allow: /about
 Allow: /contact
 
 # Protect internal admin & user dashboard routes from search crawlers

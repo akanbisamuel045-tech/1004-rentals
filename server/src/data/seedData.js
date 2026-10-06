@@ -287,6 +287,63 @@ export const properties = [
       role: "Corporate Leasing & Property Management, 1004 Estate",
       avatar: "/jk-cube-icon.png"
     },
+    cluster: "1004 High-Rise Towers",
+    last_verified_at: "2026-09-15T12:00:00.000Z",
+    available_from: "2026-09-16T00:00:00.000Z",
     createdAt: "2026-09-05T08:10:00.000Z"
+  },
+  {
+    id: "1004-prop-7",
+    title: "Spacious 4-Bedroom Executive Corner Flat in Cluster D",
+    slug: "spacious-4-bedroom-executive-corner-flat-cluster-d-1004",
+    description: "An expansive 4-bedroom corner apartment situated on the 5th floor of Block D4 in 1004 Estate, Victoria Island. Generously proportioned with four large en-suite bedrooms, dual living and formal dining salons, expansive lagoon-breeze balconies, dedicated maid's room, 24/7 dedicated turbine electricity, industrial water treatment, and three covered parking bays. Highly suitable for corporate directors, diplomatic staff, and large families.",
+    price: 14000000,
+    rentalPeriod: "ANNUALLY",
+    propertyType: "Apartment",
+    bedrooms: 4,
+    bathrooms: 4,
+    toilets: 5,
+    sizesqm: 260,
+    totalFloors: 7,
+    address: "Block D4 (5th Floor), Cluster D, 1004 Estate, Victoria Island, Lagos",
+    location: "1004 Cluster D",
+    cluster: "1004 Cluster D",
+    area: "Victoria Island",
+    furnishedStatus: "Semi-Furnished",
+    availabilityStatus: "Available",
+    last_verified_at: "2026-09-16T09:30:00.000Z",
+    available_from: "2026-09-16T00:00:00.000Z",
+    parkingSpaces: 3,
+    serviceCharge: 1500000,
+    cautionFee: 700000,
+    agencyFee: 1400000,
+    isFeatured: true,
+    viewCount: 840,
+    images: [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80"
+    ],
+    amenities: [
+      "24/7 Uninterrupted Electricity (Independent Power Plant)",
+      "Central Industrial Water Treatment",
+      "Access to swimming pool",
+      "Lawn Tennis & Basketball Courts",
+      "High-Speed Fiber-Optic Wi-Fi",
+      "Access Card Gate Security & CCTV",
+      "Modern Fitted Kitchen (Gas Hob, Oven, Microwave)",
+      "Dedicated Covered Parking Bays",
+      "Passenger & Service Elevators",
+      "Lagoon & City View Balconies"
+    ],
+    agent: {
+      name: "JK - CUBE MULTIVENTURES LIMITED",
+      phone: "+234 703 846 2284",
+      email: "jkcube85@gmail.com",
+      role: "Corporate Leasing & Property Management, 1004 Estate",
+      avatar: "/jk-cube-icon.png"
+    },
+    createdAt: "2026-09-06T10:00:00.000Z"
   }
 ];

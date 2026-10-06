@@ -14,7 +14,7 @@
     {
       "id": "prop-1789511681720",
       "slug": "modern-furnished-3-bedroom-apartment",
-      "viewCount": 14,
+      "viewCount": 25,
       "createdAt": "2026-09-15T22:34:41.720Z",
       "title": "Modern Furnished 3-Bedroom Apartment",
       "description": "",
@@ -63,7 +63,10 @@
         "avatar": "/jk-cube-icon.png"
       },
       "parkingSpaces": 0,
-      "updatedAt": "2026-09-15T22:35:27.957Z"
+      "updatedAt": "2026-09-15T22:35:27.957Z",
+      "cluster": "1004 Cluster D",
+      "last_verified_at": "2026-09-15T12:00:00.000Z",
+      "available_from": "2026-09-16T00:00:00.000Z"
     },
     {
       "id": "1004-prop-1",
@@ -112,7 +115,10 @@
         "role": "Corporate Leasing & Property Management, 1004 Estate",
         "avatar": "/jk-cube-icon.png"
       },
-      "createdAt": "2026-09-01T10:00:00.000Z"
+      "createdAt": "2026-09-01T10:00:00.000Z",
+      "cluster": "1004 High-Rise Towers",
+      "last_verified_at": "2026-09-15T12:00:00.000Z",
+      "available_from": "2026-09-16T00:00:00.000Z"
     },
     {
       "id": "1004-prop-2",
@@ -159,7 +165,10 @@
         "role": "Corporate Leasing & Property Management, 1004 Estate",
         "avatar": "/jk-cube-icon.png"
       },
-      "createdAt": "2026-09-02T14:30:00.000Z"
+      "createdAt": "2026-09-02T14:30:00.000Z",
+      "cluster": "1004 Cluster A",
+      "last_verified_at": "2026-09-15T12:00:00.000Z",
+      "available_from": "2026-09-16T00:00:00.000Z"
     },
     {
       "id": "1004-prop-4",
@@ -204,7 +213,10 @@
         "role": "Corporate Leasing & Property Management, 1004 Estate",
         "avatar": "/jk-cube-icon.png"
       },
-      "createdAt": "2026-09-04T11:45:00.000Z"
+      "createdAt": "2026-09-04T11:45:00.000Z",
+      "cluster": "1004 Cluster B",
+      "last_verified_at": "2026-09-15T12:00:00.000Z",
+      "available_from": "2026-09-16T00:00:00.000Z"
     },
     {
       "id": "1004-prop-5",
@@ -250,7 +262,10 @@
         "role": "Corporate Leasing & Property Management, 1004 Estate",
         "avatar": "/jk-cube-icon.png"
       },
-      "createdAt": "2026-09-04T16:20:00.000Z"
+      "createdAt": "2026-09-04T16:20:00.000Z",
+      "cluster": "1004 Cluster C",
+      "last_verified_at": "2026-09-15T12:00:00.000Z",
+      "available_from": "2026-09-16T00:00:00.000Z"
     },
     {
       "id": "1004-prop-6",
@@ -295,7 +310,65 @@
         "role": "Corporate Leasing & Property Management, 1004 Estate",
         "avatar": "/jk-cube-icon.png"
       },
-      "createdAt": "2026-09-05T08:10:00.000Z"
+      "cluster": "1004 High-Rise Towers",
+      "last_verified_at": "2026-09-15T12:00:00.000Z",
+      "available_from": "2026-09-16T00:00:00.000Z",
+      "createdAt": "2026-09-05T08:10:00.000Z",
+      "updatedAt": "2026-09-16T20:19:11.988Z"
+    },
+    {
+      "id": "1004-prop-7",
+      "title": "Spacious 4-Bedroom Executive Corner Flat in Cluster D",
+      "slug": "spacious-4-bedroom-executive-corner-flat-cluster-d-1004",
+      "description": "An expansive 4-bedroom corner apartment situated on the 5th floor of Block D4 in 1004 Estate, Victoria Island. Generously proportioned with four large en-suite bedrooms, dual living and formal dining salons, expansive lagoon-breeze balconies, dedicated maid's room, 24/7 dedicated turbine electricity, industrial water treatment, and three covered parking bays. Highly suitable for corporate directors, diplomatic staff, and large families.",
+      "price": 14000000,
+      "rentalPeriod": "ANNUALLY",
+      "propertyType": "Apartment",
+      "bedrooms": 4,
+      "bathrooms": 4,
+      "toilets": 5,
+      "sizesqm": 260,
+      "totalFloors": 7,
+      "address": "Block D4 (5th Floor), Cluster D, 1004 Estate, Victoria Island, Lagos",
+      "location": "1004 Cluster D",
+      "cluster": "1004 Cluster D",
+      "area": "Victoria Island",
+      "furnishedStatus": "Semi-Furnished",
+      "availabilityStatus": "Available",
+      "last_verified_at": "2026-09-16T09:30:00.000Z",
+      "available_from": "2026-09-16T00:00:00.000Z",
+      "parkingSpaces": 3,
+      "serviceCharge": 1500000,
+      "cautionFee": 700000,
+      "agencyFee": 1400000,
+      "isFeatured": true,
+      "viewCount": 846,
+      "images": [
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "amenities": [
+        "24/7 Uninterrupted Electricity (Independent Power Plant)",
+        "Central Industrial Water Treatment",
+        "Access to swimming pool",
+        "Lawn Tennis & Basketball Courts",
+        "High-Speed Fiber-Optic Wi-Fi",
+        "Access Card Gate Security & CCTV",
+        "Modern Fitted Kitchen (Gas Hob, Oven, Microwave)",
+        "Dedicated Covered Parking Bays",
+        "Passenger & Service Elevators",
+        "Lagoon & City View Balconies"
+      ],
+      "agent": {
+        "name": "JK - CUBE MULTIVENTURES LIMITED",
+        "phone": "+234 703 846 2284",
+        "email": "jkcube85@gmail.com",
+        "role": "Corporate Leasing & Property Management, 1004 Estate",
+        "avatar": "/jk-cube-icon.png"
+      },
+      "createdAt": "2026-09-06T10:00:00.000Z"
     }
   ],
   "locations": [
@@ -364,8 +437,754 @@
     "On-site Facility Management Desk",
     "Lagoon & City View Balconies"
   ],
-  "enquiries": [],
+  "enquiries": [
+    {
+      "id": "enq-1789589951943",
+      "status": "CLOSED",
+      "createdAt": "2026-09-16T20:19:11.943Z",
+      "userId": null,
+      "name": "Audit Client",
+      "email": "client.audit@test.com",
+      "phone": "+2348011223344",
+      "message": "Looking to lease a 2-bedroom serviced flat in Cluster B for 1 year.",
+      "propertyId": "1004-prop-2",
+      "propertyTitle": "2-Bedroom Serviced Apartment in Cluster B",
+      "source": "property_detail_modal"
+    },
+    {
+      "id": "enq-1789589924810",
+      "status": "CLOSED",
+      "createdAt": "2026-09-16T20:18:44.810Z",
+      "userId": null,
+      "name": "Audit Client",
+      "email": "client.audit@test.com",
+      "phone": "+2348011223344",
+      "message": "Looking to lease a 2-bedroom serviced flat in Cluster B for 1 year.",
+      "propertyId": "1004-prop-2",
+      "propertyTitle": "2-Bedroom Serviced Apartment in Cluster B",
+      "source": "property_detail_modal"
+    },
+    {
+      "id": "enq-1789589819929",
+      "status": "CLOSED",
+      "createdAt": "2026-09-16T20:16:59.929Z",
+      "userId": null,
+      "name": "Audit Client",
+      "email": "client.audit@test.com",
+      "phone": "+2348011223344",
+      "message": "Looking to lease a 2-bedroom serviced flat in Cluster B for 1 year.",
+      "propertyId": "1004-prop-2",
+      "propertyTitle": "2-Bedroom Serviced Apartment in Cluster B",
+      "source": "property_detail_modal"
+    }
+  ],
   "viewings": [],
   "bookings": [],
-  "favorites": {}
+  "favorites": {},
+  "analyticsEvents": [
+    {
+      "id": "evt-1791299425735-vgcg",
+      "name": "apartment_category_view",
+      "category": "all_apartments",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;properties",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-10-06T15:10:25.736Z"
+    },
+    {
+      "id": "evt-1791299425732-0xg6",
+      "name": "apartment_category_view",
+      "category": "all_apartments",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;properties",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-10-06T15:10:25.732Z"
+    },
+    {
+      "id": "evt-1791299316554-py9i",
+      "name": "apartment_category_view",
+      "category": "available-now",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;apartments&#x2F;available-now",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-10-06T15:08:36.554Z"
+    },
+    {
+      "id": "evt-1791299316550-284t",
+      "name": "apartment_category_view",
+      "category": "available-now",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;apartments&#x2F;available-now",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-10-06T15:08:36.550Z"
+    },
+    {
+      "id": "evt-1791299300169-uyeb",
+      "name": "apartment_category_view",
+      "category": "all_apartments",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;apartments",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-10-06T15:08:20.169Z"
+    },
+    {
+      "id": "evt-1791299300165-q4fv",
+      "name": "apartment_category_view",
+      "category": "all_apartments",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;apartments",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-10-06T15:08:20.165Z"
+    },
+    {
+      "id": "evt-1791299024683-ap3v",
+      "name": "apartment_view",
+      "category": "3-bedroom",
+      "propertyId": "prop-1789511681720",
+      "propertyTitle": "Modern Furnished 3-Bedroom Apartment",
+      "page": "&#x2F;apartments&#x2F;modern-furnished-3-bedroom-apartment",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-10-06T15:03:44.683Z"
+    },
+    {
+      "id": "evt-1791299024594-ppid",
+      "name": "apartment_view",
+      "category": "3-bedroom",
+      "propertyId": "prop-1789511681720",
+      "propertyTitle": "Modern Furnished 3-Bedroom Apartment",
+      "page": "&#x2F;apartments&#x2F;modern-furnished-3-bedroom-apartment",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-10-06T15:03:44.594Z"
+    },
+    {
+      "id": "evt-1791299008984-d8wa",
+      "name": "apartment_category_view",
+      "category": "all_apartments",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;apartments",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-10-06T15:03:28.984Z"
+    },
+    {
+      "id": "evt-1791299008974-6vo8",
+      "name": "apartment_category_view",
+      "category": "all_apartments",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;apartments",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-10-06T15:03:28.974Z"
+    },
+    {
+      "id": "evt-1789592244461-306l",
+      "name": "apartment_category_view",
+      "category": "all_apartments",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;apartments",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:57:24.461Z"
+    },
+    {
+      "id": "evt-1789592244454-90oz",
+      "name": "apartment_category_view",
+      "category": "all_apartments",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;apartments",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:57:24.454Z"
+    },
+    {
+      "id": "evt-1789591694827-g7qb",
+      "name": "apartment_category_view",
+      "category": "available-now",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;apartments&#x2F;available-now",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:48:14.827Z"
+    },
+    {
+      "id": "evt-1789591694823-k6qu",
+      "name": "apartment_category_view",
+      "category": "available-now",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;apartments&#x2F;available-now",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:48:14.823Z"
+    },
+    {
+      "id": "evt-1789591692747-zpaq",
+      "name": "apartment_category_view",
+      "category": "all_apartments",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;apartments",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:48:12.747Z"
+    },
+    {
+      "id": "evt-1789591692739-cdne",
+      "name": "apartment_category_view",
+      "category": "all_apartments",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;apartments",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:48:12.739Z"
+    },
+    {
+      "id": "evt-1789591687138-z6it",
+      "name": "apartment_category_view",
+      "category": "available-now",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;apartments&#x2F;available-now",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:48:07.138Z"
+    },
+    {
+      "id": "evt-1789591687128-0f5f",
+      "name": "apartment_category_view",
+      "category": "available-now",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;apartments&#x2F;available-now",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:48:07.128Z"
+    },
+    {
+      "id": "evt-1789591173175-p7os",
+      "name": "1004_estate_hub_view",
+      "category": "user_action",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;1004-estate&#x2F;faqs",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:39:33.175Z"
+    },
+    {
+      "id": "evt-1789591168832-77q5",
+      "name": "1004_estate_hub_view",
+      "category": "user_action",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;1004-estate&#x2F;location",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:39:28.832Z"
+    },
+    {
+      "id": "evt-1789591164401-b7mb",
+      "name": "1004_estate_hub_view",
+      "category": "user_action",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;1004-estate&#x2F;facilities",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:39:24.401Z"
+    },
+    {
+      "id": "evt-1789591159718-50il",
+      "name": "1004_estate_hub_view",
+      "category": "user_action",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;1004-estate&#x2F;rental-prices",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:39:19.718Z"
+    },
+    {
+      "id": "evt-1789591153298-v8x3",
+      "name": "1004_estate_hub_view",
+      "category": "user_action",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;1004-estate&#x2F;apartment-types",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:39:13.298Z"
+    },
+    {
+      "id": "evt-1789591140963-7av4",
+      "name": "1004_estate_hub_view",
+      "category": "user_action",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;1004-estate&#x2F;guide",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:39:00.963Z"
+    },
+    {
+      "id": "evt-1789591131634-ddo8",
+      "name": "1004_estate_hub_view",
+      "category": "user_action",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;1004-estate",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:38:51.634Z"
+    },
+    {
+      "id": "evt-1789591131624-hqzw",
+      "name": "1004_estate_hub_view",
+      "category": "user_action",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;1004-estate",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:38:51.624Z"
+    },
+    {
+      "id": "evt-1789591126003-tqu3",
+      "name": "apartment_category_view",
+      "category": "available-now",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;apartments&#x2F;available-now",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:38:46.003Z"
+    },
+    {
+      "id": "evt-1789591125992-t2zy",
+      "name": "apartment_category_view",
+      "category": "available-now",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;apartments&#x2F;available-now",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:38:45.992Z"
+    },
+    {
+      "id": "evt-1789590638291-kjdo",
+      "name": "1004_estate_hub_view",
+      "category": "user_action",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;1004-estate&#x2F;faqs",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:30:38.291Z"
+    },
+    {
+      "id": "evt-1789590631107-iicq",
+      "name": "1004_estate_hub_view",
+      "category": "user_action",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;1004-estate&#x2F;location",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:30:31.107Z"
+    },
+    {
+      "id": "evt-1789590620985-onxj",
+      "name": "1004_estate_hub_view",
+      "category": "user_action",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;1004-estate&#x2F;facilities",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:30:20.985Z"
+    },
+    {
+      "id": "evt-1789590606338-l078",
+      "name": "1004_estate_hub_view",
+      "category": "user_action",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;1004-estate&#x2F;rental-prices",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:30:06.338Z"
+    },
+    {
+      "id": "evt-1789590586544-tusq",
+      "name": "1004_estate_hub_view",
+      "category": "user_action",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;1004-estate&#x2F;apartment-types",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:29:46.544Z"
+    },
+    {
+      "id": "evt-1789590565675-v4c9",
+      "name": "1004_estate_hub_view",
+      "category": "user_action",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;1004-estate&#x2F;guide",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:29:25.675Z"
+    },
+    {
+      "id": "evt-1789590523814-5vep",
+      "name": "1004_estate_hub_view",
+      "category": "user_action",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;1004-estate",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:28:43.814Z"
+    },
+    {
+      "id": "evt-1789590523798-8l1s",
+      "name": "1004_estate_hub_view",
+      "category": "user_action",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;1004-estate",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:28:43.798Z"
+    },
+    {
+      "id": "evt-1789590512081-ye29",
+      "name": "apartment_category_view",
+      "category": "available-now",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;apartments&#x2F;available-now",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:28:32.081Z"
+    },
+    {
+      "id": "evt-1789590512070-22ua",
+      "name": "apartment_category_view",
+      "category": "available-now",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;apartments&#x2F;available-now",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:28:32.070Z"
+    },
+    {
+      "id": "evt-1789590480288-5wze",
+      "name": "apartment_category_view",
+      "category": "all_apartments",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;apartments",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:28:00.288Z"
+    },
+    {
+      "id": "evt-1789590480282-hoed",
+      "name": "apartment_category_view",
+      "category": "all_apartments",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;apartments",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:28:00.282Z"
+    },
+    {
+      "id": "evt-1789590094655-xk0b",
+      "name": "apartment_view",
+      "category": "4-bedroom",
+      "propertyId": "1004-prop-7",
+      "propertyTitle": "Spacious 4-Bedroom Executive Corner Flat in Cluster D",
+      "page": "&#x2F;apartments&#x2F;spacious-4-bedroom-executive-corner-flat-cluster-d-1004",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:21:34.655Z"
+    },
+    {
+      "id": "evt-1789590094652-8q8i",
+      "name": "apartment_view",
+      "category": "4-bedroom",
+      "propertyId": "1004-prop-7",
+      "propertyTitle": "Spacious 4-Bedroom Executive Corner Flat in Cluster D",
+      "page": "&#x2F;apartments&#x2F;spacious-4-bedroom-executive-corner-flat-cluster-d-1004",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:21:34.652Z"
+    },
+    {
+      "id": "evt-1789590091955-arwt",
+      "name": "1004_estate_hub_view",
+      "category": "user_action",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;1004-estate&#x2F;faqs",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:21:31.955Z"
+    },
+    {
+      "id": "evt-1789590091943-6qh3",
+      "name": "1004_estate_hub_view",
+      "category": "user_action",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;1004-estate&#x2F;faqs",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:21:31.943Z"
+    },
+    {
+      "id": "evt-1789590089435-c3c3",
+      "name": "1004_estate_hub_view",
+      "category": "user_action",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;1004-estate&#x2F;rental-prices",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:21:29.435Z"
+    },
+    {
+      "id": "evt-1789590089415-ggcf",
+      "name": "1004_estate_hub_view",
+      "category": "user_action",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;1004-estate&#x2F;rental-prices",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:21:29.415Z"
+    },
+    {
+      "id": "evt-1789590086595-klz8",
+      "name": "1004_estate_hub_view",
+      "category": "user_action",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;1004-estate",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:21:26.595Z"
+    },
+    {
+      "id": "evt-1789590086579-f70f",
+      "name": "1004_estate_hub_view",
+      "category": "user_action",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;1004-estate",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:21:26.579Z"
+    },
+    {
+      "id": "evt-1789590081701-x5vv",
+      "name": "apartment_category_view",
+      "category": "2-bedroom",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;apartments&#x2F;2-bedroom",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:21:21.701Z"
+    },
+    {
+      "id": "evt-1789590081684-1rhd",
+      "name": "apartment_category_view",
+      "category": "2-bedroom",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;apartments&#x2F;2-bedroom",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:21:21.684Z"
+    },
+    {
+      "id": "evt-1789590001216-zitz",
+      "name": "apartment_view",
+      "category": "4-bedroom",
+      "propertyId": "1004-prop-7",
+      "propertyTitle": "Spacious 4-Bedroom Executive Corner Flat in Cluster D",
+      "page": "&#x2F;apartments&#x2F;spacious-4-bedroom-executive-corner-flat-cluster-d-1004",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:20:01.216Z"
+    },
+    {
+      "id": "evt-1789590001213-dxi1",
+      "name": "apartment_view",
+      "category": "4-bedroom",
+      "propertyId": "1004-prop-7",
+      "propertyTitle": "Spacious 4-Bedroom Executive Corner Flat in Cluster D",
+      "page": "&#x2F;apartments&#x2F;spacious-4-bedroom-executive-corner-flat-cluster-d-1004",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:20:01.213Z"
+    },
+    {
+      "id": "evt-1789589998451-cosx",
+      "name": "1004_estate_hub_view",
+      "category": "user_action",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;1004-estate&#x2F;faqs",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:19:58.451Z"
+    },
+    {
+      "id": "evt-1789589998433-band",
+      "name": "1004_estate_hub_view",
+      "category": "user_action",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;1004-estate&#x2F;faqs",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:19:58.433Z"
+    },
+    {
+      "id": "evt-1789589996023-l87e",
+      "name": "1004_estate_hub_view",
+      "category": "user_action",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;1004-estate&#x2F;rental-prices",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:19:56.023Z"
+    },
+    {
+      "id": "evt-1789589996005-vyd4",
+      "name": "1004_estate_hub_view",
+      "category": "user_action",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;1004-estate&#x2F;rental-prices",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:19:56.005Z"
+    },
+    {
+      "id": "evt-1789589993169-mpe6",
+      "name": "1004_estate_hub_view",
+      "category": "user_action",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;1004-estate",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:19:53.169Z"
+    },
+    {
+      "id": "evt-1789589993155-24ap",
+      "name": "1004_estate_hub_view",
+      "category": "user_action",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;1004-estate",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:19:53.155Z"
+    },
+    {
+      "id": "evt-1789589988136-eq70",
+      "name": "apartment_category_view",
+      "category": "2-bedroom",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;apartments&#x2F;2-bedroom",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:19:48.137Z"
+    },
+    {
+      "id": "evt-1789589988125-iee0",
+      "name": "apartment_category_view",
+      "category": "2-bedroom",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": "&#x2F;apartments&#x2F;2-bedroom",
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:19:48.125Z"
+    },
+    {
+      "id": "evt-1789589951732-lnuj",
+      "name": "whatsapp_clicked",
+      "category": "interaction",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": null,
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:19:11.732Z"
+    },
+    {
+      "id": "evt-1789589924528-ac6e",
+      "name": "whatsapp_clicked",
+      "category": "interaction",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": null,
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:18:44.528Z"
+    },
+    {
+      "id": "evt-1789589840254-svyl",
+      "name": "test_event",
+      "category": "interaction",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": null,
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:17:20.254Z"
+    },
+    {
+      "id": "evt-1789589819817-0hdn",
+      "name": "whatsapp_clicked",
+      "category": "interaction",
+      "propertyId": null,
+      "propertyTitle": null,
+      "page": null,
+      "source": "web_client",
+      "metadata": {},
+      "timestamp": "2026-09-16T20:16:59.817Z"
+    }
+  ]
 }

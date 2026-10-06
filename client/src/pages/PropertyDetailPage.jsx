@@ -7,6 +7,8 @@ import { useAuth } from '../context/AuthContext';
 import { handleImageError, FALLBACK_IMAGES } from '../utils/imageUtils';
 import EnquiryModal from '../components/EnquiryModal';
 import SEO from '../components/SEO';
+import Breadcrumbs from '../components/Breadcrumbs';
+import { trackEvent } from '../utils/analytics';
 
 /* ─── Lightbox Component ─── */
 function Lightbox({ images, startIndex, onClose }) {
@@ -133,7 +135,8 @@ function Lightbox({ images, startIndex, onClose }) {
 }
 
 export default function PropertyDetailPage() {
-  const { id } = useParams();
+  const { id, slug, categoryOrSlug } = useParams();
+  const propertyKey = slug || id || categoryOrSlug;
   const { user, isFavorite, toggleFavorite, openBookingModal } = useAuth();
 
   const [property, setProperty] = useState(null);
@@ -153,8 +156,16 @@ export default function PropertyDetailPage() {
     async function loadProperty() {
       setLoading(true);
       try {
-        const res = await api.getPropertyById(id);
+        const res = await api.getPropertyById(propertyKey);
         setProperty(res.data);
+        if (res.data) {
+          trackEvent('apartment_view', {
+            propertyId: res.data.id,
+            propertyTitle: res.data.title,
+            category: `${res.data.bedrooms}-bedroom`,
+            price: res.data.price
+          });
+        }
       } catch (err) {
         console.error(err);
       } finally {
@@ -193,7 +204,7 @@ export default function PropertyDetailPage() {
     return (
       <div className="container" style={{ padding: '100px 0', textAlign: 'center' }}>
         <h2>Property Not Found</h2>
-        <Link to="/properties" className="btn-add-listing" style={{ marginTop: '16px' }}>
+        <Link to="/apartments" className="btn-add-listing" style={{ marginTop: '16px' }}>
           Back to Listings
         </Link>
       </div>
@@ -209,7 +220,6 @@ export default function PropertyDetailPage() {
         'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80'
       ];
 
-  // ✅ Use the actual image count
   const totalPhotoCount = imgs.length;
   const saved = isFavorite(property.id);
 
@@ -217,27 +227,49 @@ export default function PropertyDetailPage() {
     ? property.description
     : `A tastefully finished and fully serviced ${property.bedrooms}-bedroom apartment located in ${property.location}, 1004 Estate, Victoria Island, Lagos. Features include 24/7 uninterrupted estate turbine electricity, central treated water supply, biometric gated security, high-speed fiber connectivity, dedicated parking bays, and direct access to swimming pools and lawn tennis courts. Professionally managed by JK - CUBE MULTIVENTURES LIMITED with dedicated on-site concierge care.`;
 
+  const categorySlug = property.bedrooms === 3 && (property.propertyType === 'Duplex' || property.propertyType === 'Maisonette' || property.title.toLowerCase().includes('maisonette'))
+    ? '3-bedroom-maisonette'
+    : `${property.bedrooms}-bedroom`;
+
+  const breadcrumbsItems = [
+    { label: 'Apartments', path: '/apartments' },
+    { label: `${property.bedrooms} Bedroom`, path: `/apartments/${categorySlug}` },
+    { label: property.title, path: `/apartments/${property.slug || property.id}` }
+  ];
+
+  const verifiedDate = property.last_verified_at
+    ? new Date(property.last_verified_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
+    : 'Recent';
+
+  const canonicalApartmentUrl = typeof window !== 'undefined' ? `${window.location.origin}/apartments/${property.slug || property.id}` : `https://1004rentals.ng/apartments/${property.slug || property.id}`;
+  const dynamicWhatsappText = `Hello JK-Cube Leasing Desk, I am interested in ${property.title} in 1004 Estate (${property.location || property.cluster}) listed at ${formatPriceNGN(property.price)}/yr on ${canonicalApartmentUrl}. Could you confirm if this unit is available for an in-person inspection tour?`;
+  const dynamicWhatsappUrl = `https://wa.me/2347038462284?text=${encodeURIComponent(dynamicWhatsappText)}`;
+
   return (
     <div className="detail-page-wrapper">
       <SEO
         title={property.title}
         description={`${property.bedrooms} Bed, ${property.bathrooms} Bath ${property.propertyType} in ${property.location}, 1004 Estate, Victoria Island. ${displayDescription.slice(0, 150)}...`}
         image={imgs[0]}
-        canonicalPath={`/properties/${property.id}`}
+        canonicalPath={`/apartments/${property.slug || property.id}`}
         property={property}
+        breadcrumbs={breadcrumbsItems}
       />
       <div className="container">
         
+        {/* Breadcrumbs Navigation */}
+        <Breadcrumbs items={breadcrumbsItems} />
+
         {/* Navigation & Header */}
         <div style={{ marginBottom: '20px' }}>
-          <Link to="/properties" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.88rem', color: '#6b7280', fontWeight: '500', marginBottom: '14px' }}>
-            <ArrowLeft size={16} /> Back to listing
+          <Link to="/apartments" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.88rem', color: '#6b7280', fontWeight: '500', marginBottom: '14px', textDecoration: 'none' }}>
+            <ArrowLeft size={16} /> Back to 1004 Apartments
           </Link>
 
           {/* Prominent Apartment Name and Badges */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px', flexWrap: 'wrap' }}>
             <span className="explore-badge" style={{ background: 'var(--brand-orange)', color: '#ffffff', fontWeight: '700' }}>
-              {property.location}
+              {property.location || property.cluster}
             </span>
             <span className="badge" style={{ background: '#f3f4f6', color: '#111827', fontWeight: '600' }}>
               {property.propertyType || 'Apartment'}
@@ -247,6 +279,9 @@ export default function PropertyDetailPage() {
             </span>
             <span className="badge" style={{ background: '#f8fafc', color: '#64748b', border: '1px solid #e2e8f0' }}>
               {property.bedrooms} Bed • {property.bathrooms} Bath
+            </span>
+            <span className="badge" style={{ background: '#f0fdf4', color: '#15803d', border: '1px solid #bbf7d0', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+              <Shield size={12} color="#16a34a" /> Last Verified: {verifiedDate}
             </span>
           </div>
 
@@ -391,7 +426,10 @@ export default function PropertyDetailPage() {
 
               <div>
                 <button
-                  onClick={() => openBookingModal(property)}
+                  onClick={() => {
+                    trackEvent('book_now_clicked', { propertyId: property.id, propertyTitle: property.title });
+                    openBookingModal(property);
+                  }}
                   className="btn-add-listing"
                   style={{ width: '100%', padding: '14px', justifyContent: 'center', fontSize: '0.95rem' }}
                 >
@@ -483,14 +521,20 @@ export default function PropertyDetailPage() {
             </div>
             <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
               <button
-                onClick={() => openBookingModal(property)}
+                onClick={() => {
+                  trackEvent('booking_started', { propertyId: property.id, propertyTitle: property.title });
+                  openBookingModal(property);
+                }}
                 className="btn-add-listing"
                 style={{ padding: '12px 24px', fontWeight: '700' }}
               >
                 Schedule In-Person Inspection
               </button>
               <a
-                href={`https://wa.me/2347038462284?text=${encodeURIComponent(`Hello JK-Cube Leasing Desk, I would like to inspect ${property.title} in 1004 Estate.`)}`}
+                href={dynamicWhatsappUrl}
+                onClick={() => {
+                  trackEvent('whatsapp_clicked', { propertyId: property.id, propertyTitle: property.title, price: property.price });
+                }}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-add-listing"

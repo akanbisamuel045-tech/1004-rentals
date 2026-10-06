@@ -13,6 +13,8 @@ import authRoutes from "./routes/authRoutes.js";
 import bookingRoutes from "./routes/bookingRoutes.js";
 import favoriteRoutes from "./routes/favoriteRoutes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
+import analyticsRoutes from "./routes/analyticsRoutes.js";
+import { db } from "./models/db.js";
 
 dotenv.config();
 
@@ -34,6 +36,68 @@ app.use("/api", globalLimiter);
 // Static uploads folder
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
+// Dynamic Sitemap Endpoint
+app.get("/sitemap.xml", (req, res) => {
+  try {
+    const domain = "https://1004rentals.ng";
+    const today = new Date().toISOString().split("T")[0];
+
+    const staticRoutes = [
+      { path: "/", priority: "1.0", changefreq: "daily" },
+      { path: "/apartments", priority: "0.9", changefreq: "daily" },
+      { path: "/apartments/1-bedroom", priority: "0.8", changefreq: "weekly" },
+      { path: "/apartments/2-bedroom", priority: "0.8", changefreq: "weekly" },
+      { path: "/apartments/3-bedroom", priority: "0.8", changefreq: "weekly" },
+      { path: "/apartments/3-bedroom-maisonette", priority: "0.8", changefreq: "weekly" },
+      { path: "/apartments/4-bedroom", priority: "0.8", changefreq: "weekly" },
+      { path: "/apartments/available-now", priority: "0.9", changefreq: "daily" },
+      { path: "/apartments/furnished", priority: "0.8", changefreq: "weekly" },
+      { path: "/apartments/serviced", priority: "0.8", changefreq: "weekly" },
+      { path: "/1004-estate", priority: "0.9", changefreq: "weekly" },
+      { path: "/1004-estate/guide", priority: "0.8", changefreq: "weekly" },
+      { path: "/1004-estate/apartment-types", priority: "0.8", changefreq: "weekly" },
+      { path: "/1004-estate/rental-prices", priority: "0.9", changefreq: "daily" },
+      { path: "/1004-estate/facilities", priority: "0.8", changefreq: "monthly" },
+      { path: "/1004-estate/location", priority: "0.8", changefreq: "monthly" },
+      { path: "/1004-estate/faqs", priority: "0.7", changefreq: "weekly" },
+      { path: "/contact", priority: "0.6", changefreq: "monthly" }
+    ];
+
+    const properties = db.getProperties();
+    const propertyRoutes = properties.map((p) => ({
+      path: `/apartments/${p.slug || p.id}`,
+      lastmod: p.updatedAt ? p.updatedAt.split("T")[0] : today,
+      priority: "0.85",
+      changefreq: "weekly"
+    }));
+
+    const allUrls = [
+      ...staticRoutes.map((r) => `  <url>
+    <loc>${domain}${r.path}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>${r.changefreq}</changefreq>
+    <priority>${r.priority}</priority>
+  </url>`),
+      ...propertyRoutes.map((r) => `  <url>
+    <loc>${domain}${r.path}</loc>
+    <lastmod>${r.lastmod}</lastmod>
+    <changefreq>${r.changefreq}</changefreq>
+    <priority>${r.priority}</priority>
+  </url>`)
+    ];
+
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${allUrls.join("\n")}
+</urlset>`;
+
+    res.header("Content-Type", "application/xml");
+    res.send(xml);
+  } catch (err) {
+    res.status(500).send("Error generating sitemap");
+  }
+});
+
 // API Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/properties", propertyRoutes);
@@ -43,6 +107,7 @@ app.use("/api/enquiries", enquiryRoutes);
 app.use("/api/viewings", viewingRoutes);
 app.use("/api/locations", locationRoutes);
 app.use("/api/upload", uploadRoutes);
+app.use("/api/analytics", analyticsRoutes);
 
 // Health Check
 app.get("/api/health", (req, res) => {
@@ -65,7 +130,11 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(` Lagos Rentals Server running on http://localhost:${PORT}`);
-});
+if (!process.env.VERCEL) {
+  app.listen(PORT, "0.0.0.0", () => {
+    console.log(` Lagos Rentals Server running on http://localhost:${PORT}`);
+  });
+}
+
+export default app;
 
