@@ -28,20 +28,8 @@
       "destination": { "service": "server" }
     },
     {
-      "source": "/assets/:path*",
+      "source": "/(.*)",
       "destination": { "service": "client" }
-    },
-    {
-      "source": "/:path*.:ext",
-      "destination": { "service": "client" }
-    },
-    {
-      "source": "/",
-      "destination": { "service": "client", "path": "/index.html" }
-    },
-    {
-      "source": "/:path*",
-      "destination": { "service": "client", "path": "/index.html" }
     }
   ]
 }
