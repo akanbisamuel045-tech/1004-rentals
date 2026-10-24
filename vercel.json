@@ -29,11 +29,11 @@
     },
     {
       "source": "/assets/:path*",
-      "destination": { "service": "client", "path": "/assets/:path*" }
+      "destination": { "service": "client" }
     },
     {
       "source": "/:path*.:ext",
-      "destination": { "service": "client", "path": "/:path*.:ext" }
+      "destination": { "service": "client" }
     },
     {
       "source": "/",
