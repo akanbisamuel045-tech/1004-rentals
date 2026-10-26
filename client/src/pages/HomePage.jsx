@@ -167,7 +167,7 @@ export default function HomePage() {
             <Link to="/apartments/3-bedroom-maisonette" className="curated-card curated-card-large">
               <div className="curated-card-img">
                 <img
-                  src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"
+                  src="https://i.ibb.co/6jf3xVC/download-6.jpg"
                   alt="3-Bedroom Maisonette Rentals"
                   loading="lazy"
                 />
