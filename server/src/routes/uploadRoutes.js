@@ -107,6 +107,13 @@ router.post("/", (req, res, next) => {
     }
 
     await ensureStandardFormat(req.file.path);
+    const CLIENT_UPLOADS_DIR = path.join(__dirname, "../../../client/public/uploads");
+    try {
+      if (fs.existsSync(CLIENT_UPLOADS_DIR)) {
+        fs.copyFileSync(req.file.path, path.join(CLIENT_UPLOADS_DIR, req.file.filename));
+      }
+    } catch (e) {}
+
     const fileUrl = `/uploads/${req.file.filename}`;
     res.status(201).json({
       success: true,
@@ -126,8 +133,14 @@ router.post("/multiple", (req, res, next) => {
       return res.status(400).json({ success: false, message: "No image files provided in request." });
     }
 
+    const CLIENT_UPLOADS_DIR = path.join(__dirname, "../../../client/public/uploads");
     for (const file of req.files) {
       await ensureStandardFormat(file.path);
+      try {
+        if (fs.existsSync(CLIENT_UPLOADS_DIR)) {
+          fs.copyFileSync(file.path, path.join(CLIENT_UPLOADS_DIR, file.filename));
+        }
+      } catch (e) {}
     }
 
     const fileUrls = req.files.map((file) => `/uploads/${file.filename}`);

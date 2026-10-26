@@ -173,7 +173,7 @@ export default function PropertyDetailPage() {
       }
     }
     loadProperty();
-  }, [id]);
+  }, [propertyKey]);
 
   const handleShare = () => {
     navigator.clipboard.writeText(window.location.href);

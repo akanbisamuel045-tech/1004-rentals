@@ -49,6 +49,21 @@ const CATEGORY_CONFIG = {
     shortIntro: 'Clean, freshly renovated unfurnished flats in 1004 Estate ready for your personalized furniture, bespoke interior setup, and family living.',
     filter: (p) => (p.furnishedStatus || '').toLowerCase() === 'unfurnished'
   },
+  'studio': {
+    title: 'Studio & Executive Suites in 1004 Estate',
+    shortIntro: 'Efficient, fully serviced private studio units and executive suites in 1004 Estate tailored for corporate professionals, tech leaders, and consultants with 24/7 power.',
+    filter: (p) => p.bedrooms === 1 || p.propertyType?.toLowerCase() === 'studio' || p.title.toLowerCase().includes('studio')
+  },
+  '2-bedroom-flat': {
+    title: '2-Bedroom Serviced Flats in 1004 Estate',
+    shortIntro: 'Spacious 2-bedroom flats in 1004 Estate Clusters A, B, C, D and High-Rise Towers. Move-in-ready serviced options with balcony views, swimming pool access, and covered parking bays.',
+    filter: (p) => p.bedrooms === 2
+  },
+  '3-bedroom-flat': {
+    title: '3-Bedroom Family Flats in 1004 Estate',
+    shortIntro: 'Classic single-level 3-bedroom family flats commanding panoramic views of Five Cowries Creek lagoon and the Victoria Island skyline with central industrial water treatment.',
+    filter: (p) => p.bedrooms === 3 && p.propertyType !== 'Maisonette' && p.propertyType !== 'Duplex' && !p.title.toLowerCase().includes('maisonette')
+  },
   'serviced': {
     title: 'Serviced Apartments in 1004 Estate',
     shortIntro: 'Apartments with comprehensive estate servicing including 24/7 turbine electricity, central treated water supply, 24/7 gate security, and facilities maintenance.',

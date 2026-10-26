@@ -13,13 +13,14 @@ export function getImageUrl(src) {
 }
 
 export function handleImageError(e, fallback = DEFAULT_PROPERTY_IMAGE) {
-  const currentSrc = e.target.src;
-  // If a relative /uploads request failed via proxy, try direct backend server on port 5000
-  if (currentSrc && currentSrc.includes('/uploads/') && !currentSrc.includes(':5000')) {
-    const filename = currentSrc.split('/uploads/')[1];
-    if (filename) {
-      e.target.src = `http://localhost:5000/uploads/${filename}`;
-      return;
+  // In local dev only, try direct backend port 5000 if proxy failed
+  if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+    if (currentSrc && currentSrc.includes('/uploads/') && !currentSrc.includes(':5000')) {
+      const filename = currentSrc.split('/uploads/')[1];
+      if (filename) {
+        e.target.src = `http://localhost:5000/uploads/${filename}`;
+        return;
+      }
     }
   }
   e.target.onerror = null;

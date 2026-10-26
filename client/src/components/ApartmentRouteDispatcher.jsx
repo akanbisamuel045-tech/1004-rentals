@@ -6,13 +6,16 @@ import PropertyDetailPage from '../pages/PropertyDetailPage';
 const KNOWN_CATEGORIES = new Set([
   '1-bedroom',
   '2-bedroom',
+  '2-bedroom-flat',
   '3-bedroom',
+  '3-bedroom-flat',
   '3-bedroom-maisonette',
   '4-bedroom',
   'available-now',
   'furnished',
   'unfurnished',
-  'serviced'
+  'serviced',
+  'studio'
 ]);
 
 export default function ApartmentRouteDispatcher() {

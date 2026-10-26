@@ -36,6 +36,5 @@ Thumbs.db
 .idea/
 .vercel/
 
-# Uploads
-server/uploads/*
-!server/uploads/.gitkeep
+# Uploads (Keep essential listing photos tracked for production Vercel deployment)
+# Temporary / local-only test uploads can be ignored if needed

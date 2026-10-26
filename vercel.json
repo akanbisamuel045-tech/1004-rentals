@@ -21,7 +21,7 @@
     },
     {
       "source": "/uploads/:path*",
-      "destination": { "service": "server" }
+      "destination": { "service": "client" }
     },
     {
       "source": "/sitemap.xml",
