@@ -212,7 +212,7 @@ export default function HomePage() {
             <Link to="/apartments/3-bedroom" className="curated-card curated-card-small">
               <div className="curated-card-img">
                 <img
-                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+                  src="https://i.ibb.co/7xRxJqcQ/esu-executive-suite-1.webp"
                   alt="3-Bedroom Family Flats"
                   loading="lazy"
                 />
@@ -227,7 +227,7 @@ export default function HomePage() {
             <Link to="/apartments/studio" className="curated-card curated-card-small">
               <div className="curated-card-img">
                 <img
-                  src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80"
+                  src="https://i.ibb.co/tpWX1sJ8/esu-studio-suite-5.webp"
                   alt="Studio & Executive Suites"
                   loading="lazy"
                 />
