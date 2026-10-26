@@ -33,30 +33,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Categories */}
-          <div>
-            <h4 className="footer-heading">Apartment Categories</h4>
-            <ul className="footer-link-list">
-              <li><Link to="/apartments/available-now" className="footer-link-item" style={{ color: '#4ade80' }}>Available Now</Link></li>
-              <li><Link to="/apartments/1-bedroom" className="footer-link-item">1-Bedroom Executive</Link></li>
-              <li><Link to="/apartments/2-bedroom" className="footer-link-item">2-Bedroom Serviced</Link></li>
-              <li><Link to="/apartments/3-bedroom" className="footer-link-item">3-Bedroom Flats</Link></li>
-              <li><Link to="/apartments/3-bedroom-maisonette" className="footer-link-item">3-Bedroom Maisonettes</Link></li>
-              <li><Link to="/apartments/4-bedroom" className="footer-link-item">4-Bedroom Executive</Link></li>
-            </ul>
-          </div>
-
-          {/* 1004 Clusters */}
-          <div>
-            <h4 className="footer-heading">Estate Clusters</h4>
-            <ul className="footer-link-list">
-              <li><Link to="/apartments?location=1004+High-Rise+Towers" className="footer-link-item">High-Rise Towers</Link></li>
-              <li><Link to="/apartments?location=1004+Cluster+A" className="footer-link-item">Cluster A (Recreation Wing)</Link></li>
-              <li><Link to="/apartments?location=1004+Cluster+B" className="footer-link-item">Cluster B (Executive Wing)</Link></li>
-              <li><Link to="/apartments?location=1004+Cluster+C" className="footer-link-item">Cluster C (Family Wing)</Link></li>
-              <li><Link to="/apartments?location=1004+Cluster+D" className="footer-link-item">Cluster D (Family Wing)</Link></li>
-            </ul>
-          </div>
 
           {/* Contact Support */}
           <div>

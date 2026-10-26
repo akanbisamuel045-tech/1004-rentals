@@ -823,7 +823,7 @@ button, input, select, textarea {
 
 .footer-top-grid {
   display: grid;
-  grid-template-columns: 1.8fr repeat(3, 1fr);
+  grid-template-columns: 2fr 1fr 1fr;
   gap: 48px;
   padding-bottom: 48px;
   border-bottom: 1px solid #27272a;

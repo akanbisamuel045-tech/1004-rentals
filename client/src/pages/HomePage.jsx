@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { ArrowRight, Bed, Bath, Car, MapPin, Sparkles, Shield, Zap, Droplet } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { ArrowRight, Sparkles, Shield, Zap, Droplet } from 'lucide-react';
 import { api } from '../services/api';
 import { formatPriceNGN } from '../components/PropertyCard';
 import { useAuth } from '../context/AuthContext';
@@ -10,10 +10,7 @@ import SEO from '../components/SEO';
 export default function HomePage() {
   const { openBookingModal } = useAuth();
   const location = useLocation();
-  const navigate = useNavigate();
   const [properties, setProperties] = useState([]);
-  const [activeCategory, setActiveCategory] = useState('All 1004 Units');
-  const [activeType, setActiveType] = useState('All');
   const [loading, setLoading] = useState(true);
 
   // Auto-scroll to #about if navigating to hash
@@ -30,7 +27,6 @@ export default function HomePage() {
   }, [location]);
 
   const heroTags = ['High-Rise', 'Serviced Flat', '1004 Victoria Island'];
-  const categoryPills = ['All 1004 Units', 'High-Rise Towers', 'Cluster A', 'Cluster B', 'Cluster C', 'Cluster D'];
 
   useEffect(() => {
     async function loadProperties() {
@@ -45,17 +41,6 @@ export default function HomePage() {
     }
     loadProperties();
   }, []);
-
-  const filteredProperties = properties.filter((p) => {
-    const matchesCategory =
-      activeCategory === 'All 1004 Units' ||
-      p.location?.toLowerCase().includes(activeCategory.toLowerCase()) ||
-      p.propertyType?.toLowerCase() === activeCategory.toLowerCase();
-
-    const matchesType = activeType === 'All' || p.propertyType?.toLowerCase() === activeType.toLowerCase();
-
-    return matchesCategory && matchesType;
-  });
 
   return (
     <div>
@@ -84,29 +69,12 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Right Column: Clean Large Typography, Cluster Pills, and Agent Highlight Card */}
+            {/* Right Column: Clean Large Typography and Agent Highlight Card */}
             <div className="hero-right-col">
               <div>
                 <h1 className="hero-main-title">
                   Discover luxury apartments in 1004 Estate, Victoria Island
                 </h1>
-
-                {/* Filter Pill Chips for 1004 Estate Clusters */}
-                <div className="hero-filter-pills">
-                  {categoryPills.map((pill) => (
-                    <button
-                      key={pill}
-                      onClick={() => {
-                        setActiveCategory(pill);
-                        if (pill === 'All 1004 Units') navigate('/properties');
-                        else navigate(`/properties?location=${encodeURIComponent('1004 ' + pill.replace('1004 ', ''))}`);
-                      }}
-                      className={`filter-pill-btn ${activeCategory === pill ? 'active' : ''}`}
-                    >
-                      {pill}
-                    </button>
-                  ))}
-                </div>
               </div>
 
               {/* Dark Agent Highlight Banner Card */}
@@ -271,36 +239,9 @@ export default function HomePage() {
             <p style={{ color: '#374151', fontSize: '1rem', lineHeight: '1.8', marginBottom: '18px' }}>
               Situated right in the heart of Victoria Island along Ozumba Mbadiwe Way and Adetokunbo Ademola, <strong>1004 Estate</strong> is one of Lagos' most iconic and interconnected residential communities. Whether you are an expatriate, a financial services professional on VI, a tech leader, or a family seeking central luxury living, 1004 offers unmatched convenience without daily mainland traffic.
             </p>
-            <p style={{ color: '#374151', fontSize: '1rem', lineHeight: '1.8', marginBottom: '28px' }}>
+            <p style={{ color: '#374151', fontSize: '1rem', lineHeight: '1.8', marginBottom: '0' }}>
               Our agent desk ensures every apartment in our portfolio is fully serviced, verified, with guaranteed 24/7 dedicated electricity, treated water supply, high-speed fiber connectivity, and immediate physical inspection assistance.
             </p>
-
-            {/* Key Advantages 3-Grid */}
-            <div className="advantages-3grid">
-              <div style={{ padding: '20px', background: '#f9fafb', borderRadius: '16px', border: '1px solid #e5e7eb' }}>
-                <Zap size={24} color="#000000" style={{ marginBottom: '12px' }} />
-                <h4 style={{ fontSize: '1.05rem', fontWeight: '700', marginBottom: '6px' }}>24/7 Dedicated Power</h4>
-                <p style={{ color: '#6b7280', fontSize: '0.88rem', lineHeight: '1.5' }}>
-                  Independent turbine generators ensuring round-the-clock uninterrupted electricity for all flats.
-                </p>
-              </div>
-
-              <div style={{ padding: '20px', background: '#f9fafb', borderRadius: '16px', border: '1px solid #e5e7eb' }}>
-                <Shield size={24} color="#000000" style={{ marginBottom: '12px' }} />
-                <h4 style={{ fontSize: '1.05rem', fontWeight: '700', marginBottom: '6px' }}>Biometric Gate Security</h4>
-                <p style={{ color: '#6b7280', fontSize: '0.88rem', lineHeight: '1.5' }}>
-                  Biometric access cards, 24/7 patrol officers, CCTV monitoring, and strict guest verification.
-                </p>
-              </div>
-
-              <div style={{ padding: '20px', background: '#f9fafb', borderRadius: '16px', border: '1px solid #e5e7eb' }}>
-                <Sparkles size={24} color="#000000" style={{ marginBottom: '12px' }} />
-                <h4 style={{ fontSize: '1.05rem', fontWeight: '700', marginBottom: '6px' }}>Direct Agent Care</h4>
-                <p style={{ color: '#6b7280', fontSize: '0.88rem', lineHeight: '1.5' }}>
-                  Zero middleman drama. Direct landlord liaison, swift tenancy onboarding, and hassle-free renewals.
-                </p>
-              </div>
-            </div>
           </div>
 
           {/* Interactive 1004 Estate Map & Cluster Navigator */}
